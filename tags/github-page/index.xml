@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Github page on yingchao Blog</title>
+    <link>https://tw1chao.github.io/tags/github-page/</link>
+    <description>Recent content in Github page on yingchao Blog</description>
+    <image>
+      <url>https://tw1chao.github.io/papermod-cover.png</url>
+      <link>https://tw1chao.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Thu, 07 Apr 2022 15:46:18 +0800</lastBuildDate><atom:link href="https://tw1chao.github.io/tags/github-page/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何建立 Hugo 到 Github page 上</title>
+      <link>https://tw1chao.github.io/post/how-to-make-hugo-blog-to-github-page/</link>
+      <pubDate>Thu, 07 Apr 2022 15:46:18 +0800</pubDate>
+      
+      <guid>https://tw1chao.github.io/post/how-to-make-hugo-blog-to-github-page/</guid>
+      <description>前言 將過往在 HackMD 整理好的資料，轉移到自己的 Github Page 上，一開始在挑選建立 Blog 的工具上找到了 Hexo ，後來聽聞 Hugo 編譯（產生靜態頁面）的速度比 Hexo 快了很多，果斷捨棄（停損） Hexo 建置 Blog 的方法。 以下將紀錄在 Linux 上使用 brew 安裝 hugo 並建立 Blog 的方法。
+教學開始 這邊安裝的 Hugo 版本為 hugo v0.96.0+extended linux/amd64 BuildDate=unknown
+作業系統環境 Linux 120-117-81-57 5.9.13 #1 SMP Tue Dec 15 10:25:24 CST 2020 x86_64 GNU/Linux
+安裝 Homebrew [1] 系統需求  GCC 4.7.0 or newer Linux 2.6.32 or newer Glibc 2.13 or newer 64-bit x86_64 CPU  ＃如果你是使用 ARM 和 32-bit x86 的安裝可參考官方文檔</description>
+    </item>
+    
+  </channel>
+</rss>

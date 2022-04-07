@@ -1,0 +1,5 @@
+.DS_Store
+public/
+config.yml
+comfigTaxo.yml
+.hugo_build.lock
