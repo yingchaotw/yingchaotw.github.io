@@ -2,36 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on yingchao Blog</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://yingchaotw.github.io/tags/</link>
     <description>Recent content in Tags on yingchao Blog</description>
     <image>
       <title>yingchao Blog</title>
-      <url>http://localhost:1313/papermod-cover.png</url>
-      <link>http://localhost:1313/papermod-cover.png</link>
+      <url>https://yingchaotw.github.io/papermod-cover.png</url>
+      <link>https://yingchaotw.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- 0.130.0</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Feb 2024 16:46:18 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Feb 2024 16:46:18 +0800</lastBuildDate>
+    <atom:link href="https://yingchaotw.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Badge</title>
+      <link>https://yingchaotw.github.io/tags/badge/</link>
+      <pubDate>Wed, 21 Feb 2024 16:46:18 +0800</pubDate>
+      <guid>https://yingchaotw.github.io/tags/badge/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Logo</title>
+      <link>https://yingchaotw.github.io/tags/logo/</link>
+      <pubDate>Wed, 21 Feb 2024 16:46:18 +0800</pubDate>
+      <guid>https://yingchaotw.github.io/tags/logo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Shield Badge</title>
+      <link>https://yingchaotw.github.io/tags/shield-badge/</link>
+      <pubDate>Wed, 21 Feb 2024 16:46:18 +0800</pubDate>
+      <guid>https://yingchaotw.github.io/tags/shield-badge/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Blog</title>
-      <link>http://localhost:1313/tags/blog/</link>
+      <link>https://yingchaotw.github.io/tags/blog/</link>
       <pubDate>Thu, 15 Feb 2024 16:46:18 +0800</pubDate>
-      <guid>http://localhost:1313/tags/blog/</guid>
+      <guid>https://yingchaotw.github.io/tags/blog/</guid>
       <description></description>
     </item>
     <item>
       <title>Github Page</title>
-      <link>http://localhost:1313/tags/github-page/</link>
+      <link>https://yingchaotw.github.io/tags/github-page/</link>
       <pubDate>Thu, 15 Feb 2024 16:46:18 +0800</pubDate>
-      <guid>http://localhost:1313/tags/github-page/</guid>
+      <guid>https://yingchaotw.github.io/tags/github-page/</guid>
       <description></description>
     </item>
     <item>
       <title>Hugo</title>
-      <link>http://localhost:1313/tags/hugo/</link>
+      <link>https://yingchaotw.github.io/tags/hugo/</link>
       <pubDate>Thu, 15 Feb 2024 16:46:18 +0800</pubDate>
-      <guid>http://localhost:1313/tags/hugo/</guid>
+      <guid>https://yingchaotw.github.io/tags/hugo/</guid>
       <description></description>
     </item>
   </channel>

@@ -2,37 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/tags/blog/</loc>
+    <loc>https://yingchaotw.github.io/tags/badge/</loc>
+    <lastmod>2024-02-21T16:46:18+08:00</lastmod>
+  </url><url>
+    <loc>https://yingchaotw.github.io/categories/badge/</loc>
+    <lastmod>2024-02-21T16:46:18+08:00</lastmod>
+  </url><url>
+    <loc>https://yingchaotw.github.io/categories/</loc>
+    <lastmod>2024-02-21T16:46:18+08:00</lastmod>
+  </url><url>
+    <loc>https://yingchaotw.github.io/tags/logo/</loc>
+    <lastmod>2024-02-21T16:46:18+08:00</lastmod>
+  </url><url>
+    <loc>https://yingchaotw.github.io/posts/</loc>
+    <lastmod>2024-02-21T16:46:18+08:00</lastmod>
+  </url><url>
+    <loc>https://yingchaotw.github.io/tags/shield-badge/</loc>
+    <lastmod>2024-02-21T16:46:18+08:00</lastmod>
+  </url><url>
+    <loc>https://yingchaotw.github.io/tags/</loc>
+    <lastmod>2024-02-21T16:46:18+08:00</lastmod>
+  </url><url>
+    <loc>https://yingchaotw.github.io/</loc>
+    <lastmod>2024-02-21T16:46:18+08:00</lastmod>
+  </url><url>
+    <loc>https://yingchaotw.github.io/posts/shield-badge-icon/</loc>
+    <lastmod>2024-02-21T16:46:18+08:00</lastmod>
+  </url><url>
+    <loc>https://yingchaotw.github.io/tags/blog/</loc>
     <lastmod>2024-02-15T16:46:18+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://yingchaotw.github.io/tags/github-page/</loc>
     <lastmod>2024-02-15T16:46:18+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/make-hugo-blog-at-docker/</loc>
+    <loc>https://yingchaotw.github.io/tags/hugo/</loc>
     <lastmod>2024-02-15T16:46:18+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/github-page/</loc>
+    <loc>https://yingchaotw.github.io/categories/hugo/</loc>
     <lastmod>2024-02-15T16:46:18+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/hugo/</loc>
+    <loc>https://yingchaotw.github.io/posts/make-hugo-blog-at-docker/</loc>
     <lastmod>2024-02-15T16:46:18+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/hugo/</loc>
-    <lastmod>2024-02-15T16:46:18+08:00</lastmod>
+    <loc>https://yingchaotw.github.io/archives/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2024-02-15T16:46:18+08:00</lastmod>
+    <loc>https://yingchaotw.github.io/search/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2024-02-15T16:46:18+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2024-02-15T16:46:18+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/archives/</loc>
-  </url><url>
-    <loc>http://localhost:1313/search/</loc>
-  </url><url>
-    <loc>http://localhost:1313/series/</loc>
+    <loc>https://yingchaotw.github.io/series/</loc>
   </url>
 </urlset>

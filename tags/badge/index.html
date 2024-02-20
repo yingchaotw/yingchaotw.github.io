@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Hugo | yingchao Blog</title>
+<title>Badge | yingchao Blog</title>
 <meta name="keywords" content="">
 <meta name="description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
 <meta name="author" content="Theme PaperMod">
-<link rel="canonical" href="https://yingchaotw.github.io/categories/hugo/">
+<link rel="canonical" href="https://yingchaotw.github.io/tags/badge/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://yingchaotw.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://yingchaotw.github.io/favicon-16x16.png">
@@ -18,8 +18,8 @@
 <link rel="mask-icon" href="https://yingchaotw.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://yingchaotw.github.io/categories/hugo/index.xml">
-<link rel="alternate" hreflang="en" href="https://yingchaotw.github.io/categories/hugo/">
+<link rel="alternate" type="application/rss+xml" href="https://yingchaotw.github.io/tags/badge/index.xml">
+<link rel="alternate" hreflang="en" href="https://yingchaotw.github.io/tags/badge/">
 <noscript>
     <style>
         #theme-toggle,
@@ -59,16 +59,16 @@
 </noscript>
   
 
-<meta property="og:title" content="Hugo" />
+<meta property="og:title" content="Badge" />
 <meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://yingchaotw.github.io/categories/hugo/" />
+<meta property="og:url" content="https://yingchaotw.github.io/tags/badge/" />
 <meta property="og:image" content="https://yingchaotw.github.io/papermod-cover.png" />
 
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://yingchaotw.github.io/papermod-cover.png" />
-<meta name="twitter:title" content="Hugo"/>
+<meta name="twitter:title" content="Badge"/>
 <meta name="twitter:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"/>
 
 </head>
@@ -137,23 +137,30 @@
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="https://yingchaotw.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://yingchaotw.github.io/categories/">Categories</a></div>
+<header class="page-header"><div class="breadcrumbs"><a href="https://yingchaotw.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://yingchaotw.github.io/tags/">Tags</a></div>
   <h1>
-    Hugo
+    Badge
   </h1>
 </header>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">在 Docker Container 上撰寫 Hugo Blog
+    <h2 class="entry-hint-parent">自訂 shield badge logo 的方式
     </h2>
   </header>
   <div class="entry-content">
-    <p>TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container.
-FROM golang:alpine as builder ENV GOGC=50 # gcc/g&#43;&#43; are required to build SASS libraries for extended version RUN apk update &amp;&amp; \ # [自選] 編譯 Image 時間較短 apk add --no-cache --repository=https://dl-cdn....</p>
+    <p>shields.io 是一個生成靜態和動態徽章的線上服務，適用於類似 GitHub, GitLab 等專案頁面。透過調整 URL 參數，可以輕鬆地創建顯示專案狀態和顏色匹配的徽章。對於簡單的動態徽章，例如 last-commit，可以直接構造 URL，而對於複雜的動態徽章，如網頁訪問量等，則可能需要額外的工具，如 substats，來獲取數據。
+其實，如果是靜態的徽章，使用起來非常簡單。只需按照以下格式撰寫圖片的 URL，即可直接插入到 Markdown 中：
+&lt;!-- badge 加上連結的語法 --&gt; ![圖片說明](https://img.shields.io/badge/{左半部分標籤文字}-{右半部分標籤文字}-{右半部分顏色}) &lt;!-- badge 加上實際連結 --&gt; [![Github](https://img.shields.io/badge/Repository-Github-white?logo=github)](https://github.com) 效果如下
+客製 Logos 在網站上有時候希望加入一些徽章（badge）時，可能會到網站上自訂想要的樣式。然而，由於世界上有如此多的徽標，shields.io 並未將所有徽標都收錄在資料庫中，因此它提供了客製化徽標的方式。
+任何自訂徽標都可以透過將其進行 base64 編碼後，作為 URL 參數傳遞。例如：
+我想要使用下面 github 這張圖片作為 badge 的 logo
+首先我必須將圖片下載下來，再上傳至 cloudconvert 網站轉檔之後將圖片大小更換成 14px 正方形尺寸的圖片
+再上傳至 b64 可以得到如下的資訊。
+/* file size: 1ko | optimized file size: 0.8ko | base64 size: 1ko */ .github-logopng { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAMAAAAolt3jAAABqlBMVEUAAABnZ2d3d3f///8CAgIhISH09PTp6enLy8u2trbF4uiutbo5Nzbw8PCw/f8Auv/6/v8L0//u/P905v/z/f/3/v/G9f&#43;GhoZgYGCgoKCqqqqmpqaXl5dgYGCLi4tRUVEPDw8cHBwbGxsaGhoZGRkRERFZWVlCQkI/Pz/////V1dUhISEdHh63t7ft7e3h4eHR0dInJiYpJiW8vb3i4uLq6urj4&#43;PS0tLS0tJSUVGad2VJRkTNzc7Q0NDf39/o6Ojf3t7Hzs&#43;Lk5J3bGajg3KWcF2ohXN6aV91d3f////b29vl5eXY8vhzf39ZYF85PTwJCQoICAg1Njfs9/yHhYVOTUsuLi0eHh4eHh42Njb8/PzK//&#43;g9/9EanIeNDgeNTk0VFyK3/Kz8/&#43;V7P9o4fyE6v////&#43;s8P&#43;E6v9p0/9bw/9aw/9lz/9&#43;6f&#43;d7f/////O7f&#43;y4f&#43;v4f/F6//y/f8EBAQAAAAdFhJfSj9dRztcRTpiTEAlHBiYdGPqrZ37v6H&#43;waHrr56pgXDqrp37vqD9v5/tsp&#43;uhXOWbltGqtY8lr8/msFBoM1i3Pkn9f8rAAAAdXRSTlMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACFRGxcYH1IdXvTR0dPW81N8gwEOwMoTBA0jydQqDwY3bGan/bpnbEoSFyV3mtj&#43;5aQvCRYXHJOXsff6pgwZfMnl56kIEVvF9fXXcyNr&#43;aIHKJHH2tzPpkUDFSQmGgfx/2dVAAAAiUlEQVQIW2NkQAGMQCTGCAFP/gG5zIzSUO7930Au2y91P6Aahv&#43;bGe/9ZGTgUGL0AUtuYLzznVEPyIBxgcAMRHiCiC0gwh4sw&#43;i8D0IzcDlBGIw7fvwFWcTpAeFu/gxyBjO3L1R6LeMHIJcviFEVxLvBuOYdkCsQApXd/foN0D3MQlFg3qK3fxkAiHIfzSIHcYEAAAAASUVORK5CYII=); } 加入自定義 logo 後 badge 的效果如下...</p>
   </div>
-  <footer class="entry-footer"><span title='2024-02-15 16:46:18 +0800 CST'>February 15, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 在 Docker Container 上撰寫 Hugo Blog" href="https://yingchaotw.github.io/posts/make-hugo-blog-at-docker/"></a>
+  <footer class="entry-footer"><span title='2024-02-21 16:46:18 +0800 CST'>February 21, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 自訂 shield badge logo 的方式" href="https://yingchaotw.github.io/posts/shield-badge-icon/"></a>
 </article>
     </main>
     

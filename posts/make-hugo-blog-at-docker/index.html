@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Create Hugo Blog at Docker Container | yingchao Blog</title>
+<title>在 Docker Container 上撰寫 Hugo Blog | yingchao Blog</title>
 <meta name="keywords" content="Github page, Hugo, Blog">
-<meta name="description" content="TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Hugo Hugo 是一個用 Go 編寫的靜態網站生成器，2013由 Steve Francia 原創，自 v0.14 (2015年) 由 Bjørn Erik Pedersen 主力開發，並由全球各地的開發者和使用者提交貢獻。Hugo 以 Apache License 2.0 授權的開放原始碼專案。
-Hugo 一般只需幾秒鐘就能生成一個網站（每頁少於 1 毫秒），被稱為「世界上最快的網站構建框架」，也使 Hugo 大受歡迎，成為最熱門的靜態網站生成器之一，被廣泛採用。例如，2015年7月，Netlify 推出專為 Hugo 而設的網站代管服務，而2017年，Smashing Magazine 推出重新設計的官方網站，從原來的 WordPress 遷移到基於 Hugo 的 JAMstack 解決方案。1
-Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container.">
+<meta name="description" content="TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container.
+FROM golang:alpine as builder ENV GOGC=50 # gcc/g&#43;&#43; are required to build SASS libraries for extended version RUN apk update &amp;&amp; \ # [自選] 編譯 Image 時間較短 apk add --no-cache --repository=https://dl-cdn.">
 <meta name="author" content="yingchao">
-<link rel="canonical" href="http://localhost:1313/posts/make-hugo-blog-at-docker/">
+<link rel="canonical" href="https://yingchaotw.github.io/posts/make-hugo-blog-at-docker/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://yingchaotw.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yingchaotw.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yingchaotw.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yingchaotw.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yingchaotw.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/make-hugo-blog-at-docker/">
+<link rel="alternate" hreflang="en" href="https://yingchaotw.github.io/posts/make-hugo-blog-at-docker/">
 <noscript>
     <style>
         #theme-toggle,
@@ -60,23 +59,21 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
 </noscript>
   
 
-<meta property="og:title" content="Create Hugo Blog at Docker Container" />
-<meta property="og:description" content="TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Hugo Hugo 是一個用 Go 編寫的靜態網站生成器，2013由 Steve Francia 原創，自 v0.14 (2015年) 由 Bjørn Erik Pedersen 主力開發，並由全球各地的開發者和使用者提交貢獻。Hugo 以 Apache License 2.0 授權的開放原始碼專案。
-Hugo 一般只需幾秒鐘就能生成一個網站（每頁少於 1 毫秒），被稱為「世界上最快的網站構建框架」，也使 Hugo 大受歡迎，成為最熱門的靜態網站生成器之一，被廣泛採用。例如，2015年7月，Netlify 推出專為 Hugo 而設的網站代管服務，而2017年，Smashing Magazine 推出重新設計的官方網站，從原來的 WordPress 遷移到基於 Hugo 的 JAMstack 解決方案。1
-Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container." />
+<meta property="og:title" content="在 Docker Container 上撰寫 Hugo Blog" />
+<meta property="og:description" content="TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container.
+FROM golang:alpine as builder ENV GOGC=50 # gcc/g&#43;&#43; are required to build SASS libraries for extended version RUN apk update &amp;&amp; \ # [自選] 編譯 Image 時間較短 apk add --no-cache --repository=https://dl-cdn." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/make-hugo-blog-at-docker/" />
-<meta property="og:image" content="http://localhost:1313/papermod-cover.png" />
+<meta property="og:url" content="https://yingchaotw.github.io/posts/make-hugo-blog-at-docker/" />
+<meta property="og:image" content="https://yingchaotw.github.io/papermod-cover.png" />
 <meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-15T16:46:18+08:00" />
 <meta property="article:modified_time" content="2024-02-15T16:46:18+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/papermod-cover.png" />
-<meta name="twitter:title" content="Create Hugo Blog at Docker Container"/>
-<meta name="twitter:description" content="TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Hugo Hugo 是一個用 Go 編寫的靜態網站生成器，2013由 Steve Francia 原創，自 v0.14 (2015年) 由 Bjørn Erik Pedersen 主力開發，並由全球各地的開發者和使用者提交貢獻。Hugo 以 Apache License 2.0 授權的開放原始碼專案。
-Hugo 一般只需幾秒鐘就能生成一個網站（每頁少於 1 毫秒），被稱為「世界上最快的網站構建框架」，也使 Hugo 大受歡迎，成為最熱門的靜態網站生成器之一，被廣泛採用。例如，2015年7月，Netlify 推出專為 Hugo 而設的網站代管服務，而2017年，Smashing Magazine 推出重新設計的官方網站，從原來的 WordPress 遷移到基於 Hugo 的 JAMstack 解決方案。1
-Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container."/>
+<meta name="twitter:image" content="https://yingchaotw.github.io/papermod-cover.png" />
+<meta name="twitter:title" content="在 Docker Container 上撰寫 Hugo Blog"/>
+<meta name="twitter:description" content="TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container.
+FROM golang:alpine as builder ENV GOGC=50 # gcc/g&#43;&#43; are required to build SASS libraries for extended version RUN apk update &amp;&amp; \ # [自選] 編譯 Image 時間較短 apk add --no-cache --repository=https://dl-cdn."/>
 
 
 <script type="application/ld+json">
@@ -88,13 +85,13 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "http://localhost:1313/posts/"
+      "item": "https://yingchaotw.github.io/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "Create Hugo Blog at Docker Container",
-      "item": "http://localhost:1313/posts/make-hugo-blog-at-docker/"
+      "name": "在 Docker Container 上撰寫 Hugo Blog",
+      "item": "https://yingchaotw.github.io/posts/make-hugo-blog-at-docker/"
     }
   ]
 }
@@ -103,16 +100,16 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Create Hugo Blog at Docker Container",
-  "name": "Create Hugo Blog at Docker Container",
-  "description": "TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Hugo Hugo 是一個用 Go 編寫的靜態網站生成器，2013由 Steve Francia 原創，自 v0.14 (2015年) 由 Bjørn Erik Pedersen 主力開發，並由全球各地的開發者和使用者提交貢獻。Hugo 以 Apache License 2.0 授權的開放原始碼專案。\nHugo 一般只需幾秒鐘就能生成一個網站（每頁少於 1 毫秒），被稱為「世界上最快的網站構建框架」，也使 Hugo 大受歡迎，成為最熱門的靜態網站生成器之一，被廣泛採用。例如，2015年7月，Netlify 推出專為 Hugo 而設的網站代管服務，而2017年，Smashing Magazine 推出重新設計的官方網站，從原來的 WordPress 遷移到基於 Hugo 的 JAMstack 解決方案。1\nDocker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container.",
+  "headline": "在 Docker Container 上撰寫 Hugo Blog",
+  "name": "在 Docker Container 上撰寫 Hugo Blog",
+  "description": "TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container.\nFROM golang:alpine as builder ENV GOGC=50 # gcc/g++ are required to build SASS libraries for extended version RUN apk update \u0026amp;\u0026amp; \\ # [自選] 編譯 Image 時間較短 apk add --no-cache --repository=https://dl-cdn.",
   "keywords": [
     "Github page", "Hugo", "Blog"
   ],
-  "articleBody": "TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Hugo Hugo 是一個用 Go 編寫的靜態網站生成器，2013由 Steve Francia 原創，自 v0.14 (2015年) 由 Bjørn Erik Pedersen 主力開發，並由全球各地的開發者和使用者提交貢獻。Hugo 以 Apache License 2.0 授權的開放原始碼專案。\nHugo 一般只需幾秒鐘就能生成一個網站（每頁少於 1 毫秒），被稱為「世界上最快的網站構建框架」，也使 Hugo 大受歡迎，成為最熱門的靜態網站生成器之一，被廣泛採用。例如，2015年7月，Netlify 推出專為 Hugo 而設的網站代管服務，而2017年，Smashing Magazine 推出重新設計的官方網站，從原來的 WordPress 遷移到基於 Hugo 的 JAMstack 解決方案。1\nDocker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container.\nFROM golang:alpine as builder ENV GOGC=50 # gcc/g++ are required to build SASS libraries for extended version RUN apk update \u0026\u0026 \\ # [自選] 編譯 Image 時間較短 apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community hugo \u0026\u0026 \\ # [自選] 編譯 Image 時間太長 # apk add --no-cache gcc g++ musl-dev git \u0026\u0026 \\ # go install -tags extended github.com/gohugoio/hugo@latest \u0026\u0026 \\ # [自選] 確認 hugo 安裝路徑及版本 $(which hugo) \u0026\u0026 hugo version ######################################################## FROM alpine:latest as base LABEL maintainer=\"yingchao \" # 更新 apt 及安裝套件. RUN apk update \u0026\u0026 apk add --no-cache \\ ca-certificates \\ libc6-compat \\ libstdc++ \\ procps \\ shadow \\ curl \\ sudo \\ git \\ # [自選] vim 套件安裝，會增加 image. vim ######################################################## FROM base as user_config ARG USER ARG USERID ARG GROUPID ARG PASSWORD # 在 OSX 環境上，一般用戶 UID 為 501，小於預設 UID_MIN 1000 RUN echo -e \"UID_MIN 500\\nUID_MAX 60000\" \u003e /etc/login.defs; # 確認群組是否存在，如不存在則建立群組，在 docker 編譯失敗時，暫存中會有上一次編譯的群組名稱。 RUN if ! getent group $GROUPID \u003e /dev/null 2\u003e\u00261; then \\ groupadd -g $GROUPID $USER; \\ else \\ groupmod -n $USER $(getent group $GROUPID | cut -d: -f1); \\ fi # 新增用戶並設定 UID 及 GID RUN useradd -m -u $USERID -g $GROUPID -s /bin/bash $USER # 設定用戶密碼 RUN echo \"$USER:$PASSWORD\" | chpasswd RUN echo \"%$USER ALL=(ALL) NOPASSWD:ALL\" \u003e\u003e /etc/sudoers RUN addgroup $USER wheel ######################################################## FROM base as final # 設定環境變數 ARG USER ENV PROJECT=/home/$USER/usbridge COPY --from=user_config /etc/sudoers /etc/passwd /etc/group /etc/ COPY --from=user_config /home/$USER /home/$USER COPY --from=builder /usr/bin/hugo /usr/bin/hugo COPY .profile /home/$USER/ # [自選] 編譯 Image 時間太長 # COPY --from=builder /go/bin/hugo /usr/bin/hugo # 登入非 root 用戶 USER $USER CMD [\"/bin/sh\", \"-l\"] # 設定工作目錄 WORKDIR $PROJECT # 轉 HUGO 預設 PORT 1313 EXPOSE 1313 Build docker build 命令用於從 Dockerfile 構建 Docker image。 docker build 命令通過讀取 Dockerfile 中定義的指令，逐步構建 image，並將最終結果保存到 local 端的 image 中。\n$ DOCKER_BUILDKIT=1 docker image build --no-cache \\ -t :latest \\ --build-arg USER=$(whoami) \\ --build-arg USERID=$(id -u) \\ --build-arg GROUPID=$(id -g) \\ --build-arg PASSWORD=taiwan123 . Start docker run 命令用於創建並啟動一個新的容器。\n透過 iamge 執行並產生一個新的 container docker run [Image 名稱]:[Image 版本] [執行指令] $ docker run -it --rm --name website-srv \\ --volume :/home/$(whoami)/blog \\ --volume /etc/localtime:/etc/localtime:ro \\ --workdir /home/$(whoami)/blog \\ --hostname website-srv \\ -p 1313:1313 Attach docker attach 指令用於附加到正在執行的 Docker 容器的標準輸入、輸出和錯誤輸出（stdin、stdout、stderr）。允許使用者直接與容器交互，就像與正在運行的進程交互一樣。\n$ docker attach website-srv Stop docker stop 指令用來停止一個運作中的容器。\n$ docker stop website-srv Remove 刪除容器 docker rm 指令用於刪除一個或多個已經停止的容器。 docker rm 指令不會刪除正在執行的容器，如果你需要先停止容器，可以使用 docker stop 指令。\n刪除鏡像 docker rmi 指令用於刪除一個或多個 Docker 映像。 docker rmi 指令對於管理本機儲存的映像非常有用，可協助使用者清理不再需要的映像，釋放儲存空間。\n$ docker images --filter reference=website-srv --format \"{{.ID}}\" # 記住輸出的 Image ID $ docker rm {image-id} $ docker rmi {image-id} Hugo 基本用法 Hugo的命令行介面（CLI）功能齊全，但使用簡單，即使對於那些在命令列工作經驗有限的人來說也是如此。\n安裝測試 安裝 Hugo 後，透過執行以下方式測試您的安裝：\n$ hugo version 你應該看到這樣的東西：\nhugo v0.130.0+extended linux/arm64 BuildDate=unknown 顯示可用的命令 要檢視可用命令和標誌的列表：\nhugo help 要獲得子命令的幫助，請使用–help標誌。 例如：\nhugo server --help 構建您的網站 要構建您的網站，請將cd放入您的專案目錄並執行：\nhugo hugo 命令構建您的網站，將檔案釋出到 public 目錄。 要將您的網站釋出到其他目錄，請使用 --destination 標誌或在站點配置中設定 publishDir 。\nHugo 在構建您的網站之前不會清除 public 目錄。 現有檔案被覆蓋，但不會被刪除。 此行為是故意防止無意中刪除您在構建後可能新增到 public 目錄中的檔案。\n根據您的需求，您可能希望在每次構建之前手動清除公共目錄的內容。\n草稿、未來和過期的內容 Hugo允許您在內容的前面設定 draft、date、publishDate和expiryDate。 預設情況下，雨果不會在以下情況下釋出內容：\ndraft價值是true date在未來 publishDate是在未來 expiryDate是過去的 Hugo 釋出草稿、未來和過期節點頁面的後代。 為了防止這些後代的釋出，請使用 cascade 前端欄位將選項級聯構建到後代頁面。\n使用命令列標誌執行 hugo 或 hugo server 時，您可以覆蓋預設行為：\nhugo --buildDrafts # or -D hugo --buildExpired # or -E hugo --buildFuture # or -F 雖然您也可以在網站配置中設定這些值，但除非所有內容作者都瞭解並理解設定，否則可能會導致不想要的結果。\n如上所述，Hugo在構建您的網站之前不會清除 public 目錄。 根據當前對上述四個條件的評估，構建後，您的 public 目錄可能包含之前構建的無關檔案。\n一種常見的做法是在每次構建之前手動清除public目錄的內容，以刪除草稿、過期和未來內容。\n開發和測試您的網站 要在開發佈局或建立內容時檢視您的網站，請cd放入您的專案目錄並執行：\nhugo server --bind 0.0.0.0 hugo server 命令將您的網站構建到記憶體中，並使用最小的HTTP伺服器為您的頁面提供服務。 當您執行hugo server時，它將顯示您本地網站的URL：\nWeb Server is available at http://localhost:1313/ 當伺服器執行時，它會監視您的專案目錄對資產、配置、內容、資料、佈局、翻譯和靜態檔案的更改。 當它檢測到更改時，伺服器會重建您的網站，並使用LiveReload重新整理您的瀏覽器。\n大多數 Hugo 構建速度非常快，除非您直接檢視瀏覽器，否則您可能不會注意到變化。\nNote 在伺服器環境中，0.0.0.0 代表伺服器上所有的 IPv4 位址。例如，如果機器上有兩個 IP 地址 192.168.30.10 和 10.0.2.15，當 Hugo 配置中設置監聽地址為 0.0.0.0 時，這兩個 IP 地址都可以連接到 Hugo 服務。同時，通過本地的 127.0.0.1 也能夠訪問到 Hugo 服務。 在本機預覽 Hugo 網頁\n在 Hugo 網站根目錄開啟終端機，輸入 $ hugo server --bind 0.0.0.0 -D 啟動網站。 終端機會顯示 Web Server is available at，表示網站伺服器已開啟。 開啟 browser, 輸入 http://localhost:1313 就能看到自己網站的樣子。 如果要停止本機伺服器，在終端機按下 CTRL+C 參考內容\nInstalling Hugo (or anything else) into a Docker Container 現場重新載入 當伺服器執行時，Hugo將JavaScript注入生成的HTML頁面。 LiveReload指令碼透過網路套接字從瀏覽器建立到伺服器的連線。 您不需要安裝任何軟體或瀏覽器外掛，也不需要任何配置。\n自動重定向 編輯內容時，如果您希望瀏覽器自動重定向到您上次修改的頁面，請執行：\nhugo server --navigateToChanged 部署您的網站 如上所述，Hugo在構建您的網站之前不會清除公共目錄。 在每次構建之前手動清除公共目錄的內容，以刪除草稿、過期和未來內容。\n當您準備好部署您的網站時，請執行：\nhugo 這將構建您的網站，將檔案釋出到公共目錄。 目錄結構將看起來像這樣：\npublic/ ├── categories/ │ ├── index.html │ └── index.xml \u003c-- RSS feed for this section ├── posts/ │ ├── my-first-post/ │ │ └── index.html │ ├── index.html │ └── index.xml \u003c-- RSS feed for this section ├── tags/ │ ├── index.html │ └── index.xml \u003c-- RSS feed for this section ├── index.html ├── index.xml \u003c-- RSS feed for the site └── sitemap.xml 在簡單的託管環境中，您通常將檔案ftp、rsync或scp到虛擬主機的根目錄，public目錄的內容就是您所需要的。\n我們的大多數使用者使用CI/CD工作流程部署他們的網站，其中推送2到他們的GitHub或GitLab儲存庫會觸發構建和部署。 熱門提供商包括AWS Amplify、CloudCannon、Cloudflare Pages、GitHub Pages、GitLab Pages和Netlify。\n在託管和部署部分瞭解更多資訊。\n參考維基百科全書 ↩︎\nGit 儲存庫包含整個專案目錄，通常不包括公共目錄，因為網站是在推送後構建的。 ↩︎\n",
+  "articleBody": " TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container.\nFROM golang:alpine as builder ENV GOGC=50 # gcc/g++ are required to build SASS libraries for extended version RUN apk update \u0026\u0026 \\ # [自選] 編譯 Image 時間較短 apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community hugo \u0026\u0026 \\ # [自選] 編譯 Image 時間太長 # apk add --no-cache gcc g++ musl-dev git \u0026\u0026 \\ # go install -tags extended github.com/gohugoio/hugo@latest \u0026\u0026 \\ # [自選] 確認 hugo 安裝路徑及版本 $(which hugo) \u0026\u0026 hugo version ######################################################## FROM alpine:latest as base LABEL maintainer=\"yingchao \" # 更新 apt 及安裝套件. RUN apk update \u0026\u0026 apk add --no-cache \\ ca-certificates \\ libc6-compat \\ libstdc++ \\ procps \\ shadow \\ curl \\ sudo \\ git \\ # [自選] vim 套件安裝，會增加 image. vim ######################################################## FROM base as user_config ARG USER ARG USERID ARG GROUPID ARG PASSWORD # 在 OSX 環境上，一般用戶 UID 為 501，小於預設 UID_MIN 1000 RUN echo -e \"UID_MIN 500\\nUID_MAX 60000\" \u003e /etc/login.defs; # 確認群組是否存在，如不存在則建立群組，在 docker 編譯失敗時，暫存中會有上一次編譯的群組名稱。 RUN if ! getent group $GROUPID \u003e /dev/null 2\u003e\u00261; then \\ groupadd -g $GROUPID $USER; \\ else \\ groupmod -n $USER $(getent group $GROUPID | cut -d: -f1); \\ fi # 新增用戶並設定 UID 及 GID RUN useradd -m -u $USERID -g $GROUPID -s /bin/bash $USER # 設定用戶密碼 RUN echo \"$USER:$PASSWORD\" | chpasswd RUN echo \"%$USER ALL=(ALL) NOPASSWD:ALL\" \u003e\u003e /etc/sudoers RUN addgroup $USER wheel ######################################################## FROM base as final # 設定環境變數 ARG USER ENV PROJECT=/home/$USER/usbridge COPY --from=user_config /etc/sudoers /etc/passwd /etc/group /etc/ COPY --from=user_config /home/$USER /home/$USER COPY --from=builder /usr/bin/hugo /usr/bin/hugo COPY .profile /home/$USER/ # [自選] 編譯 Image 時間太長 # COPY --from=builder /go/bin/hugo /usr/bin/hugo # 登入非 root 用戶 USER $USER CMD [\"/bin/sh\", \"-l\"] # 設定工作目錄 WORKDIR $PROJECT # 轉 HUGO 預設 PORT 1313 EXPOSE 1313 Build docker build 命令用於從 Dockerfile 構建 Docker image。 docker build 命令通過讀取 Dockerfile 中定義的指令，逐步構建 image，並將最終結果保存到 local 端的 image 中。\n$ DOCKER_BUILDKIT=1 docker image build --no-cache \\ -t :latest \\ --build-arg USER=$(whoami) \\ --build-arg USERID=$(id -u) \\ --build-arg GROUPID=$(id -g) \\ --build-arg PASSWORD=taiwan123 . Start docker run 命令用於創建並啟動一個新的容器。\n透過 iamge 執行並產生一個新的 container docker run [Image 名稱]:[Image 版本] [執行指令] $ docker run -it --rm --name website-srv \\ --volume :/home/$(whoami)/blog \\ --volume /etc/localtime:/etc/localtime:ro \\ --workdir /home/$(whoami)/blog \\ --hostname website-srv \\ -p 1313:1313 Attach docker attach 指令用於附加到正在執行的 Docker 容器的標準輸入、輸出和錯誤輸出（stdin、stdout、stderr）。允許使用者直接與容器交互，就像與正在運行的進程交互一樣。\n$ docker attach website-srv Stop docker stop 指令用來停止一個運作中的容器。\n$ docker stop website-srv Remove 刪除容器 docker rm 指令用於刪除一個或多個已經停止的容器。 docker rm 指令不會刪除正在執行的容器，如果你需要先停止容器，可以使用 docker stop 指令。\n刪除鏡像 docker rmi 指令用於刪除一個或多個 Docker 映像。 docker rmi 指令對於管理本機儲存的映像非常有用，可協助使用者清理不再需要的映像，釋放儲存空間。\n$ docker images --filter reference=website-srv --format \"{{.ID}}\" # 記住輸出的 Image ID $ docker rm {image-id} $ docker rmi {image-id} Hugo Hugo 是一個用 Go 編寫的靜態網站生成器，2013由 Steve Francia 原創，自 v0.14 (2015年) 由 Bjørn Erik Pedersen 主力開發，並由全球各地的開發者和使用者提交貢獻。Hugo 以 Apache License 2.0 授權的開放原始碼專案。\nHugo 一般只需幾秒鐘就能生成一個網站（每頁少於 1 毫秒），被稱為「世界上最快的網站構建框架」，也使 Hugo 大受歡迎，成為最熱門的靜態網站生成器之一，被廣泛採用。例如，2015年7月，Netlify 推出專為 Hugo 而設的網站代管服務，而2017年，Smashing Magazine 推出重新設計的官方網站，從原來的 WordPress 遷移到基於 Hugo 的 JAMstack 解決方案。1\nHugo 基本用法 Hugo的命令行介面（CLI）功能齊全，但使用簡單，即使對於那些在命令列工作經驗有限的人來說也是如此。\n安裝測試 安裝 Hugo 後，透過執行以下方式測試您的安裝：\n$ hugo version 你應該看到這樣的東西：\nhugo v0.130.0+extended linux/arm64 BuildDate=unknown 顯示可用的命令 要檢視可用命令和標誌的列表：\nhugo help 要獲得子命令的幫助，請使用–help標誌。 例如：\nhugo server --help 構建您的網站 要構建您的網站，請將cd放入您的專案目錄並執行：\nhugo hugo 命令構建您的網站，將檔案釋出到 public 目錄。 要將您的網站釋出到其他目錄，請使用 --destination 標誌或在站點配置中設定 publishDir 。\nHugo 在構建您的網站之前不會清除 public 目錄。 現有檔案被覆蓋，但不會被刪除。 此行為是故意防止無意中刪除您在構建後可能新增到 public 目錄中的檔案。\n根據您的需求，您可能希望在每次構建之前手動清除公共目錄的內容。\n草稿、未來和過期的內容 Hugo允許您在內容的前面設定 draft、date、publishDate和expiryDate。 預設情況下，雨果不會在以下情況下釋出內容：\ndraft價值是true date在未來 publishDate是在未來 expiryDate是過去的 Hugo 釋出草稿、未來和過期節點頁面的後代。 為了防止這些後代的釋出，請使用 cascade 前端欄位將選項級聯構建到後代頁面。\n使用命令列標誌執行 hugo 或 hugo server 時，您可以覆蓋預設行為：\nhugo --buildDrafts # or -D hugo --buildExpired # or -E hugo --buildFuture # or -F 雖然您也可以在網站配置中設定這些值，但除非所有內容作者都瞭解並理解設定，否則可能會導致不想要的結果。\n如上所述，Hugo在構建您的網站之前不會清除 public 目錄。 根據當前對上述四個條件的評估，構建後，您的 public 目錄可能包含之前構建的無關檔案。\n一種常見的做法是在每次構建之前手動清除public目錄的內容，以刪除草稿、過期和未來內容。\n開發和測試您的網站 要在開發佈局或建立內容時檢視您的網站，請cd放入您的專案目錄並執行：\nhugo server --bind 0.0.0.0 hugo server 命令將您的網站構建到記憶體中，並使用最小的HTTP伺服器為您的頁面提供服務。 當您執行hugo server時，它將顯示您本地網站的URL：\nWeb Server is available at http://localhost:1313/ 當伺服器執行時，它會監視您的專案目錄對資產、配置、內容、資料、佈局、翻譯和靜態檔案的更改。 當它檢測到更改時，伺服器會重建您的網站，並使用LiveReload重新整理您的瀏覽器。\n大多數 Hugo 構建速度非常快，除非您直接檢視瀏覽器，否則您可能不會注意到變化。\nNote 在伺服器環境中，0.0.0.0 代表伺服器上所有的 IPv4 位址。例如，如果機器上有兩個 IP 地址 192.168.30.10 和 10.0.2.15，當 Hugo 配置中設置監聽地址為 0.0.0.0 時，這兩個 IP 地址都可以連接到 Hugo 服務。同時，通過本地的 127.0.0.1 也能夠訪問到 Hugo 服務。 在本機預覽 Hugo 網頁\n在 Hugo 網站根目錄開啟終端機，輸入 $ hugo server --bind 0.0.0.0 -D 啟動網站。 終端機會顯示 Web Server is available at，表示網站伺服器已開啟。 開啟 browser, 輸入 http://localhost:1313 就能看到自己網站的樣子。 如果要停止本機伺服器，在終端機按下 CTRL+C 參考內容\nInstalling Hugo (or anything else) into a Docker Container 現場重新載入 當伺服器執行時，Hugo將JavaScript注入生成的HTML頁面。 LiveReload指令碼透過網路套接字從瀏覽器建立到伺服器的連線。 您不需要安裝任何軟體或瀏覽器外掛，也不需要任何配置。\n自動重定向 編輯內容時，如果您希望瀏覽器自動重定向到您上次修改的頁面，請執行：\nhugo server --navigateToChanged 部署您的網站 如上所述，Hugo在構建您的網站之前不會清除公共目錄。 在每次構建之前手動清除公共目錄的內容，以刪除草稿、過期和未來內容。\n當您準備好部署您的網站時，請執行：\nhugo 這將構建您的網站，將檔案釋出到公共目錄。 目錄結構將看起來像這樣：\npublic/ ├── categories/ │ ├── index.html │ └── index.xml \u003c-- RSS feed for this section ├── posts/ │ ├── my-first-post/ │ │ └── index.html │ ├── index.html │ └── index.xml \u003c-- RSS feed for this section ├── tags/ │ ├── index.html │ └── index.xml \u003c-- RSS feed for this section ├── index.html ├── index.xml \u003c-- RSS feed for the site └── sitemap.xml 在簡單的託管環境中，您通常將檔案ftp、rsync或scp到虛擬主機的根目錄，public目錄的內容就是您所需要的。\n我們的大多數使用者使用CI/CD工作流程部署他們的網站，其中推送2到他們的GitHub或GitLab儲存庫會觸發構建和部署。 熱門提供商包括AWS Amplify、CloudCannon、Cloudflare Pages、GitHub Pages、GitLab Pages和Netlify。\n在託管和部署部分瞭解更多資訊。\n參考維基百科全書 ↩︎\nGit 儲存庫包含整個專案目錄，通常不包括公共目錄，因為網站是在推送後構建的。 ↩︎\n",
   "wordCount" : "736",
   "inLanguage": "en",
-  "image": "http://localhost:1313/papermod-cover.png","datePublished": "2024-02-15T16:46:18+08:00",
+  "image": "https://yingchaotw.github.io/papermod-cover.png","datePublished": "2024-02-15T16:46:18+08:00",
   "dateModified": "2024-02-15T16:46:18+08:00",
   "author":{
     "@type": "Person",
@@ -120,14 +117,14 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/make-hugo-blog-at-docker/"
+    "@id": "https://yingchaotw.github.io/posts/make-hugo-blog-at-docker/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "yingchao Blog",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
+      "url": "https://yingchaotw.github.io/favicon.ico"
     }
   }
 }
@@ -149,7 +146,7 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="yingchao Blog (Alt + H)">yingchao Blog</a>
+            <a href="https://yingchaotw.github.io/" accesskey="h" title="yingchao Blog (Alt + H)">yingchao Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -175,22 +172,22 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives" title="Archive">
+                <a href="https://yingchaotw.github.io/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://yingchaotw.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://yingchaotw.github.io/search" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://yingchaotw.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -201,9 +198,9 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://yingchaotw.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://yingchaotw.github.io/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
-      Create Hugo Blog at Docker Container
+      在 Docker Container 上撰寫 Hugo Blog
     </h1>
     <div class="post-meta"><span title='2024-02-15 16:46:18 +0800 CST'>February 15, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;yingchao&nbsp;|&nbsp;<a href="https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content/posts/Make-Hugo-Blog-at-Docker.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
 
@@ -217,8 +214,6 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
         <div class="inner"><ul>
                 <li>
                     <a href="#tldr" aria-label="TL;DR">TL;DR</a></li>
-                <li>
-                    <a href="#hugo" aria-label="Hugo">Hugo</a></li>
                 <li>
                     <a href="#docker-setup" aria-label="Docker Setup">Docker Setup</a><ul>
                         
@@ -239,6 +234,9 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
                     <a href="#%e5%88%aa%e9%99%a4%e9%8f%a1%e5%83%8f" aria-label="刪除鏡像">刪除鏡像</a></li></ul>
                 </li></ul>
                 </li>
+                <li>
+                    <a href="#hugo" aria-label="Hugo">Hugo</a><ul>
+                        
                 <li>
                     <a href="#hugo-%e5%9f%ba%e6%9c%ac%e7%94%a8%e6%b3%95" aria-label="Hugo 基本用法">Hugo 基本用法</a><ul>
                         
@@ -264,11 +262,14 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
             </ul>
             </li>
             </ul>
+            </li>
+            </ul>
         </div>
     </details>
 </div>
 
-  <div class="post-content"><h1 id="tldr">TL;DR<a hidden class="anchor" aria-hidden="true" href="#tldr">#</a></h1>
+  <div class="post-content"><!-- Create Hugo Blog at Docker Container -->
+<h1 id="tldr">TL;DR<a hidden class="anchor" aria-hidden="true" href="#tldr">#</a></h1>
 <ul>
 <li><strong>Hugo 介紹</strong>: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。</li>
 <li><strong>Docker 設定與建置</strong>: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。</li>
@@ -276,11 +277,6 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
 <li><strong>部署網站</strong>: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。</li>
 <li><strong>附加功能</strong>: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。</li>
 </ul>
-<h1 id="hugo">Hugo<a hidden class="anchor" aria-hidden="true" href="#hugo">#</a></h1>
-<blockquote>
-<p>Hugo 是一個用 Go 編寫的靜態網站生成器，2013由 Steve Francia 原創，自 v0.14 (2015年) 由 Bjørn Erik Pedersen 主力開發，並由全球各地的開發者和使用者提交貢獻。Hugo 以 Apache License 2.0 授權的開放原始碼專案。</p>
-<p>Hugo 一般只需幾秒鐘就能生成一個網站（每頁少於 1 毫秒），被稱為「世界上最快的網站構建框架」，也使 Hugo 大受歡迎，成為最熱門的靜態網站生成器之一，被廣泛採用。例如，2015年7月，Netlify 推出專為 Hugo 而設的網站代管服務，而2017年，Smashing Magazine 推出重新設計的官方網站，從原來的 WordPress 遷移到基於 Hugo 的 JAMstack 解決方案。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
-</blockquote>
 <h1 id="docker-setup">Docker Setup<a hidden class="anchor" aria-hidden="true" href="#docker-setup">#</a></h1>
 <p>首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> golang:alpine as builder</span><span class="err">
@@ -409,19 +405,24 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
 </span></span><span class="line"><span class="cl"><span class="c1"># 記住輸出的 Image ID</span>
 </span></span><span class="line"><span class="cl">$ docker rm <span class="o">{</span>image-id<span class="o">}</span>
 </span></span><span class="line"><span class="cl">$ docker rmi <span class="o">{</span>image-id<span class="o">}</span>
-</span></span></code></pre></div><h1 id="hugo-基本用法">Hugo 基本用法<a hidden class="anchor" aria-hidden="true" href="#hugo-基本用法">#</a></h1>
+</span></span></code></pre></div><h1 id="hugo">Hugo<a hidden class="anchor" aria-hidden="true" href="#hugo">#</a></h1>
+<blockquote>
+<p>Hugo 是一個用 Go 編寫的靜態網站生成器，2013由 Steve Francia 原創，自 v0.14 (2015年) 由 Bjørn Erik Pedersen 主力開發，並由全球各地的開發者和使用者提交貢獻。Hugo 以 Apache License 2.0 授權的開放原始碼專案。</p>
+<p>Hugo 一般只需幾秒鐘就能生成一個網站（每頁少於 1 毫秒），被稱為「世界上最快的網站構建框架」，也使 Hugo 大受歡迎，成為最熱門的靜態網站生成器之一，被廣泛採用。例如，2015年7月，Netlify 推出專為 Hugo 而設的網站代管服務，而2017年，Smashing Magazine 推出重新設計的官方網站，從原來的 WordPress 遷移到基於 Hugo 的 JAMstack 解決方案。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+</blockquote>
+<h2 id="hugo-基本用法">Hugo 基本用法<a hidden class="anchor" aria-hidden="true" href="#hugo-基本用法">#</a></h2>
 <p>Hugo的命令行介面（CLI）功能齊全，但使用簡單，即使對於那些在命令列工作經驗有限的人來說也是如此。</p>
-<h2 id="安裝測試">安裝測試<a hidden class="anchor" aria-hidden="true" href="#安裝測試">#</a></h2>
+<h3 id="安裝測試">安裝測試<a hidden class="anchor" aria-hidden="true" href="#安裝測試">#</a></h3>
 <p>安裝 <code>Hugo</code> 後，透過執行以下方式測試您的安裝：</p>
 <pre tabindex="0"><code>$ hugo version
 </code></pre><p>你應該看到這樣的東西：</p>
 <pre tabindex="0"><code>hugo v0.130.0+extended linux/arm64 BuildDate=unknown
-</code></pre><h2 id="顯示可用的命令">顯示可用的命令<a hidden class="anchor" aria-hidden="true" href="#顯示可用的命令">#</a></h2>
+</code></pre><h3 id="顯示可用的命令">顯示可用的命令<a hidden class="anchor" aria-hidden="true" href="#顯示可用的命令">#</a></h3>
 <p>要檢視可用命令和標誌的列表：</p>
 <pre tabindex="0"><code>hugo help
 </code></pre><p>要獲得子命令的幫助，請使用&ndash;help標誌。 例如：</p>
 <pre tabindex="0"><code>hugo server --help
-</code></pre><h2 id="構建您的網站">構建您的網站<a hidden class="anchor" aria-hidden="true" href="#構建您的網站">#</a></h2>
+</code></pre><h3 id="構建您的網站">構建您的網站<a hidden class="anchor" aria-hidden="true" href="#構建您的網站">#</a></h3>
 <p>要構建您的網站，請將cd放入您的專案目錄並執行：</p>
 <pre tabindex="0"><code>hugo
 </code></pre><p><code>hugo</code> 命令構建您的網站，將檔案釋出到 <code>public</code> 目錄。 要將您的網站釋出到其他目錄，請使用 -<code>-destination</code> 標誌或在站點配置中設定 <code>publishDir</code> 。</p>
@@ -429,7 +430,7 @@ Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建
 <p>Hugo 在構建您的網站之前不會清除 <code>public</code> 目錄。 現有檔案被覆蓋，但不會被刪除。 此行為是故意防止無意中刪除您在構建後可能新增到 <code>public</code> 目錄中的檔案。</p>
 <p>根據您的需求，您可能希望在每次構建之前手動清除公共目錄的內容。</p>
 </blockquote>
-<h2 id="草稿未來和過期的內容">草稿、未來和過期的內容<a hidden class="anchor" aria-hidden="true" href="#草稿未來和過期的內容">#</a></h2>
+<h3 id="草稿未來和過期的內容">草稿、未來和過期的內容<a hidden class="anchor" aria-hidden="true" href="#草稿未來和過期的內容">#</a></h3>
 <p>Hugo允許您在內容的前面設定 <code>draft</code>、<code>date</code>、<code>publishDate</code>和<code>expiryDate</code>。 預設情況下，雨果不會在以下情況下釋出內容：</p>
 <ul>
 <li><code>draft</code>價值是<code>true</code></li>
@@ -449,7 +450,7 @@ hugo --buildFuture    # or -F
 <p>如上所述，Hugo在構建您的網站之前不會清除 <code>public</code> 目錄。 根據當前對上述四個條件的評估，構建後，您的 <code>public</code> 目錄可能包含之前構建的無關檔案。</p>
 <p>一種常見的做法是在每次構建之前手動清除public目錄的內容，以刪除草稿、過期和未來內容。</p>
 </blockquote>
-<h2 id="開發和測試您的網站">開發和測試您的網站<a hidden class="anchor" aria-hidden="true" href="#開發和測試您的網站">#</a></h2>
+<h3 id="開發和測試您的網站">開發和測試您的網站<a hidden class="anchor" aria-hidden="true" href="#開發和測試您的網站">#</a></h3>
 <p>要在開發佈局或建立內容時檢視您的網站，請cd放入您的專案目錄並執行：</p>
 <pre tabindex="0"><code>hugo server --bind 0.0.0.0 
 </code></pre><p><a href="https://gohugo.io/commands/hugo_server/"><code>hugo server</code></a> 命令將您的網站構建到記憶體中，並使用最小的HTTP伺服器為您的頁面提供服務。 當您執行<code>hugo server</code>時，它將顯示您本地網站的URL：</p>
@@ -479,12 +480,12 @@ hugo --buildFuture    # or -F
 <li><a href="https://xa1.at/hugo-docker/">Installing Hugo (or anything else) into a Docker Container</a></li>
 </ul>
 </blockquote>
-<h3 id="現場重新載入">現場重新載入<a hidden class="anchor" aria-hidden="true" href="#現場重新載入">#</a></h3>
+<h4 id="現場重新載入">現場重新載入<a hidden class="anchor" aria-hidden="true" href="#現場重新載入">#</a></h4>
 <p>當伺服器執行時，Hugo將JavaScript注入生成的HTML頁面。 LiveReload指令碼透過網路套接字從瀏覽器建立到伺服器的連線。 您不需要安裝任何軟體或瀏覽器外掛，也不需要任何配置。</p>
-<h3 id="自動重定向">自動重定向<a hidden class="anchor" aria-hidden="true" href="#自動重定向">#</a></h3>
+<h4 id="自動重定向">自動重定向<a hidden class="anchor" aria-hidden="true" href="#自動重定向">#</a></h4>
 <p>編輯內容時，如果您希望瀏覽器自動重定向到您上次修改的頁面，請執行：</p>
 <pre tabindex="0"><code>hugo server --navigateToChanged
-</code></pre><h2 id="部署您的網站">部署您的網站<a hidden class="anchor" aria-hidden="true" href="#部署您的網站">#</a></h2>
+</code></pre><h3 id="部署您的網站">部署您的網站<a hidden class="anchor" aria-hidden="true" href="#部署您的網站">#</a></h3>
 <blockquote>
 <p>如上所述，Hugo在構建您的網站之前不會清除公共目錄。 在每次構建之前手動清除公共目錄的內容，以刪除草稿、過期和未來內容。</p>
 </blockquote>
@@ -526,16 +527,23 @@ hugo --buildFuture    # or -F
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/github-page/">Github Page</a></li>
-      <li><a href="http://localhost:1313/tags/hugo/">Hugo</a></li>
-      <li><a href="http://localhost:1313/tags/blog/">Blog</a></li>
+      <li><a href="https://yingchaotw.github.io/tags/github-page/">Github Page</a></li>
+      <li><a href="https://yingchaotw.github.io/tags/hugo/">Hugo</a></li>
+      <li><a href="https://yingchaotw.github.io/tags/blog/">Blog</a></li>
     </ul>
+<nav class="paginav">
+  <a class="prev" href="https://yingchaotw.github.io/posts/shield-badge-icon/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>自訂 shield badge logo 的方式</span>
+  </a>
+</nav>
 
 
 <ul class="share-buttons">
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Create Hugo Blog at Docker Container on x"
-            href="https://x.com/intent/tweet/?text=Create%20Hugo%20Blog%20at%20Docker%20Container&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmake-hugo-blog-at-docker%2f&amp;hashtags=Githubpage%2cHugo%2cBlog">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 在 Docker Container 上撰寫 Hugo Blog on x"
+            href="https://x.com/intent/tweet/?text=%e5%9c%a8%20Docker%20Container%20%e4%b8%8a%e6%92%b0%e5%af%ab%20Hugo%20Blog&amp;url=https%3a%2f%2fyingchaotw.github.io%2fposts%2fmake-hugo-blog-at-docker%2f&amp;hashtags=Githubpage%2cHugo%2cBlog">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
@@ -543,8 +551,8 @@ hugo --buildFuture    # or -F
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Create Hugo Blog at Docker Container on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmake-hugo-blog-at-docker%2f&amp;title=Create%20Hugo%20Blog%20at%20Docker%20Container&amp;summary=Create%20Hugo%20Blog%20at%20Docker%20Container&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2fmake-hugo-blog-at-docker%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 在 Docker Container 上撰寫 Hugo Blog on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fyingchaotw.github.io%2fposts%2fmake-hugo-blog-at-docker%2f&amp;title=%e5%9c%a8%20Docker%20Container%20%e4%b8%8a%e6%92%b0%e5%af%ab%20Hugo%20Blog&amp;summary=%e5%9c%a8%20Docker%20Container%20%e4%b8%8a%e6%92%b0%e5%af%ab%20Hugo%20Blog&amp;source=https%3a%2f%2fyingchaotw.github.io%2fposts%2fmake-hugo-blog-at-docker%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
@@ -552,8 +560,8 @@ hugo --buildFuture    # or -F
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Create Hugo Blog at Docker Container on reddit"
-            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmake-hugo-blog-at-docker%2f&title=Create%20Hugo%20Blog%20at%20Docker%20Container">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 在 Docker Container 上撰寫 Hugo Blog on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fyingchaotw.github.io%2fposts%2fmake-hugo-blog-at-docker%2f&title=%e5%9c%a8%20Docker%20Container%20%e4%b8%8a%e6%92%b0%e5%af%ab%20Hugo%20Blog">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
@@ -561,8 +569,8 @@ hugo --buildFuture    # or -F
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Create Hugo Blog at Docker Container on facebook"
-            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2fmake-hugo-blog-at-docker%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 在 Docker Container 上撰寫 Hugo Blog on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fyingchaotw.github.io%2fposts%2fmake-hugo-blog-at-docker%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
@@ -570,8 +578,8 @@ hugo --buildFuture    # or -F
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Create Hugo Blog at Docker Container on whatsapp"
-            href="https://api.whatsapp.com/send?text=Create%20Hugo%20Blog%20at%20Docker%20Container%20-%20http%3a%2f%2flocalhost%3a1313%2fposts%2fmake-hugo-blog-at-docker%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 在 Docker Container 上撰寫 Hugo Blog on whatsapp"
+            href="https://api.whatsapp.com/send?text=%e5%9c%a8%20Docker%20Container%20%e4%b8%8a%e6%92%b0%e5%af%ab%20Hugo%20Blog%20-%20https%3a%2f%2fyingchaotw.github.io%2fposts%2fmake-hugo-blog-at-docker%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
@@ -579,8 +587,8 @@ hugo --buildFuture    # or -F
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Create Hugo Blog at Docker Container on telegram"
-            href="https://telegram.me/share/url?text=Create%20Hugo%20Blog%20at%20Docker%20Container&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fmake-hugo-blog-at-docker%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 在 Docker Container 上撰寫 Hugo Blog on telegram"
+            href="https://telegram.me/share/url?text=%e5%9c%a8%20Docker%20Container%20%e4%b8%8a%e6%92%b0%e5%af%ab%20Hugo%20Blog&amp;url=https%3a%2f%2fyingchaotw.github.io%2fposts%2fmake-hugo-blog-at-docker%2f">
             <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
@@ -588,8 +596,8 @@ hugo --buildFuture    # or -F
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Create Hugo Blog at Docker Container on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=Create%20Hugo%20Blog%20at%20Docker%20Container&u=http%3a%2f%2flocalhost%3a1313%2fposts%2fmake-hugo-blog-at-docker%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 在 Docker Container 上撰寫 Hugo Blog on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=%e5%9c%a8%20Docker%20Container%20%e4%b8%8a%e6%92%b0%e5%af%ab%20Hugo%20Blog&u=https%3a%2f%2fyingchaotw.github.io%2fposts%2fmake-hugo-blog-at-docker%2f">
             <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
                 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
                 <path
@@ -604,7 +612,7 @@ hugo --buildFuture    # or -F
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:1313/">yingchao Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://yingchaotw.github.io/">yingchao Blog</a></span> · 
 
     <span>
         Powered by
