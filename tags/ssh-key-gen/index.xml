@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ssh Key-Gen on YingChao Note</title>
+    <link>http://localhost:1313/tags/ssh-key-gen/</link>
+    <description>Recent content in Ssh Key-Gen on YingChao Note</description>
+    <image>
+      <title>YingChao Note</title>
+      <url>http://localhost:1313/papermod-cover.png</url>
+      <link>http://localhost:1313/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.134.1</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Fri, 26 Apr 2024 15:46:18 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ssh-key-gen/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ssh 金鑰管理與設定</title>
+      <link>http://localhost:1313/posts/draft/ssh-key-management-and-settings/</link>
+      <pubDate>Fri, 26 Apr 2024 15:46:18 +0800</pubDate>
+      <guid>http://localhost:1313/posts/draft/ssh-key-management-and-settings/</guid>
+      <description>&lt;h2 id=&#34;關於-ssh-金鑰重新命名與-config-檔案修改&#34;&gt;關於 SSH 金鑰重新命名與 config 檔案修改&lt;/h2&gt;
+&lt;h3 id=&#34;重新命名-ssh-金鑰檔案&#34;&gt;重新命名 SSH 金鑰檔案&lt;/h3&gt;
+&lt;p&gt;完全可以將 &lt;code&gt;ssh-keygen&lt;/code&gt; 生成的 &lt;code&gt;id_ed25519&lt;/code&gt; 和 &lt;code&gt;id_ed25519.pub&lt;/code&gt; 檔案重新命名為更有意義的名稱，例如 &lt;code&gt;id_ed25519_pro&lt;/code&gt; 和 &lt;code&gt;id_ed25519_pro.pub&lt;/code&gt;。這有助於你管理多個 SSH 金鑰時，更清楚地辨識每個金鑰的用途。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;重新命名步驟：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;關閉 SSH 連線：&lt;/strong&gt; 在你開始重新命名檔案之前，請確保沒有任何 SSH 連線正在使用這些金鑰。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;找到金鑰檔案：&lt;/strong&gt; 這些檔案通常位於你主目錄下的 &lt;code&gt;.ssh&lt;/code&gt; 目錄中。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用檔案管理工具或終端機：&lt;/strong&gt; 直接將檔案名稱改為你想要的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;修改-sshconfig-檔案&#34;&gt;修改 .ssh/config 檔案&lt;/h3&gt;
+&lt;p&gt;修改 &lt;code&gt;.ssh/config&lt;/code&gt; 檔案，可以讓你自定義 SSH 連線的行為。當你重新命名金鑰檔案後，就需要對應地修改 config 檔案，讓 SSH 知道該使用哪個金鑰。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;config 檔案範例：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_pro
+&lt;/code&gt;&lt;/pr</description>
+    </item>
+  </channel>
+</rss>

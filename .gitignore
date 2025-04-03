@@ -3,3 +3,4 @@ public/
 config.yml
 comfigTaxo.yml
 .hugo_build.lock
+posts/draft/

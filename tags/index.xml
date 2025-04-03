@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Tags on yingchao Blog</title>
+    <title>Tags on YingChao Note</title>
     <link>https://yingchaotw.github.io/tags/</link>
-    <description>Recent content in Tags on yingchao Blog</description>
+    <description>Recent content in Tags on YingChao Note</description>
     <image>
-      <title>yingchao Blog</title>
+      <title>YingChao Note</title>
       <url>https://yingchaotw.github.io/papermod-cover.png</url>
       <link>https://yingchaotw.github.io/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- 0.130.0</generator>
-    <language>en</language>
-    <lastBuildDate>Wed, 21 Feb 2024 16:46:18 +0800</lastBuildDate>
+    <generator>Hugo -- 0.134.1</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Thu, 10 Apr 2025 14:01:08 +0800</lastBuildDate>
     <atom:link href="https://yingchaotw.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenDHCPServer</title>
+      <link>https://yingchaotw.github.io/tags/opendhcpserver/</link>
+      <pubDate>Thu, 10 Apr 2025 14:01:08 +0800</pubDate>
+      <guid>https://yingchaotw.github.io/tags/opendhcpserver/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows</title>
+      <link>https://yingchaotw.github.io/tags/windows/</link>
+      <pubDate>Thu, 10 Apr 2025 14:01:08 +0800</pubDate>
+      <guid>https://yingchaotw.github.io/tags/windows/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Badge</title>
       <link>https://yingchaotw.github.io/tags/badge/</link>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head>
+	<meta name="generator" content="Hugo 0.134.1"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>YingChao Note</title>
+
+<meta name="description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
+<meta name="author" content="yingchao">
+<link rel="canonical" href="http://localhost:1313/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/index.xml">
+<link rel="alternate" type="application/json" href="http://localhost:1313/index.json">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="YingChao Note (Alt + H)">YingChao Note</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">建立 Doorstop 需求管理工具
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>安裝 doorstop pip install doorstop doorstop --help 快速入門 建立根父需求文件：
+doorstop create REQ ./reqs/req 將專案添加到文件中，將自動編號：
+doorstop add REQ 建立子文件（低級要求）以連結到父文檔：
+doorstop create LLR ./reqs/llr --parent REQ doorstop add LLR 將低級項目連結到需求（像 ‘-’ 這樣的分隔符是可選的，可以忽略）：
+doorstop link LLR001 REQ001 檢查文件樹的完整性並驗證連結：
+doorstop 將未審閱的項目、文件或所有文件標記為已審閱：
+doorstop review REQ-001 # Marks item REQ-001 as reviewed doorstop review REQ # Marks all items in document REQ as reviewed doorstop review all # Marks all documents as reviewed 將項目、文件或所有文件中的可疑連結標記為已清除：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-10-14 14:01:08 +0800 CST'>October 14, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 建立 Doorstop 需求管理工具" href="http://localhost:1313/posts/draft/doorstop_setup/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">建立 STM32 開發環境
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>前言 自我高職踏入電子科系以來，關於韌體開發始終都是使用廠商提供的開發環境，但也被綁住在 Microsoft(微軟軟) Windows 系統下，有一段時間一直在 Windows、Linux Debain/Ubuntu 系統切來切去的，於是踏上了折騰自己的這條路，立志要跳脫微軟，能夠在不同系統互換且開發韌體程式。
+以下紀錄如何在開源的環境中編譯韌體，不透過現成的 IDE (如：Keil MDK、eclipse、STM32CubeIDE) 建立編譯環境，可挑選自己習慣的作業系統，不侷限作業系統或韌體晶片。
+使用軟體 以下為我在開發 STM32 韌體時，所使用的軟體，若有自己較上手的軟體也能夠自行替換。
+文字編輯器
+VIM - 1991年11月2日由 Bram Moolenaar 發布。在程式設計師中被廣泛使用。和Emacs並列成為類Unix系統使用者最喜歡的編輯器。 [1] Visual Studio CODE - 2015年4月29日由微軟開發且跨平台的免費原始碼編輯器 [2] 程式編譯器
+gcc-arm-none-eabi - ARM 生產的 ARM Architecture版本的GNU工具鏈（稱為“ARM GNU工具鏈”）使合作伙伴、開發人員和社群能夠使用近期Arm Architecture和開源專案GCC、Binutils、glibc、Newlib和GDB的新功能。[3] 韌體除錯
+OpenOCD - 由 Dominic Rath建立，是2005年奧格斯堡應用科學大學文憑論文的一部分。 從那時起，該專案已發展成為一個活躍的開源專案，由來自世界各地的軟體和硬體開發人員組成的多元化社群提供支援。[4] 程式專案
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-04-26 15:46:18 +0800 CST'>April 26, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 建立 STM32 開發環境" href="http://localhost:1313/posts/draft/build-stm32-development-environment/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">設計自己的 dialog menuconfig
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>設計自己的 lxdialog menuconfig：一個完整的範例 了解 lxdialog 與 menuconfig lxdialog 是一個用於在終端中建立對話框的工具，常被用於簡單的設定工具或腳本互動。 menuconfig 是一種基於文字的配置界面，常在嵌入式系統或 Linux kernel 配置中看到。 結合兩者，我們可以建立一個用 lxdialog 繪製介面，並採用 menuconfig 的配置風格的工具。
+建立一個簡單的 menuconfig 範例 1. 準備工作:
+安裝 lxdialog: sudo apt install lxdialog # Ubuntu/Debian 選擇一個腳本語言: 我們以 Bash 為例，因為它在 Linux 系統上廣泛使用。 2. 撰寫腳本:
+#!/bin/bash # 定義選項 options=( &#34;選項一&#34; &#34;選項二&#34; &#34;選項三&#34; ) # 使用 lxdialog 顯示菜單 dialog --title &#34;我的配置工具&#34; --menu &#34;請選擇一個選項:&#34; 0 0 $((${#options[@]} * 3)) &#34;${options[@]}&#34; 2&gt;output.txt # 根據選擇執行不同動作 option=$(&lt;output.txt) case $option in 1) echo &#34;您選擇了選項一&#34; # ... 執行相關操作 ;; 2) echo &#34;您選擇了選項二&#34; # ... 執行相關操作 ;; 3) echo &#34;您選擇了選項三&#34; # ... 執行相關操作 ;; *) echo &#34;無效的選項&#34; ;; esac ...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-04-26 15:46:18 +0800 CST'>April 26, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 設計自己的 dialog menuconfig" href="http://localhost:1313/posts/draft/customized-lxdialog-menu-configuration/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>podman $ podman system prune -f $ podman machine stop $ podman machine rm -f $ podman machine init $ podman machine start Github Action Locally Nektosact - runners Run GitHub Actions locally nektos/act.
+Config install Window choco install act-cli
+MacOS brew install act
+...</p>
+  </div>
+  <footer class="entry-footer">1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/posts/draft/note/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 婚前健檢 登記結婚 - 200元/拍大頭貼 對戒 PROMESSA 能刻字/同生生/附書約 婚紗 - 昆娜婚紗 -&gt; 結婚展 婚宴會館 - 配備場佈/主持人 婚鞋 Ann’s - 2000左右 喜帖 - 淘寶15/張；蝦皮20/張 婚禮 - 印卡讚/伴伴酒 喜餅 - 蒙恩聽障烘焙坊&lt;能中西式一起訂&gt; 攝影 - Mr. 好好攝影 平面&#43;動態 (快剪快播) 淘寶 - 伴娘服 禮俗 - 12禮？
+</p>
+  </div>
+  <footer class="entry-footer">1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/posts/draft/%E7%B5%90%E5%A9%9A%E7%AD%86%E8%A8%98/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="http://localhost:1313/page/2/">
+      «&nbsp;Prev&nbsp;
+    </a>
+    <a class="next" href="http://localhost:1313/page/4/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">YingChao Note</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

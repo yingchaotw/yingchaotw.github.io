@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Git on YingChao Note</title>
+    <link>http://localhost:1313/tags/git/</link>
+    <description>Recent content in Git on YingChao Note</description>
+    <image>
+      <title>YingChao Note</title>
+      <url>http://localhost:1313/papermod-cover.png</url>
+      <link>http://localhost:1313/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.134.1</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Fri, 26 Jan 2024 15:46:18 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>git 建立遠端倉庫</title>
+      <link>http://localhost:1313/posts/draft/git-%E5%BB%BA%E7%AB%8B%E9%81%A0%E7%AB%AF%E5%80%89%E5%BA%AB/</link>
+      <pubDate>Fri, 26 Jan 2024 15:46:18 +0800</pubDate>
+      <guid>http://localhost:1313/posts/draft/git-%E5%BB%BA%E7%AB%8B%E9%81%A0%E7%AB%AF%E5%80%89%E5%BA%AB/</guid>
+      <description>&lt;h2 id=&#34;準備&#34;&gt;準備&lt;/h2&gt;
+&lt;p&gt;首先，我們要先建立好遠端倉庫，讓我們可以從電腦把資料推上去或拉回來。&lt;/p&gt;
+&lt;p&gt;遠端倉庫只要建立一次，以後就可以一直使用。&lt;/p&gt;
+&lt;p&gt;使用 git 推或拉的機制其實是透過 ssh 的連線，所以主機本身的 ssh 伺服器需要先架設好。&lt;/p&gt;
+&lt;p&gt;我們這邊以 git 教學為主，ssh 的部分就不多說了。&lt;/p&gt;
+&lt;p&gt;當然，主機也要裝好 git 套件，就像我們當時安裝了 windows 版的 git 那樣，現在只是改成 linux 版而已。&lt;/p&gt;
+&lt;p&gt;所以我們要準備的就兩件事：&lt;/p&gt;
+&lt;p&gt;主機架設好 ssh server
+主機安裝好 git
+建立遠端倉庫資料夾
+我們使用 ssh 登入檔案下載平臺的主機，打算將遠端倉庫的資料夾叫做 repo&lt;/p&gt;
+&lt;p&gt;並且放在 /home 資料夾下面。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;logo@gaga:~$ &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; /home                                                           
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;logo@gaga:/home$ sudo mkdir repo                                                
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;sudo&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; password &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; logo:                                                       
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;logo@gaga:/home$ &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; repo
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;logo@gaga:/home/repo$ 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pr</description>
+    </item>
+  </channel>
+</rss>

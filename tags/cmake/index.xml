@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Cmake on YingChao Note</title>
+    <link>http://localhost:1313/tags/cmake/</link>
+    <description>Recent content in Cmake on YingChao Note</description>
+    <image>
+      <title>YingChao Note</title>
+      <url>http://localhost:1313/papermod-cover.png</url>
+      <link>http://localhost:1313/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.134.1</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Thu, 26 Dec 2024 15:46:18 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/cmake/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CMake 輸出簡潔化</title>
+      <link>http://localhost:1313/posts/draft/cmake-simplify-output/</link>
+      <pubDate>Thu, 26 Dec 2024 15:46:18 +0800</pubDate>
+      <guid>http://localhost:1313/posts/draft/cmake-simplify-output/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://nirvana1997.github.io/CMake%E8%BE%93%E5%87%BA%E7%AE%80%E5%8C%96/&#34;&gt;https://nirvana1997.github.io/CMake%E8%BE%93%E5%87%BA%E7%AE%80%E5%8C%96/&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

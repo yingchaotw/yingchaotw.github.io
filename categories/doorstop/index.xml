@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Doorstop on YingChao Note</title>
+    <link>http://localhost:1313/categories/doorstop/</link>
+    <description>Recent content in Doorstop on YingChao Note</description>
+    <image>
+      <title>YingChao Note</title>
+      <url>http://localhost:1313/papermod-cover.png</url>
+      <link>http://localhost:1313/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.134.1</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Fri, 14 Oct 2022 14:01:08 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/doorstop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>建立 Doorstop 需求管理工具</title>
+      <link>http://localhost:1313/posts/draft/doorstop_setup/</link>
+      <pubDate>Fri, 14 Oct 2022 14:01:08 +0800</pubDate>
+      <guid>http://localhost:1313/posts/draft/doorstop_setup/</guid>
+      <description>&lt;h2 id=&#34;安裝-doorstop&#34;&gt;安裝 doorstop&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pip install doorstop
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;doorstop --help
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;快速入門&#34;&gt;快速入門&lt;/h2&gt;
+&lt;p&gt;建立根父需求文件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;doorstop create REQ ./reqs/req&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;將專案添加到文件中，將自動編號：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;doorstop add REQ&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;建立子文件（低級要求）以連結到父文檔：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;doorstop create LLR ./reqs/llr --parent REQ&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;doorstop add LLR&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;將低級項目連結到需求（像 &amp;lsquo;-&amp;rsquo; 這樣的分隔符是可選的，可以忽略）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;doorstop link LLR001 REQ001&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;檢查文件樹的完整性並驗證連結：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;doorstop&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;將未審閱的項目、文件或所有文件標記為已審閱：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;doorstop review REQ-001    # Marks item REQ-001 as reviewed&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;doorstop review REQ        # Marks all items in document REQ as reviewed&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;doorstop review all        # Marks all documents as reviewed&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;將項目、文件或所有文件中的可疑連結標記為已清除：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

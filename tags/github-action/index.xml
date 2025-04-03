@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Github Action on YingChao Note</title>
+    <link>http://localhost:1313/tags/github-action/</link>
+    <description>Recent content in Github Action on YingChao Note</description>
+    <image>
+      <title>YingChao Note</title>
+      <url>http://localhost:1313/papermod-cover.png</url>
+      <link>http://localhost:1313/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.134.1</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Mon, 26 Aug 2024 00:45:53 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/github-action/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Github Action Locally</title>
+      <link>http://localhost:1313/posts/draft/github-action-locally/</link>
+      <pubDate>Mon, 26 Aug 2024 00:45:53 +0800</pubDate>
+      <guid>http://localhost:1313/posts/draft/github-action-locally/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://nektosact.com/usage/runners.html&#34;&gt;Nektosact - runners&lt;/a&gt;
+Run GitHub Actions locally &lt;a href=&#34;https://github.com/nektos/act&#34;&gt;nektos/act&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;config&#34;&gt;Config&lt;/h2&gt;
+&lt;h3 id=&#34;install&#34;&gt;install&lt;/h3&gt;
+&lt;p&gt;Window
+&lt;code&gt;choco install act-cli&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;MacOS
+&lt;code&gt;brew install act&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Linux
+&lt;code&gt;curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;set-act-image&#34;&gt;set act image&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Reference &lt;a href=&#34;https://github.com/nektos/act/issues/2219#issuecomment-1943745024&#34;&gt;Can&amp;rsquo;t figure out how to reset image choice. #2219&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;./.actrc&lt;/code&gt; For project specfic settings
+&lt;code&gt;~/.actrc&lt;/code&gt; For global settings (default location of old versions of act, ~ is your userprofile/home folder)
+&lt;code&gt;%localappdata%/act/actrc&lt;/code&gt; (Windows, Don&amp;rsquo;t remember 100%ly)
+&lt;code&gt;/Users/[username]/Library/Application Support/act&lt;/code&gt; (macOS)&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

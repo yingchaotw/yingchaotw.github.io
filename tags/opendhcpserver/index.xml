@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>OpenDHCPServer on YingChao Note</title>
+    <link>https://yingchaotw.github.io/tags/opendhcpserver/</link>
+    <description>Recent content in OpenDHCPServer on YingChao Note</description>
+    <image>
+      <title>YingChao Note</title>
+      <url>https://yingchaotw.github.io/papermod-cover.png</url>
+      <link>https://yingchaotw.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.134.1</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Thu, 10 Apr 2025 14:01:08 +0800</lastBuildDate>
+    <atom:link href="https://yingchaotw.github.io/tags/opendhcpserver/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Open DHCP Server 在 Windows 的設置與配置</title>
+      <link>https://yingchaotw.github.io/posts/open-dhcp-server-notes/</link>
+      <pubDate>Thu, 10 Apr 2025 14:01:08 +0800</pubDate>
+      <guid>https://yingchaotw.github.io/posts/open-dhcp-server-notes/</guid>
+      <description>&lt;h2 id=&#34;基本設置與-ip-分配配置&#34;&gt;基本設置與 IP 分配配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;安裝&lt;/strong&gt;：從 SourceForge 下載 &lt;a href=&#34;https://sourceforge.net/projects/dhcpserver/&#34;&gt;Open DHCP Server&lt;/a&gt;（例如 &lt;code&gt;OpenDHCPServerInstaller64bitV1.84.exe&lt;/code&gt;），安裝至預設路徑（&lt;code&gt;C:\OpenDHCPServer&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服務啟動&lt;/strong&gt;：執行 &lt;code&gt;InstallService.exe&lt;/code&gt; 註冊服務，在 &lt;code&gt;services.msc&lt;/code&gt; 中啟動「Open DHCP Server」。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;配置文件&lt;/strong&gt;（&lt;code&gt;OpenDHCPServer.ini&lt;/code&gt;）：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[LISTEN_ON]&lt;/code&gt;：指定網卡 IP，例如 &lt;code&gt;192.168.1.2&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[RANGE_SET]&lt;/code&gt;：設置 IP 分配範圍，例如 &lt;code&gt;DHCPRange=192.168.1.100-192.168.1.150&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;重啟服務以生效。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;測試&lt;/strong&gt;：將設備設為「自動獲取 IP」，確認是否獲取範圍內的地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;指定網卡分配-ip&#34;&gt;指定網卡分配 IP&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;確認網卡 IP&lt;/strong&gt;：用 &lt;code&gt;ipconfig&lt;/code&gt; 查看目標網卡的 IPv4 地址（例如 &lt;code&gt;192.168.1.2&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;修改配置&lt;/strong&gt;：
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[LISTEN_ON]
+192.168.1.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;注意&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;網卡需設為靜態 IP。&lt;BR&gt;
+&lt;img src=&#34;網際網路通訊協定內容.jpg&#34; alt=&#34;描述&#34; width=&#34;500&#34;&gt;&lt;/li&gt;
+&lt;li&gt;防火牆需允許 UDP 67 和 68 端口。&lt;BR&gt;
+&lt;img src=&#34;OpenDHCPServer_連接埠.jpg&#34; alt=&#34;描述&#34; width=&#34;500&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;日誌分析與問題排查&#34;&gt;日誌分析與問題排查&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;日誌範例&lt;/strong&gt;（&lt;code&gt;OpenDHCPServer.log&lt;/code&gt;）：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[08-Apr-25 13:43:49] Listening On: 192.168.1.2&lt;/code&gt;：服務正常監聽。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Warning: No IP Address for DHCP Static Host...&lt;/code&gt;：靜態主機未指定 IP。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Warning: Section [HTTP_INTERFACE], invalid entry...&lt;/code&gt;：HTTP 配置錯誤。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解決靜態主機警告&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;在 &lt;code&gt;[STATIC_HOSTS]&lt;/code&gt; 中添加：
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[STATIC_HOSTS]
+00:ff:a4:0e:ef:99=192.168.1.10
+&lt;/code&gt;&lt;/pr</description>
+    </item>
+  </channel>
+</rss>
