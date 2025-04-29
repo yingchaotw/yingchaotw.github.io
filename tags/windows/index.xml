@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Windows on YingChao Note</title>
-    <link>https://yingchaotw.github.io/tags/windows/</link>
+    <link>http://localhost:1313/tags/windows/</link>
     <description>Recent content in Windows on YingChao Note</description>
     <image>
       <title>YingChao Note</title>
-      <url>https://yingchaotw.github.io/papermod-cover.png</url>
-      <link>https://yingchaotw.github.io/papermod-cover.png</link>
+      <url>http://localhost:1313/papermod-cover.png</url>
+      <link>http://localhost:1313/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- 0.134.1</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>zh-tw</language>
     <lastBuildDate>Thu, 10 Apr 2025 14:01:08 +0800</lastBuildDate>
-    <atom:link href="https://yingchaotw.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Open DHCP Server 在 Windows 的設置與配置</title>
-      <link>https://yingchaotw.github.io/posts/open-dhcp-server-notes/</link>
+      <link>http://localhost:1313/posts/open-dhcp-server-notes/</link>
       <pubDate>Thu, 10 Apr 2025 14:01:08 +0800</pubDate>
-      <guid>https://yingchaotw.github.io/posts/open-dhcp-server-notes/</guid>
+      <guid>http://localhost:1313/posts/open-dhcp-server-notes/</guid>
       <description>&lt;h2 id=&#34;基本設置與-ip-分配配置&#34;&gt;基本設置與 IP 分配配置&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;安裝&lt;/strong&gt;：從 SourceForge 下載 &lt;a href=&#34;https://sourceforge.net/projects/dhcpserver/&#34;&gt;Open DHCP Server&lt;/a&gt;（例如 &lt;code&gt;OpenDHCPServerInstaller64bitV1.84.exe&lt;/code&gt;），安裝至預設路徑（&lt;code&gt;C:\OpenDHCPServer&lt;/code&gt;）。&lt;/li&gt;
@@ -61,7 +61,77 @@
 &lt;li&gt;在 &lt;code&gt;[STATIC_HOSTS]&lt;/code&gt; 中添加：
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[STATIC_HOSTS]
 00:ff:a4:0e:ef:99=192.168.1.10
-&lt;/code&gt;&lt;/pr</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;修復 HTTP 問題&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;確保 &lt;code&gt;[HTTP_INTERFACE]&lt;/code&gt; 格式正確：
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[HTTP_INTERFACE]
+IP=127.0.0.1
+Port=6789
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;檢查防火牆（TCP 6789）與端口衝突（&lt;code&gt;netstat -an | find &amp;quot;6789&amp;quot;&lt;/code&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;http-介面無法訪問-1270016789localhost6789&#34;&gt;HTTP 介面無法訪問 (&lt;code&gt;127.0.0.1:6789&lt;/code&gt;/&lt;code&gt;localhost:6789&lt;/code&gt;)&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;問題&lt;/strong&gt;：IP 分配成功，但無法連上 HTTP 介面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;排查步驟&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;確認端口監聽：&lt;code&gt;netstat -an | find &amp;quot;6789&amp;quot;&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;修正配置並重啟服務。&lt;/li&gt;
+&lt;li&gt;開放防火牆 TCP 6789。&lt;/li&gt;
+&lt;li&gt;測試：&lt;code&gt;curl http://127.0.0.1:6789&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;未解決時&lt;/strong&gt;：檢查日誌是否有 HTTP 相關錯誤。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cli-查看-ip-分配狀態&#34;&gt;CLI 查看 IP 分配狀態&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;方法 1：監控日誌&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;PowerShell：&lt;code&gt;Get-Content &amp;quot;C:\OpenDHCPServer\OpenDHCPServer.log&amp;quot; -Tail 10 -Wait&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;cmd：迴圈 &lt;code&gt;type&lt;/code&gt; 與 &lt;code&gt;timeout&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;方法 2：提取 HTTP 資訊&lt;/strong&gt;（需修復 &lt;code&gt;127.0.0.1:6789&lt;/code&gt;）：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;curl http://127.0.0.1:6789&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;PowerShell 迴圈：&lt;code&gt;while ($true) { Invoke-WebRequest -Uri &amp;quot;http://127.0.0.1:6789&amp;quot; | Select-Object -ExpandProperty Content; Start-Sleep -Seconds 5 }&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;方法 3：檢查租約文件&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;查看 &lt;code&gt;DHCPLeases.ini&lt;/code&gt;：&lt;code&gt;type &amp;quot;C:\OpenDHCPServer\DHCPLeases.ini&amp;quot;&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;PowerShell 即時監控：&lt;code&gt;Get-Content &amp;quot;C:\OpenDHCPServer\DHCPLeases.ini&amp;quot; -Tail 10 -Wait&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;推薦配置範例&#34;&gt;推薦配置範例&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[LISTEN_ON]
+192.168.1.2
+
+[RANGE_SET]
+DHCPRange=192.168.1.100-192.168.1.150
+
+[HTTP_INTERFACE]
+IP=127.0.0.1
+Port=6789
+
+[GENERAL]
+DefaultLeaseTime=36000
+
+[LOGGING]
+LogLevel=Normal
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id=&#34;注意事項&#34;&gt;注意事項&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;防火牆&lt;/strong&gt;：確保 UDP 67/68（DHCP）和 TCP 6789（HTTP）端口開放。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;衝突&lt;/strong&gt;：關閉網路中其他 DHCP 服務（如路由器）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;靜態 IP&lt;/strong&gt;：網卡 IP（&lt;code&gt;192.168.1.2&lt;/code&gt;）需設為靜態，避免與範圍重疊。&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
   </channel>
 </rss>

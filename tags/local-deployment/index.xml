@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Local Deployment on YingChao Note</title>
+    <link>http://localhost:1313/tags/local-deployment/</link>
+    <description>Recent content in Local Deployment on YingChao Note</description>
+    <image>
+      <title>YingChao Note</title>
+      <url>http://localhost:1313/papermod-cover.png</url>
+      <link>http://localhost:1313/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Tue, 15 Apr 2025 16:46:18 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/local-deployment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 Docker 和 Docker Compose 部署 dnsmasq 和 Nginx</title>
+      <link>http://localhost:1313/posts/dnsmasq--nginx-with-docker-compose/</link>
+      <pubDate>Tue, 15 Apr 2025 16:46:18 +0800</pubDate>
+      <guid>http://localhost:1313/posts/dnsmasq--nginx-with-docker-compose/</guid>
+      <description>&lt;script src=&#34;https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://www.unpkg.com/lit@2.0.0-rc.2/polyfill-support.js&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;module&#34; src=&#34;https://cdn.jsdelivr.net/npm/@n8n_io/n8n-demo-component/n8n-demo.bundled.js&#34;&gt;&lt;/script&gt;
+
+&lt;n8n-demo 
+  workflow=&#34;%7B%22nodes%22%3A%5B%7B%22name%22%3A%22Workflow-Created%22%2C%22type%22%3A%22n8n-nodes-base.webhook%22%2C%22position%22%3A%5B512%2C369%5D%2C%22parameters%22%3A%7B%22path%22%3A%22webhook%22%2C%22httpMethod%22%3A%22POST%22%7D%2C%22typeVersion%22%3A1%7D%5D%2C%22connections%22%3A%7B%7D%7D&#34; 
+  frame=&#34;true&#34;&gt;
+&lt;/n8n-demo&gt;
+
+&lt;p&gt;這篇筆記將指導您如何使用 Docker 和 Docker Compose，將 &lt;code&gt;dnsmasq&lt;/code&gt; 作為 DNS 服務器和 &lt;code&gt;nginx&lt;/code&gt; 作為 Web 伺服器進行部署。&lt;/p&gt;
+&lt;h2 id=&#34;1-項目目錄結構&#34;&gt;1. 項目目錄結構&lt;/h2&gt;
+&lt;p&gt;首先，我們需要設置一個專案目錄結構，便於管理所有配置文件和 Docker 配置。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;docker-dns-proxy/
+├── docker-compose.yml      # Docker Compose 配置文件
+├── nginx/                  # Nginx 配置目錄
+│   └── default.conf        # Nginx 設定檔
+└── dnsmasq/                # dnsmasq 配置目錄
+    └── dnsmasq.conf        # dnsmasq 設定檔
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;2-docker-composeyml-配置&#34;&gt;2. &lt;code&gt;docker-compose.yml&lt;/code&gt; 配置&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;docker-compose.yml&lt;/code&gt; 是用來定義和管理多個 Docker 容器的配置文件。在這個例子中，我們將設置兩個服務：&lt;code&gt;dnsmasq&lt;/code&gt; 和 &lt;code&gt;nginx&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;範例配置&#34;&gt;範例配置&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;3.8&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;services&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;dnsmasq&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;andyshinn/dnsmasq:2.78&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;container_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;dnsmasq&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;ports&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;s2&#34;&gt;&amp;#34;53:53/udp&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;   &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# DNS 端口&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;s2&#34;&gt;&amp;#34;53:53/tcp&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;   &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# DNS 端口&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;volumes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;./dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf  &lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 映射配置文件&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;restart&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;always  &lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 容器異常退出後自動重啟&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;nginx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;nginx:latest&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;container_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;nginx&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;ports&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;s2&#34;&gt;&amp;#34;80:80&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;       &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# HTTP 端口&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;s2&#34;&gt;&amp;#34;443:443&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# HTTPS 端口&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;volumes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;./nginx/default.conf:/etc/nginx/conf.d/default.conf &lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 映射 Nginx 配置文件&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;depends_on&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;dnsmasq  &lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 確保 dnsmasq 容器先啟動&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;restart&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;always  &lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 容器異常退出後自動重啟&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;說明&#34;&gt;說明：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;dnsmasq&lt;/code&gt; 服務使用了 &lt;code&gt;andyshinn/dnsmasq&lt;/code&gt; Docker 映像，並將端口 &lt;code&gt;53&lt;/code&gt; 映射到主機，處理 DNS 請求。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nginx&lt;/code&gt; 服務使用官方的 &lt;code&gt;nginx&lt;/code&gt; Docker 映像，並映射了 &lt;code&gt;80&lt;/code&gt; 和 &lt;code&gt;443&lt;/code&gt; 端口來處理 HTTP 和 HTTPS 請求。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-配置-dnsmasq&#34;&gt;3. 配置 dnsmasq&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;dnsmasq&lt;/code&gt; 用來提供 DNS 解析服務。在此，我們設置了基本的 DNS 配置。以下是 &lt;code&gt;dnsmasq.conf&lt;/code&gt; 的範本：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

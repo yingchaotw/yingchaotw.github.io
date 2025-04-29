@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Wifi-Bridge on YingChao Note</title>
+    <link>http://localhost:1313/tags/wifi-bridge/</link>
+    <description>Recent content in Wifi-Bridge on YingChao Note</description>
+    <image>
+      <title>YingChao Note</title>
+      <url>http://localhost:1313/papermod-cover.png</url>
+      <link>http://localhost:1313/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Thu, 01 May 2025 14:01:08 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/wifi-bridge/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）</title>
+      <link>http://localhost:1313/posts/n8n/vpn_tailscale/</link>
+      <pubDate>Thu, 01 May 2025 14:01:08 +0800</pubDate>
+      <guid>http://localhost:1313/posts/n8n/vpn_tailscale/</guid>
+      <description>&lt;h2 id=&#34;-目標&#34;&gt;🎯 目標&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;📱 &lt;strong&gt;從手機（4G/外部網路）觸發家中內網的 n8n webhook，自動執行流程。&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-實作流程概覽&#34;&gt;🧭 實作流程概覽&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;✅ 在家中電腦安裝並登入 &lt;strong&gt;Tailscale&lt;/strong&gt;（運行 n8n）。&lt;/li&gt;
+&lt;li&gt;✅ 在手機安裝 Tailscale 並登入相同帳號。&lt;/li&gt;
+&lt;li&gt;✅ 取得 n8n 的 webhook URL（使用 Tailscale DNS 名稱）。&lt;/li&gt;
+&lt;li&gt;✅ 使用手機的捷徑（Shortcuts / Tasker）或瀏覽器觸發 webhook。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-詳細步驟&#34;&gt;🛠️ 詳細步驟&lt;/h2&gt;
+&lt;h3 id=&#34;-步驟-1在家中電腦安裝-tailscale&#34;&gt;📌 步驟 1：在家中電腦安裝 Tailscale&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;下載並安裝 Tailscale：&lt;br&gt;
+&lt;a href=&#34;https://tailscale.com/download&#34;&gt;Tailscale 下載頁面&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安裝後，執行 &lt;code&gt;tailscale up&lt;/code&gt;，或在 GUI 中登入（Windows/Mac）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用 Google / GitHub 帳號登入。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;成功後，設備會取得 Tailscale 網域（例如：&lt;code&gt;n8n-pc.tailscale.net&lt;/code&gt;）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-步驟-2手機安裝-tailscale&#34;&gt;📌 步驟 2：手機安裝 Tailscale&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;安裝 Tailscale App（iOS / Android）。&lt;/li&gt;
+&lt;li&gt;登入與家中設備相同帳號。&lt;/li&gt;
+&lt;li&gt;完成後，手機可直接與家中設備通訊。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-步驟-3設定-n8n-webhook&#34;&gt;📌 步驟 3：設定 n8n Webhook&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在 n8n 中建立 Workflow，設定第一個節點為 Webhook：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

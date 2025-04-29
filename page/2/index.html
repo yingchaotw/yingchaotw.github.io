@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.134.1"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.145.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
@@ -123,107 +123,19 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">不安裝 Docker Desktop 使用 Windows Docker 容器
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
+    <h2 class="entry-hint-parent">
     </h2>
   </header>
   <div class="entry-content">
-    <p>keyword Hyper-V, linux container
-Running Windows and Linux containers without Docker Desktop
-不安裝 Docker Desktop 使用 Windows Docker 容器
-Install Chocolatey
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://community.chocolatey.org/install.ps1&#39;)) ...</p>
+    <p></p>
   </div>
-  <footer class="entry-footer"><span title='2024-02-26 22:46:18 +0800 CST'>February 26, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 不安裝 Docker Desktop 使用 Windows Docker 容器" href="http://localhost:1313/posts/draft/windows-use-docker-without-docker-desktop/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">自訂 shield badge logo 的方式
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> shields.io 是一個生成靜態和動態徽章的線上服務，適用於類似 GitHub, GitLab 等專案頁面。透過調整 URL 參數，可以輕鬆地創建顯示專案狀態和顏色匹配的徽章。對於簡單的動態徽章，例如 last-commit，可以直接構造 URL，而對於複雜的動態徽章，如網頁訪問量等，則可能需要額外的工具，如 substats，來獲取數據。
-其實，如果是靜態的徽章，使用起來非常簡單。只需按照以下格式撰寫圖片的 URL，即可直接插入到 Markdown 中：
-&lt;!-- badge 加上連結的語法 --&gt; ![圖片說明](https://img.shields.io/badge/{左半部分標籤文字}-{右半部分標籤文字}-{右半部分顏色}) &lt;!-- badge 加上實際連結 --&gt; [![Github](https://img.shields.io/badge/Repository-Github-white?logo=github)](https://github.com) 效果如下
-客製 Logos 在網站上有時候希望加入一些徽章（badge）時，可能會到網站上自訂想要的樣式。然而，由於世界上有如此多的徽標，shields.io 並未將所有徽標都收錄在資料庫中，因此它提供了客製化徽標的方式。
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-02-21 16:46:18 +0800 CST'>February 21, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 自訂 shield badge logo 的方式" href="http://localhost:1313/posts/shield-badge-icon/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">在 Docker Container 上撰寫 Hugo Blog
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p> TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container.
-FROM golang:alpine as builder ENV GOGC=50 # gcc/g&#43;&#43; are required to build SASS libraries for extended version RUN apk update &amp;&amp; \ # [自選] 編譯 Image 時間較短 apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community hugo &amp;&amp; \ # [自選] 編譯 Image 時間太長 # apk add --no-cache gcc g&#43;&#43; musl-dev git &amp;&amp; \ # go install -tags extended github.com/gohugoio/hugo@latest &amp;&amp; \ # [自選] 確認 hugo 安裝路徑及版本 $(which hugo) &amp;&amp; hugo version ######################################################## FROM alpine:latest as base LABEL maintainer=&#34;yingchao &lt;yingchao.tw@google.com&gt;&#34; # 更新 apt 及安裝套件. RUN apk update &amp;&amp; apk add --no-cache \ ca-certificates \ libc6-compat \ libstdc&#43;&#43; \ procps \ shadow \ curl \ sudo \ git \ # [自選] vim 套件安裝，會增加 image. vim ######################################################## FROM base as user_config ARG USER ARG USERID ARG GROUPID ARG PASSWORD # 在 OSX 環境上，一般用戶 UID 為 501，小於預設 UID_MIN 1000 RUN echo -e &#34;UID_MIN 500\nUID_MAX 60000&#34; &gt; /etc/login.defs; # 確認群組是否存在，如不存在則建立群組，在 docker 編譯失敗時，暫存中會有上一次編譯的群組名稱。 RUN if ! getent group $GROUPID &gt; /dev/null 2&gt;&amp;1; then \ groupadd -g $GROUPID $USER; \ else \ groupmod -n $USER $(getent group $GROUPID | cut -d: -f1); \ fi # 新增用戶並設定 UID 及 GID RUN useradd -m -u $USERID -g $GROUPID -s /bin/bash $USER # 設定用戶密碼 RUN echo &#34;$USER:$PASSWORD&#34; | chpasswd RUN echo &#34;%$USER ALL=(ALL) NOPASSWD:ALL&#34; &gt;&gt; /etc/sudoers RUN addgroup $USER wheel ######################################################## FROM base as final # 設定環境變數 ARG USER ENV PROJECT=/home/$USER/usbridge COPY --from=user_config /etc/sudoers /etc/passwd /etc/group /etc/ COPY --from=user_config /home/$USER /home/$USER COPY --from=builder /usr/bin/hugo /usr/bin/hugo COPY .profile /home/$USER/ # [自選] 編譯 Image 時間太長 # COPY --from=builder /go/bin/hugo /usr/bin/hugo # 登入非 root 用戶 USER $USER CMD [&#34;/bin/sh&#34;, &#34;-l&#34;] # 設定工作目錄 WORKDIR $PROJECT # 轉 HUGO 預設 PORT 1313 EXPOSE 1313 ...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-02-15 16:46:18 +0800 CST'>February 15, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 在 Docker Container 上撰寫 Hugo Blog" href="http://localhost:1313/posts/make-hugo-blog-at-docker/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Docker 命令環境設置
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>docker buildx docker/buildx github/docker/buildx 參考這個解法 無法從二進位版本安裝 buildx 插件
-這是 Mac 上此問題的正確解決方案： （Apple Silicon：M1、M2 等..）
-brew install docker-buildx ln -sfn /opt/homebrew/opt/docker-buildx/bin/docker-buildx ~/.docker/cli-plugins/docker-buildx chmod &#43;x ~/.docker/cli-plugins/docker-buildx Subcommands Command Description docker buildx bake Build from a file docker buildx build Start a build docker buildx create Create a new builder instance docker buildx debug Start debugger docker buildx du Disk usage docker buildx imagetools Commands to work on images in registry docker buildx inspect Inspect current builder instance docker buildx ls List builder instances docker buildx prune Remove build cache docker buildx rm Remove one or more builder instances docker buildx stop Stop builder instance docker buildx use Set the current builder instance docker buildx version Show buildx version information docker compose docker: ‘compose’ is not a docker command
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-01-26 15:46:18 +0800 CST'>January 26, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to Docker 命令環境設置" href="http://localhost:1313/posts/draft/docker-env-setup/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">git 建立遠端倉庫
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>準備 首先，我們要先建立好遠端倉庫，讓我們可以從電腦把資料推上去或拉回來。
-遠端倉庫只要建立一次，以後就可以一直使用。
-使用 git 推或拉的機制其實是透過 ssh 的連線，所以主機本身的 ssh 伺服器需要先架設好。
-我們這邊以 git 教學為主，ssh 的部分就不多說了。
-當然，主機也要裝好 git 套件，就像我們當時安裝了 windows 版的 git 那樣，現在只是改成 linux 版而已。
-所以我們要準備的就兩件事：
-主機架設好 ssh server 主機安裝好 git 建立遠端倉庫資料夾 我們使用 ssh 登入檔案下載平臺的主機，打算將遠端倉庫的資料夾叫做 repo
-並且放在 /home 資料夾下面。
-logo@gaga:~$ cd /home logo@gaga:/home$ sudo mkdir repo [sudo] password for logo: logo@gaga:/home$ cd repo logo@gaga:/home/repo$ ...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-01-26 15:46:18 +0800 CST'>January 26, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to git 建立遠端倉庫" href="http://localhost:1313/posts/draft/git-%E5%BB%BA%E7%AB%8B%E9%81%A0%E7%AB%AF%E5%80%89%E5%BA%AB/"></a>
+  <footer class="entry-footer">0 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/_draft/n8n/weather_workflow/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="http://localhost:1313/">
       «&nbsp;Prev&nbsp;
-    </a>
-    <a class="next" href="http://localhost:1313/page/3/">Next&nbsp;&nbsp;»
     </a>
   </nav>
 </footer>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>N8n on YingChao Note</title>
+    <link>http://localhost:1313/categories/n8n/</link>
+    <description>Recent content in N8n on YingChao Note</description>
+    <image>
+      <title>YingChao Note</title>
+      <url>http://localhost:1313/papermod-cover.png</url>
+      <link>http://localhost:1313/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Tue, 29 Apr 2025 20:14:08 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/n8n/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在 Hugo 部落格中嵌入 n8n Demo 組件</title>
+      <link>http://localhost:1313/posts/embed-the-n8n-demo-component-in-the-hugoblog/</link>
+      <pubDate>Tue, 29 Apr 2025 20:14:08 +0800</pubDate>
+      <guid>http://localhost:1313/posts/embed-the-n8n-demo-component-in-the-hugoblog/</guid>
+      <description>&lt;style&gt;
+pre code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+&lt;/style&gt;
+&lt;script src=&#34;https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://www.unpkg.com/lit@2.0.0-rc.2/polyfill-support.js&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;module&#34; src=&#34;https://cdn.jsdelivr.net/npm/@n8n_io/n8n-demo-component/n8n-demo.bundled.js&#34;&gt;&lt;/script&gt;
+&lt;h3 id=&#34;-tldr&#34;&gt;🧪 TL;DR&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;n8n-demo&amp;gt;&lt;/code&gt; 是官方推出的 Web Component，可以把 n8n workflow 直接嵌入網頁，讓讀者不用進 n8n 編輯器也能理解流程。本文教你怎麼在 Hugo 網站中啟用這個功能，從設定 unsafe HTML、建立 shortcode 到把 workflow JSON 編碼成可用格式。適合想要在技術部落格中分享 n8n 範例的你。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-什麼是-n8n-demo-組件&#34;&gt;✨ 什麼是 &amp;lt;n8n-demo&amp;gt; 組件？&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;n8n-demo&amp;gt;&lt;/code&gt; 是官方提供的 Web Component，可用來&lt;strong&gt;視覺化預覽 n8n 的 workflow&lt;/strong&gt;。這可以直接在網頁中嵌入一個互動式流程圖，讓讀者&lt;strong&gt;不必進入 n8n 編輯器，也能快速理解整體流程邏輯&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;如果沒有這個組件，要達到同樣的效果可能會非常繁瑣。就必須要：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;匯出 workflow JSON&lt;/li&gt;
+&lt;li&gt;截圖或自行繪製流程圖&lt;/li&gt;
+&lt;li&gt;解釋每個節點如何運作&lt;/li&gt;
+&lt;li&gt;或嵌入 iframe 指向 n8n 編輯器（但這通常不公開）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;有了 &lt;code&gt;&amp;lt;n8n-demo&amp;gt;&lt;/code&gt;，只需要貼上 workflow JSON 編碼成 URL 的格式，就能直接顯示清晰的圖形介面，大幅減少說明成本，也讓讀者更容易理解。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-步驟一設定-hugo-允許-html&#34;&gt;✅ 步驟一：設定 Hugo 允許 HTML&lt;/h2&gt;
+&lt;p&gt;在 &lt;code&gt;config.toml&lt;/code&gt; 中啟用 unsafe HTML，否則 Markdown 中的 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt;、&lt;code&gt;&amp;lt;n8n-demo&amp;gt;&lt;/code&gt; 等 HTML 會被過濾。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
