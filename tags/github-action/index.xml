@@ -9,7 +9,7 @@
       <url>http://localhost:1313/papermod-cover.png</url>
       <link>http://localhost:1313/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- 0.134.1</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>zh-tw</language>
     <lastBuildDate>Mon, 26 Aug 2024 00:45:53 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/github-action/index.xml" rel="self" type="application/rss+xml" />
@@ -35,7 +35,12 @@ Run GitHub Actions locally &lt;a href=&#34;https://github.com/nektos/act&#34;&gt
 &lt;p&gt;&lt;code&gt;./.actrc&lt;/code&gt; For project specfic settings
 &lt;code&gt;~/.actrc&lt;/code&gt; For global settings (default location of old versions of act, ~ is your userprofile/home folder)
 &lt;code&gt;%localappdata%/act/actrc&lt;/code&gt; (Windows, Don&amp;rsquo;t remember 100%ly)
-&lt;code&gt;/Users/[username]/Library/Application Support/act&lt;/code&gt; (macOS)&lt;/p&gt;</description>
+&lt;code&gt;/Users/[username]/Library/Application Support/act&lt;/code&gt; (macOS)&lt;/p&gt;
+&lt;p&gt;edit the actrc file&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-P ubuntu-latest&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;ghcr.io/catthehacker/ubuntu:runner-latest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;h3 id=&#34;issue-cannot-connect-to-docker-daemon&#34;&gt;&lt;a href=&#34;https://github.com/nektos/act/issues/1051#issuecomment-1070599087&#34;&gt;Issue: cannot connect to Docker daemon &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;setting &lt;code&gt;DOCKER_HOST=&amp;quot;unix://$HOME/.colima/docker.sock&amp;quot;&lt;/code&gt; did work however.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

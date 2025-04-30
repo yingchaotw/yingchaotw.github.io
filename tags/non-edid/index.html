@@ -126,20 +126,22 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">在 Hugo 部落格中嵌入 n8n Demo 組件
+    <h2 class="entry-hint-parent">Raspberry Pi 5 強制解析度顯示 TTY 畫面（適用無 EDID 顯示器）
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
   <div class="entry-content">
-    <p>如果你在使用 Hugo 部落格系統，並且希望在文章中展示 n8n 的 workflow，這篇文章將教你如何快速將 n8n-demo 組件嵌入你的 Hugo 文章中，並且正確處理 workflow JSON 的格式。
-什麼是 n8n-demo 組件？ n8n 是一個開源自動化工具，讓你可以在圖形介面中設計工作流程（workflow），並且連接各種不同的 API 或服務。而 n8n-demo 是一個可以將 n8n 工作流程嵌入到網頁中的 Web Component，讓你可以在文章或頁面中預覽這些流程。
-步驟一：安裝與設置 Hugo 如果你還沒有設置 Hugo 部落格，你可以參考 Hugo 官方文檔 來進行安裝和初始化。一旦安裝完成，記得選擇一個適合的主題，這裡我們將使用 PaperMod 主題來進行展示。
-步驟二：允許 Hugo 解析 HTML 元素 在 Hugo 中，默認情況下並不允許 Markdown 中使用 raw HTML 元素（像是 &lt;script&gt; 標籤）。為了能夠嵌入 n8n-demo 組件，我們需要讓 Hugo 允許這些 HTML 標籤。
-修改 config.toml 打開你的 Hugo 配置文件 config.toml，加入以下設置：
-[markup] [markup.goldmark] [markup.goldmark.renderer] unsafe = true 這樣，Hugo 就能夠正確解析 Markdown 中的 &lt;script&gt; 和 &lt;n8n-demo&gt; 標籤。
+    <p>Raspberry Pi 5 強制解析度顯示 TTY 畫面（適用無 EDID 顯示器） 本文筆記記錄如何讓 Raspberry Pi 5 在不支援 EDID 的顯示器上，透過 HDMI → DP → SerDes 的輸出方式，成功顯示純文字 TTY 畫面（無圖形介面），並強制指定解析度為 2560x1440@60Hz。
+🧠 系統環境與需求 項目 說明 硬體平台 Raspberry Pi 5 作業系統 Raspberry Pi OS (Bookworm / Bullseye 以上) 顯示輸出 HDMI → DP 轉接 → SerDes → 顯示器 顯示器解析度 2560x1440 @ 60Hz EDID 支援 ❌ 無（需手動指定解析度） ⚙️ 設定方法 1. 編輯 /boot/firmware/config.txt sudo nano /boot/firmware/config.txt 2. 加入以下內容 hdmi_force_hotplug=1 hdmi_group=2 hdmi_mode=87 hdmi_cvt=2560 1440 60 3 0 0 0 disable_overscan=1 config_hdmi_boost=9 boot_delay=5 hdmi_mode=87 搭配 hdmi_cvt 代表自定解析度。 boot_delay=5 可讓 SerDes 等待初始化時間。
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-05-01 14:01:08 +0800 CST'>May 1, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 在 Hugo 部落格中嵌入 n8n Demo 組件" href="http://localhost:1313/posts/n8n-demo/"></a>
+  <footer class="entry-footer"><span title='2025-05-01 14:01:08 +0800 CST'>May 1, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to Raspberry Pi 5 強制解析度顯示 TTY 畫面（適用無 EDID 顯示器）" href="http://localhost:1313/posts/raspberrypios_display_setup/"></a>
 </article>
     </main>
     

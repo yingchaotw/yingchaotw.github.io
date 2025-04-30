@@ -126,18 +126,68 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">使用 Docker 和 Docker Compose 部署 dnsmasq 和 Nginx
+    <h2 class="entry-hint-parent">n8n 重建使用者帳號（保留 workflow、credentials）
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
   <div class="entry-content">
-    <p> 這篇筆記將指導您如何使用 Docker 和 Docker Compose，將 dnsmasq 作為 DNS 服務器和 nginx 作為 Web 伺服器進行部署。
+    <p>🔄 n8n 重建使用者帳號（保留 workflow、credentials） 📌 背景 當使用 n8n（版本 1.x）開啟 User Management 功能後，第一次啟動會要求建立一個 admin 使用者帳號。
+如果之後忘記密碼或想重新建立帳號，卻又不想刪除原本的 workflow/credentials 資料，這篇筆記提供一個簡單的方法。
+✅ 目標 重置 n8n 使用者帳號（User） 保留所有 workflows、credentials、設定 適用於：SQLite（預設儲存方式） n8n 是透過 Docker container 執行 資料掛載預設目錄為：~/.n8n 🧰 環境條件 Docker 已安裝 n8n 資料有掛載 volume 到 ~/.n8n Host 系統為 ARM 架構（例如 Apple M1/M2），所以需額外指定 --platform linux/amd64 使用 nouchka/sqlite3 Docker image 來存取資料庫 🧼 重建使用者步驟 1. 使用 Docker 打開 SQLite 資料庫 docker run --rm -it \ --platform linux/amd64 \ -v ~/.n8n:/data \ nouchka/sqlite3 \ /data/database.sqlite 2. 在 sqlite3 CLI 中執行： SELECT email FROM user; DELETE FROM user; .exit 說明：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-15 16:46:18 +0800 CST'>April 15, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to n8n 重建使用者帳號（保留 workflow、credentials）" href="http://localhost:1313/posts/draft/n8n/n8n-reset-admin-credentials-without-deleting-your-data/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">使用 Docker 和 Docker Compose 部署 dnsmasq 和 Nginx
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>這篇筆記將指導您如何使用 Docker 和 Docker Compose，將 dnsmasq 作為 DNS 服務器和 nginx 作為 Web 伺服器進行部署。
 1. 項目目錄結構 首先，我們需要設置一個專案目錄結構，便於管理所有配置文件和 Docker 配置。
 docker-dns-proxy/ ├── docker-compose.yml # Docker Compose 配置文件 ├── nginx/ # Nginx 配置目錄 │ └── default.conf # Nginx 設定檔 └── dnsmasq/ # dnsmasq 配置目錄 └── dnsmasq.conf # dnsmasq 設定檔 2. docker-compose.yml 配置 docker-compose.yml 是用來定義和管理多個 Docker 容器的配置文件。在這個例子中，我們將設置兩個服務：dnsmasq 和 nginx。
 範例配置 version: &#39;3.8&#39; services: dnsmasq: image: andyshinn/dnsmasq:2.78 container_name: dnsmasq ports: - &#34;53:53/udp&#34; # DNS 端口 - &#34;53:53/tcp&#34; # DNS 端口 volumes: - ./dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf # 映射配置文件 restart: always # 容器異常退出後自動重啟 nginx: image: nginx:latest container_name: nginx ports: - &#34;80:80&#34; # HTTP 端口 - &#34;443:443&#34; # HTTPS 端口 volumes: - ./nginx/default.conf:/etc/nginx/conf.d/default.conf # 映射 Nginx 配置文件 depends_on: - dnsmasq # 確保 dnsmasq 容器先啟動 restart: always # 容器異常退出後自動重啟 說明： dnsmasq 服務使用了 andyshinn/dnsmasq Docker 映像，並將端口 53 映射到主機，處理 DNS 請求。 nginx 服務使用官方的 nginx Docker 映像，並映射了 80 和 443 端口來處理 HTTP 和 HTTPS 請求。 3. 配置 dnsmasq dnsmasq 用來提供 DNS 解析服務。在此，我們設置了基本的 DNS 配置。以下是 dnsmasq.conf 的範本：
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2025-04-15 16:46:18 +0800 CST'>April 15, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 使用 Docker 和 Docker Compose 部署 dnsmasq 和 Nginx" href="http://localhost:1313/posts/dnsmasq--nginx-with-docker-compose/"></a>
+  <a class="entry-link" aria-label="post link to 使用 Docker 和 Docker Compose 部署 dnsmasq 和 Nginx" href="http://localhost:1313/posts/draft/dnsmasq--nginx-with-docker-compose/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">如何解決 `400: redirect_uri_mismatch` 錯誤並成功配置 Google OAuth 2.0 與 n8n
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>在使用 n8n 自架 Docker 環境並配置 Google OAuth 2.0 認證時，你可能會遇到 400: redirect_uri_mismatch 錯誤。這個錯誤通常是由於 Google OAuth 配置中的回調 URI 與實際使用的 URI 不匹配所導致的。
+本文將逐步引導你解決這個問題，並讓你能夠順利將 Google 服務與 n8n 進行集成。
+什麼是 redirect_uri_mismatch 錯誤？ redirect_uri_mismatch 是 OAuth 2.0 流程中的一種常見錯誤。當 Google 在認證過程中發現傳入的回調 URI 與註冊的回調 URI 不匹配時，就會顯示這個錯誤。這樣的情況通常出現於以下幾種情況：
+回調 URI 在 Google Cloud Console 中的設置與 n8n 中使用的 URI 不一致。 使用 Docker 容器運行 n8n 時，localhost 和容器的網絡配置未正確處理。 確認 n8n 中的回調 URI 首先，確認 n8n 中使用的回調 URI。根據 n8n 文檔，默認的回調 URI 是：
+http://localhost:5678/rest/oauth2-credential/callback 如果你在本地運行 n8n，請確保這個 URI 在 n8n 配置中正確設置。如果你是在 Docker 中運行 n8n，則可能需要根據 Docker 的網絡配置來調整 URI。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-15 16:46:18 +0800 CST'>April 15, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 如何解決 `400: redirect_uri_mismatch` 錯誤並成功配置 Google OAuth 2.0 與 n8n" href="http://localhost:1313/posts/draft/n8n/n8n-fixing-400-redirect_uri_mismatch-error-in-google-oauth-2.0/"></a>
 </article>
     </main>
     

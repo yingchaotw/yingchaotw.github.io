@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.134.1"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.145.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
@@ -123,7 +123,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">建立 Doorstop 需求管理工具
+    <h2 class="entry-hint-parent">Github Action Locally
       <span class="entry-hint" title="Draft">
         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
           <path
@@ -133,91 +133,107 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>安裝 doorstop pip install doorstop doorstop --help 快速入門 建立根父需求文件：
-doorstop create REQ ./reqs/req 將專案添加到文件中，將自動編號：
-doorstop add REQ 建立子文件（低級要求）以連結到父文檔：
-doorstop create LLR ./reqs/llr --parent REQ doorstop add LLR 將低級項目連結到需求（像 ‘-’ 這樣的分隔符是可選的，可以忽略）：
-doorstop link LLR001 REQ001 檢查文件樹的完整性並驗證連結：
-doorstop 將未審閱的項目、文件或所有文件標記為已審閱：
-doorstop review REQ-001 # Marks item REQ-001 as reviewed doorstop review REQ # Marks all items in document REQ as reviewed doorstop review all # Marks all documents as reviewed 將項目、文件或所有文件中的可疑連結標記為已清除：
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-10-14 14:01:08 +0800 CST'>October 14, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 建立 Doorstop 需求管理工具" href="http://localhost:1313/posts/draft/doorstop_setup/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">建立 STM32 開發環境
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>前言 自我高職踏入電子科系以來，關於韌體開發始終都是使用廠商提供的開發環境，但也被綁住在 Microsoft(微軟軟) Windows 系統下，有一段時間一直在 Windows、Linux Debain/Ubuntu 系統切來切去的，於是踏上了折騰自己的這條路，立志要跳脫微軟，能夠在不同系統互換且開發韌體程式。
-以下紀錄如何在開源的環境中編譯韌體，不透過現成的 IDE (如：Keil MDK、eclipse、STM32CubeIDE) 建立編譯環境，可挑選自己習慣的作業系統，不侷限作業系統或韌體晶片。
-使用軟體 以下為我在開發 STM32 韌體時，所使用的軟體，若有自己較上手的軟體也能夠自行替換。
-文字編輯器
-VIM - 1991年11月2日由 Bram Moolenaar 發布。在程式設計師中被廣泛使用。和Emacs並列成為類Unix系統使用者最喜歡的編輯器。 [1] Visual Studio CODE - 2015年4月29日由微軟開發且跨平台的免費原始碼編輯器 [2] 程式編譯器
-gcc-arm-none-eabi - ARM 生產的 ARM Architecture版本的GNU工具鏈（稱為“ARM GNU工具鏈”）使合作伙伴、開發人員和社群能夠使用近期Arm Architecture和開源專案GCC、Binutils、glibc、Newlib和GDB的新功能。[3] 韌體除錯
-OpenOCD - 由 Dominic Rath建立，是2005年奧格斯堡應用科學大學文憑論文的一部分。 從那時起，該專案已發展成為一個活躍的開源專案，由來自世界各地的軟體和硬體開發人員組成的多元化社群提供支援。[4] 程式專案
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-04-26 15:46:18 +0800 CST'>April 26, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 建立 STM32 開發環境" href="http://localhost:1313/posts/draft/build-stm32-development-environment/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">設計自己的 dialog menuconfig
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>設計自己的 lxdialog menuconfig：一個完整的範例 了解 lxdialog 與 menuconfig lxdialog 是一個用於在終端中建立對話框的工具，常被用於簡單的設定工具或腳本互動。 menuconfig 是一種基於文字的配置界面，常在嵌入式系統或 Linux kernel 配置中看到。 結合兩者，我們可以建立一個用 lxdialog 繪製介面，並採用 menuconfig 的配置風格的工具。
-建立一個簡單的 menuconfig 範例 1. 準備工作:
-安裝 lxdialog: sudo apt install lxdialog # Ubuntu/Debian 選擇一個腳本語言: 我們以 Bash 為例，因為它在 Linux 系統上廣泛使用。 2. 撰寫腳本:
-#!/bin/bash # 定義選項 options=( &#34;選項一&#34; &#34;選項二&#34; &#34;選項三&#34; ) # 使用 lxdialog 顯示菜單 dialog --title &#34;我的配置工具&#34; --menu &#34;請選擇一個選項:&#34; 0 0 $((${#options[@]} * 3)) &#34;${options[@]}&#34; 2&gt;output.txt # 根據選擇執行不同動作 option=$(&lt;output.txt) case $option in 1) echo &#34;您選擇了選項一&#34; # ... 執行相關操作 ;; 2) echo &#34;您選擇了選項二&#34; # ... 執行相關操作 ;; 3) echo &#34;您選擇了選項三&#34; # ... 執行相關操作 ;; *) echo &#34;無效的選項&#34; ;; esac ...</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-04-26 15:46:18 +0800 CST'>April 26, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 設計自己的 dialog menuconfig" href="http://localhost:1313/posts/draft/customized-lxdialog-menu-configuration/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>podman $ podman system prune -f $ podman machine stop $ podman machine rm -f $ podman machine init $ podman machine start Github Action Locally Nektosact - runners Run GitHub Actions locally nektos/act.
+    <p>Nektosact - runners Run GitHub Actions locally nektos/act.
 Config install Window choco install act-cli
 MacOS brew install act
+Linux curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+set act image Reference Can’t figure out how to reset image choice. #2219 ./.actrc For project specfic settings ~/.actrc For global settings (default location of old versions of act, ~ is your userprofile/home folder) %localappdata%/act/actrc (Windows, Don’t remember 100%ly) /Users/[username]/Library/Application Support/act (macOS)
+edit the actrc file
+-P ubuntu-latest=ghcr.io/catthehacker/ubuntu:runner-latest Issue: cannot connect to Docker daemon setting DOCKER_HOST=&#34;unix://$HOME/.colima/docker.sock&#34; did work however.
 ...</p>
   </div>
-  <footer class="entry-footer">1 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/posts/draft/note/"></a>
+  <footer class="entry-footer"><span title='2024-08-26 00:45:53 +0800 CST'>August 26, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to Github Action Locally" href="http://localhost:1313/posts/draft/github-action-locally/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">
+    <h2 class="entry-hint-parent">VSCode 佔用大量記憶體
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
   <div class="entry-content">
-    <p> 婚前健檢 登記結婚 - 200元/拍大頭貼 對戒 PROMESSA 能刻字/同生生/附書約 婚紗 - 昆娜婚紗 -&gt; 結婚展 婚宴會館 - 配備場佈/主持人 婚鞋 Ann’s - 2000左右 喜帖 - 淘寶15/張；蝦皮20/張 婚禮 - 印卡讚/伴伴酒 喜餅 - 蒙恩聽障烘焙坊&lt;能中西式一起訂&gt; 攝影 - Mr. 好好攝影 平面&#43;動態 (快剪快播) 淘寶 - 伴娘服 禮俗 - 12禮？
-</p>
+    <p> { &#34;telemetry.telemetryLevel&#34;: &#34;off&#34;, &#34;git.autorefresh&#34;: false, &#34;git.countBadge&#34;: &#34;tracked&#34;, &#34;git.smartCommitChanges&#34;: &#34;tracked&#34;, &#34;git.detectSubmodules&#34;: false, &#34;git.confirmForcePush&#34;: false, &#34;git.confirmNoVerifyCommit&#34;: false, &#34;git.confirmSync&#34;: false, &#34;git.confirmEmptyCommits&#34;: false, &#34;git.timeline.showAuthor&#34;: false, &#34;git.showCommitInput&#34;: false, &#34;git.showInlineOpenFileAction&#34;: false, &#34;git.showProgress&#34;: false, &#34;git.suggestSmartCommit&#34;: false, &#34;git.terminalAuthentication&#34;: false, &#34;C_Cpp.intelliSenseMemoryLimit&#34;: 1024, &#34;C_Cpp.default.compilerPath&#34;: &#34;c:\\Program Files\\Microchip\\xc32\\v4.45\\bin\\xc32-gcc.exe&#34;, &#34;search.exclude&#34;: { &#34;**/node_modules&#34;: true, &#34;**/bower_components&#34;: true, &#34;**/env&#34;: true, &#34;**/venv&#34;: true }, &#34;files.watcherExclude&#34;: { &#34;**/.git/objects/**&#34;: true, &#34;**/.git/subtree-cache/**&#34;: true, &#34;**/node_modules/**&#34;: true, &#34;**/env/**&#34;: true, &#34;**/venv/**&#34;: true, &#34;env-*&#34;: true }, &#34;files.exclude&#34;: { &#34;**/.git&#34;: true, &#34;**/.DS_Store&#34;: true, &#34;**/.vscode&#34;: true, &#34;**/__pycache__&#34;: true, &#34;**/.pytest_cache&#34;: true, &#34;**/node_modules&#34;: true, &#34;venv&#34;: true, &#34;*.sublime-*&#34;: true, &#34;env*&#34;: true }, &#34;explorer.excludeGitIgnore&#34;: true, } </p>
   </div>
-  <footer class="entry-footer">1 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/posts/draft/%E7%B5%90%E5%A9%9A%E7%AD%86%E8%A8%98/"></a>
+  <footer class="entry-footer"><span title='2024-08-26 00:45:53 +0800 CST'>August 26, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to VSCode 佔用大量記憶體" href="http://localhost:1313/posts/draft/vscode-takes-up-a-lot-of-memory/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">ssh 金鑰管理與設定
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>關於 SSH 金鑰重新命名與 config 檔案修改 重新命名 SSH 金鑰檔案 完全可以將 ssh-keygen 生成的 id_ed25519 和 id_ed25519.pub 檔案重新命名為更有意義的名稱，例如 id_ed25519_pro 和 id_ed25519_pro.pub。這有助於你管理多個 SSH 金鑰時，更清楚地辨識每個金鑰的用途。
+重新命名步驟：
+關閉 SSH 連線： 在你開始重新命名檔案之前，請確保沒有任何 SSH 連線正在使用這些金鑰。 找到金鑰檔案： 這些檔案通常位於你主目錄下的 .ssh 目錄中。 使用檔案管理工具或終端機： 直接將檔案名稱改為你想要的。 修改 .ssh/config 檔案 修改 .ssh/config 檔案，可以讓你自定義 SSH 連線的行為。當你重新命名金鑰檔案後，就需要對應地修改 config 檔案，讓 SSH 知道該使用哪個金鑰。
+config 檔案範例：
+Host github.com HostName github.com User git IdentityFile ~/.ssh/id_ed25519_pro 解釋：
+Host: 指定一個別名，方便你快速連接。 HostName: 指定實際的伺服器地址。 User: 指定登入的使用者名稱。 IdentityFile: 指定要使用的私鑰檔案路徑。 修改步驟：
+開啟 .ssh/config 檔案： 使用你喜歡的文字編輯器。 新增或修改 Host 區塊： 如果已經有對應的 Host 區塊，直接修改 IdentityFile 的值。 如果沒有，新增一個 Host 區塊，並填寫相關資訊。 儲存檔案： 務必以純文字格式儲存，不要加入任何格式設定。 修改後的範例：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-04-26 15:46:18 +0800 CST'>April 26, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to ssh 金鑰管理與設定" href="http://localhost:1313/posts/draft/ssh-key-management-and-settings/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">不安裝 Docker Desktop 使用 Windows Docker 容器
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>keyword Hyper-V, linux container
+Running Windows and Linux containers without Docker Desktop
+不安裝 Docker Desktop 使用 Windows Docker 容器
+Install Chocolatey
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://community.chocolatey.org/install.ps1&#39;)) 最簡單的方法是只使用 -o 選項，並確保下載鏈接是最終的下載地址：
+curl.exe -o docker.zip https://download.docker.com/win/static/stable/x86_64/docker-27.2.0.zip 這種方法直接將下載內容保存到指定的 docker.zip 檔案中。
+解壓縮之後放到 C:\Program Files
+將環境變數 Path 加入 C:\Program Files\docker-27.2.0\docker
+Expand-Archive docker.zip -DestinationPath C: [Environment]::SetEnvironmentVariable(&#34;Path&#34;, &#34;$($env:path);C:docker&#34;, [System.EnvironmentVariableTarget]::Machine) $env:Path = [System.Environment]::GetEnvironmentVariable(&#34;Path&#34;,&#34;Machine&#34;) dockerd --register-service Start-Service docker docker run hello-world C:\Users\yingchaochen&gt;dockerd --register-service C:\Users\yingchaochen&gt;docker run hello-world docker: error during connect: this error may indicate that the docker daemon is not running: Head &#34;http://%2F%2F.%2Fpipe%2Fdocker_engine/_ping&#34;: open //./pipe/docker_engine: The system cannot find the file specified. See &#39;docker run --help&#39; </p>
+  </div>
+  <footer class="entry-footer"><span title='2024-02-26 22:46:18 +0800 CST'>February 26, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 不安裝 Docker Desktop 使用 Windows Docker 容器" href="http://localhost:1313/posts/draft/windows-use-docker-without-docker-desktop/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">自訂 shield badge logo 的方式
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> shields.io 是一個生成靜態和動態徽章的線上服務，適用於類似 GitHub, GitLab 等專案頁面。透過調整 URL 參數，可以輕鬆地創建顯示專案狀態和顏色匹配的徽章。對於簡單的動態徽章，例如 last-commit，可以直接構造 URL，而對於複雜的動態徽章，如網頁訪問量等，則可能需要額外的工具，如 substats，來獲取數據。
+其實，如果是靜態的徽章，使用起來非常簡單。只需按照以下格式撰寫圖片的 URL，即可直接插入到 Markdown 中：
+&lt;!-- badge 加上連結的語法 --&gt; ![圖片說明](https://img.shields.io/badge/{左半部分標籤文字}-{右半部分標籤文字}-{右半部分顏色}) &lt;!-- badge 加上實際連結 --&gt; [![Github](https://img.shields.io/badge/Repository-Github-white?logo=github)](https://github.com) 效果如下
+客製 Logos 在網站上有時候希望加入一些徽章（badge）時，可能會到網站上自訂想要的樣式。然而，由於世界上有如此多的徽標，shields.io 並未將所有徽標都收錄在資料庫中，因此它提供了客製化徽標的方式。
+任何自訂徽標都可以透過將其進行 base64 編碼後，作為 URL 參數傳遞。例如：
+我想要使用下面 github 這張圖片作為 badge 的 logo
+首先我必須將圖片下載下來，再上傳至 cloudconvert 網站轉檔之後將圖片大小更換成 14px 正方形尺寸的圖片
+再上傳至 b64 可以得到如下的資訊。
+/* file size: 1ko | optimized file size: 0.8ko | base64 size: 1ko */ .github-logopng { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAMAAAAolt3jAAABqlBMVEUAAABnZ2d3d3f///8CAgIhISH09PTp6enLy8u2trbF4uiutbo5Nzbw8PCw/f8Auv/6/v8L0//u/P905v/z/f/3/v/G9f&#43;GhoZgYGCgoKCqqqqmpqaXl5dgYGCLi4tRUVEPDw8cHBwbGxsaGhoZGRkRERFZWVlCQkI/Pz/////V1dUhISEdHh63t7ft7e3h4eHR0dInJiYpJiW8vb3i4uLq6urj4&#43;PS0tLS0tJSUVGad2VJRkTNzc7Q0NDf39/o6Ojf3t7Hzs&#43;Lk5J3bGajg3KWcF2ohXN6aV91d3f////b29vl5eXY8vhzf39ZYF85PTwJCQoICAg1Njfs9/yHhYVOTUsuLi0eHh4eHh42Njb8/PzK//&#43;g9/9EanIeNDgeNTk0VFyK3/Kz8/&#43;V7P9o4fyE6v////&#43;s8P&#43;E6v9p0/9bw/9aw/9lz/9&#43;6f&#43;d7f/////O7f&#43;y4f&#43;v4f/F6//y/f8EBAQAAAAdFhJfSj9dRztcRTpiTEAlHBiYdGPqrZ37v6H&#43;waHrr56pgXDqrp37vqD9v5/tsp&#43;uhXOWbltGqtY8lr8/msFBoM1i3Pkn9f8rAAAAdXRSTlMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACFRGxcYH1IdXvTR0dPW81N8gwEOwMoTBA0jydQqDwY3bGan/bpnbEoSFyV3mtj&#43;5aQvCRYXHJOXsff6pgwZfMnl56kIEVvF9fXXcyNr&#43;aIHKJHH2tzPpkUDFSQmGgfx/2dVAAAAiUlEQVQIW2NkQAGMQCTGCAFP/gG5zIzSUO7930Au2y91P6Aahv&#43;bGe/9ZGTgUGL0AUtuYLzznVEPyIBxgcAMRHiCiC0gwh4sw&#43;i8D0IzcDlBGIw7fvwFWcTpAeFu/gxyBjO3L1R6LeMHIJcviFEVxLvBuOYdkCsQApXd/foN0D3MQlFg3qK3fxkAiHIfzSIHcYEAAAAASUVORK5CYII=); } 加入自定義 logo 後 badge 的效果如下
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-02-21 16:46:18 +0800 CST'>February 21, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 自訂 shield badge logo 的方式" href="http://localhost:1313/posts/shield-badge-icon/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -9,7 +9,7 @@
       <url>http://localhost:1313/papermod-cover.png</url>
       <link>http://localhost:1313/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- 0.134.1</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>zh-tw</language>
     <lastBuildDate>Fri, 14 Oct 2022 14:01:08 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/doorstop/index.xml" rel="self" type="application/rss+xml" />
@@ -49,7 +49,15 @@
 &lt;li&gt;&lt;code&gt;doorstop review REQ        # Marks all items in document REQ as reviewed&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;doorstop review all        # Marks all documents as reviewed&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;將項目、文件或所有文件中的可疑連結標記為已清除：&lt;/p&gt;</description>
+&lt;p&gt;將項目、文件或所有文件中的可疑連結標記為已清除：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;doorstop clear LLR-001         # Marks all links originating in item LLR-001 as cleared&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;doorstop clear LLR-001 REQ     # Marks links in item LLR-001 to document REQ as cleared&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;doorstop clear LLR REQ         # Marks all links from LLR that target REQ as cleared&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;doorstop clear LLR all         # Marks all links originating in document LLR as cleared&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;doorstop clear all             # Marks all links in all documents as cleared&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;建立 HTML 文件 ：&lt;code&gt;publish&lt;/code&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

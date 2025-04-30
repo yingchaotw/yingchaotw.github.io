@@ -140,7 +140,11 @@
 Running Windows and Linux containers without Docker Desktop
 不安裝 Docker Desktop 使用 Windows Docker 容器
 Install Chocolatey
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://community.chocolatey.org/install.ps1&#39;)) ...</p>
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(&#39;https://community.chocolatey.org/install.ps1&#39;)) 最簡單的方法是只使用 -o 選項，並確保下載鏈接是最終的下載地址：
+curl.exe -o docker.zip https://download.docker.com/win/static/stable/x86_64/docker-27.2.0.zip 這種方法直接將下載內容保存到指定的 docker.zip 檔案中。
+解壓縮之後放到 C:\Program Files
+將環境變數 Path 加入 C:\Program Files\docker-27.2.0\docker
+Expand-Archive docker.zip -DestinationPath C: [Environment]::SetEnvironmentVariable(&#34;Path&#34;, &#34;$($env:path);C:docker&#34;, [System.EnvironmentVariableTarget]::Machine) $env:Path = [System.Environment]::GetEnvironmentVariable(&#34;Path&#34;,&#34;Machine&#34;) dockerd --register-service Start-Service docker docker run hello-world C:\Users\yingchaochen&gt;dockerd --register-service C:\Users\yingchaochen&gt;docker run hello-world docker: error during connect: this error may indicate that the docker daemon is not running: Head &#34;http://%2F%2F.%2Fpipe%2Fdocker_engine/_ping&#34;: open //./pipe/docker_engine: The system cannot find the file specified. See &#39;docker run --help&#39; </p>
   </div>
   <footer class="entry-footer"><span title='2024-02-26 22:46:18 +0800 CST'>February 26, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
   <a class="entry-link" aria-label="post link to 不安裝 Docker Desktop 使用 Windows Docker 容器" href="http://localhost:1313/posts/draft/windows-use-docker-without-docker-desktop/"></a>

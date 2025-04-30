@@ -139,7 +139,8 @@
     <p>設計自己的 lxdialog menuconfig：一個完整的範例 了解 lxdialog 與 menuconfig lxdialog 是一個用於在終端中建立對話框的工具，常被用於簡單的設定工具或腳本互動。 menuconfig 是一種基於文字的配置界面，常在嵌入式系統或 Linux kernel 配置中看到。 結合兩者，我們可以建立一個用 lxdialog 繪製介面，並採用 menuconfig 的配置風格的工具。
 建立一個簡單的 menuconfig 範例 1. 準備工作:
 安裝 lxdialog: sudo apt install lxdialog # Ubuntu/Debian 選擇一個腳本語言: 我們以 Bash 為例，因為它在 Linux 系統上廣泛使用。 2. 撰寫腳本:
-#!/bin/bash # 定義選項 options=( &#34;選項一&#34; &#34;選項二&#34; &#34;選項三&#34; ) # 使用 lxdialog 顯示菜單 dialog --title &#34;我的配置工具&#34; --menu &#34;請選擇一個選項:&#34; 0 0 $((${#options[@]} * 3)) &#34;${options[@]}&#34; 2&gt;output.txt # 根據選擇執行不同動作 option=$(&lt;output.txt) case $option in 1) echo &#34;您選擇了選項一&#34; # ... 執行相關操作 ;; 2) echo &#34;您選擇了選項二&#34; # ... 執行相關操作 ;; 3) echo &#34;您選擇了選項三&#34; # ... 執行相關操作 ;; *) echo &#34;無效的選項&#34; ;; esac ...</p>
+#!/bin/bash # 定義選項 options=( &#34;選項一&#34; &#34;選項二&#34; &#34;選項三&#34; ) # 使用 lxdialog 顯示菜單 dialog --title &#34;我的配置工具&#34; --menu &#34;請選擇一個選項:&#34; 0 0 $((${#options[@]} * 3)) &#34;${options[@]}&#34; 2&gt;output.txt # 根據選擇執行不同動作 option=$(&lt;output.txt) case $option in 1) echo &#34;您選擇了選項一&#34; # ... 執行相關操作 ;; 2) echo &#34;您選擇了選項二&#34; # ... 執行相關操作 ;; 3) echo &#34;您選擇了選項三&#34; # ... 執行相關操作 ;; *) echo &#34;無效的選項&#34; ;; esac 3. 執行腳本:
+...</p>
   </div>
   <footer class="entry-footer"><span title='2022-04-26 15:46:18 +0800 CST'>April 26, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
   <a class="entry-link" aria-label="post link to 設計自己的 dialog menuconfig" href="http://localhost:1313/posts/draft/customized-lxdialog-menu-configuration/"></a>

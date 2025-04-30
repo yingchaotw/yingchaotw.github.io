@@ -9,7 +9,7 @@
       <url>http://localhost:1313/papermod-cover.png</url>
       <link>http://localhost:1313/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- 0.134.1</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>zh-tw</language>
     <lastBuildDate>Fri, 26 Apr 2024 15:46:18 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/ssh-key-gen/index.xml" rel="self" type="application/rss+xml" />
@@ -34,7 +34,25 @@
   HostName github.com
   User git
   IdentityFile ~/.ssh/id_ed25519_pro
-&lt;/code&gt;&lt;/pr</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;解釋：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Host:&lt;/strong&gt; 指定一個別名，方便你快速連接。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HostName:&lt;/strong&gt; 指定實際的伺服器地址。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;User:&lt;/strong&gt; 指定登入的使用者名稱。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IdentityFile:&lt;/strong&gt; 指定要使用的私鑰檔案路徑。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;修改步驟：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;開啟 .ssh/config 檔案：&lt;/strong&gt; 使用你喜歡的文字編輯器。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;新增或修改 Host 區塊：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;如果已經有對應的 Host 區塊，直接修改 &lt;code&gt;IdentityFile&lt;/code&gt; 的值。&lt;/li&gt;
+&lt;li&gt;如果沒有，新增一個 Host 區塊，並填寫相關資訊。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;儲存檔案：&lt;/strong&gt; 務必以純文字格式儲存，不要加入任何格式設定。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;修改後的範例：&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

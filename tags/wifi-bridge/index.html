@@ -127,6 +127,12 @@
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
   <div class="entry-content">
@@ -140,7 +146,62 @@ Tailscale 下載頁面
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2025-05-01 14:01:08 +0800 CST'>May 1, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）" href="http://localhost:1313/posts/n8n/vpn_tailscale/"></a>
+  <a class="entry-link" aria-label="post link to 利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）" href="http://localhost:1313/posts/draft/n8n/vpn_tailscale/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>🛠️ 利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP） 在某些特殊場景下，我們可能希望 讓一台 Raspberry Pi 的 WiFi 網路，共享給另一台僅透過乙太網路連線的電腦上網。這篇文章將介紹如何設定：
+PC 作為 DHCP Server Raspberry Pi 用 eth0 接收 IP Pi 透過 WiFi 上網 PC 最終透過 Pi 上網 這是一種「反向網路共用」，常見於開發板、測試環境或無線橋接需求。
+🖼️ 架構說明 graph LR PC([PC&lt;br&gt;OpenDHCPServer]) -- eth0 --&gt; RPi([Raspberry Pi&lt;br&gt;eth0: DHCP client]) RPi -- wlan0: WiFi --&gt; Router([WiFi 路由器&lt;br&gt;Internet Access]) PC 開啟 OpenDHCPServer，發配 IP 給 Raspberry Pi 的 eth0。 Raspberry Pi 已連上 WiFi，可正常上網。 我們希望 PC 能透過 Pi 的 WiFi 上網，因此 Raspberry Pi 必須設定成 NAT 路由器。 📦 環境條件 Raspberry Pi：已安裝 Raspberry Pi OS，WiFi 已能上網 PC：Windows、安裝 OpenDHCPServer (跳線)網路線一條，Pi eth0 ↔ PC ✅ 步驟一：設定 OpenDHCPServer（PC 端） 安裝與啟用 OpenDHCPServer 後，編輯設定檔（例如 OpenDHCPServer.ini）如下：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-05-01 14:01:08 +0800 CST'>May 1, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）" href="http://localhost:1313/posts/raspberrypios_network_forward/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>📋 步驟 1：開啟 Wi-Fi 檢查無線網卡狀態
+首先，確認你的無線網卡（wlan0）是否有啟動：
+ip link show wlan0 如果你看到 wlan0 被標記為 DOWN，那麼需要啟動它。
+啟動無線網卡
+如果 wlan0 是關閉的，使用以下指令啟動它：
+sudo ip link set wlan0 up 如果遇到 RF-kill 錯誤（即飛航模式），這表示 Wi-Fi 被軟體或硬體封鎖，會進入下一步解決。
+📋 步驟 2：解除飛航模式（RF-kill） 查看 RF-kill 狀態
+使用 rfkill 來檢查無線網卡是否被封鎖：
+rfkill list 這會列出所有被封鎖的設備。如果你看到無線網卡（wifi）被 “Soft blocked: yes” 或 “Hard blocked: yes”，則需要解封它。
+解除 RF-kill 封鎖
+如果是軟體封鎖（Soft blocked），可以用以下指令解除封鎖：
+sudo rfkill unblock wifi 如果是硬體封鎖（Hard blocked），可能需要按下物理的開關（例如某些筆電有 Wi-Fi 開關或按鍵）。
+若要解除所有封鎖，也可以使用：
+sudo rfkill unblock all 再次檢查無線網卡狀態
+解封後，重新啟動無線網卡：
+sudo ip link set wlan0 up 📋 步驟 3：連接到 Wi-Fi 網路 使用 wpa_supplicant 配置 Wi-Fi
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-05-01 14:01:08 +0800 CST'>May 1, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）" href="http://localhost:1313/posts/raspberrypios_network_setup/"></a>
 </article>
     </main>
     

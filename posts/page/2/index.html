@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Posts | YingChao Note</title>
+<meta name="keywords" content="">
+<meta name="description" content="Posts - YingChao Note">
+<meta name="author" content="yingchao">
+<link rel="canonical" href="http://localhost:1313/posts/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/posts/index.xml">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="YingChao Note (Alt + H)">YingChao Note</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:1313/">Home</a></div>
+  <h1>
+    Posts
+  </h1>
+</header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">n8n 重建使用者帳號（保留 workflow、credentials）
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>🔄 n8n 重建使用者帳號（保留 workflow、credentials） 📌 背景 當使用 n8n（版本 1.x）開啟 User Management 功能後，第一次啟動會要求建立一個 admin 使用者帳號。
+如果之後忘記密碼或想重新建立帳號，卻又不想刪除原本的 workflow/credentials 資料，這篇筆記提供一個簡單的方法。
+✅ 目標 重置 n8n 使用者帳號（User） 保留所有 workflows、credentials、設定 適用於：SQLite（預設儲存方式） n8n 是透過 Docker container 執行 資料掛載預設目錄為：~/.n8n 🧰 環境條件 Docker 已安裝 n8n 資料有掛載 volume 到 ~/.n8n Host 系統為 ARM 架構（例如 Apple M1/M2），所以需額外指定 --platform linux/amd64 使用 nouchka/sqlite3 Docker image 來存取資料庫 🧼 重建使用者步驟 1. 使用 Docker 打開 SQLite 資料庫 docker run --rm -it \ --platform linux/amd64 \ -v ~/.n8n:/data \ nouchka/sqlite3 \ /data/database.sqlite 2. 在 sqlite3 CLI 中執行： SELECT email FROM user; DELETE FROM user; .exit 說明：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-15 16:46:18 +0800 CST'>April 15, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to n8n 重建使用者帳號（保留 workflow、credentials）" href="http://localhost:1313/posts/draft/n8n/n8n-reset-admin-credentials-without-deleting-your-data/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">使用 Docker 和 Docker Compose 部署 dnsmasq 和 Nginx
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>這篇筆記將指導您如何使用 Docker 和 Docker Compose，將 dnsmasq 作為 DNS 服務器和 nginx 作為 Web 伺服器進行部署。
+1. 項目目錄結構 首先，我們需要設置一個專案目錄結構，便於管理所有配置文件和 Docker 配置。
+docker-dns-proxy/ ├── docker-compose.yml # Docker Compose 配置文件 ├── nginx/ # Nginx 配置目錄 │ └── default.conf # Nginx 設定檔 └── dnsmasq/ # dnsmasq 配置目錄 └── dnsmasq.conf # dnsmasq 設定檔 2. docker-compose.yml 配置 docker-compose.yml 是用來定義和管理多個 Docker 容器的配置文件。在這個例子中，我們將設置兩個服務：dnsmasq 和 nginx。
+範例配置 version: &#39;3.8&#39; services: dnsmasq: image: andyshinn/dnsmasq:2.78 container_name: dnsmasq ports: - &#34;53:53/udp&#34; # DNS 端口 - &#34;53:53/tcp&#34; # DNS 端口 volumes: - ./dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf # 映射配置文件 restart: always # 容器異常退出後自動重啟 nginx: image: nginx:latest container_name: nginx ports: - &#34;80:80&#34; # HTTP 端口 - &#34;443:443&#34; # HTTPS 端口 volumes: - ./nginx/default.conf:/etc/nginx/conf.d/default.conf # 映射 Nginx 配置文件 depends_on: - dnsmasq # 確保 dnsmasq 容器先啟動 restart: always # 容器異常退出後自動重啟 說明： dnsmasq 服務使用了 andyshinn/dnsmasq Docker 映像，並將端口 53 映射到主機，處理 DNS 請求。 nginx 服務使用官方的 nginx Docker 映像，並映射了 80 和 443 端口來處理 HTTP 和 HTTPS 請求。 3. 配置 dnsmasq dnsmasq 用來提供 DNS 解析服務。在此，我們設置了基本的 DNS 配置。以下是 dnsmasq.conf 的範本：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-15 16:46:18 +0800 CST'>April 15, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 使用 Docker 和 Docker Compose 部署 dnsmasq 和 Nginx" href="http://localhost:1313/posts/draft/dnsmasq--nginx-with-docker-compose/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">如何解決 `400: redirect_uri_mismatch` 錯誤並成功配置 Google OAuth 2.0 與 n8n
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>在使用 n8n 自架 Docker 環境並配置 Google OAuth 2.0 認證時，你可能會遇到 400: redirect_uri_mismatch 錯誤。這個錯誤通常是由於 Google OAuth 配置中的回調 URI 與實際使用的 URI 不匹配所導致的。
+本文將逐步引導你解決這個問題，並讓你能夠順利將 Google 服務與 n8n 進行集成。
+什麼是 redirect_uri_mismatch 錯誤？ redirect_uri_mismatch 是 OAuth 2.0 流程中的一種常見錯誤。當 Google 在認證過程中發現傳入的回調 URI 與註冊的回調 URI 不匹配時，就會顯示這個錯誤。這樣的情況通常出現於以下幾種情況：
+回調 URI 在 Google Cloud Console 中的設置與 n8n 中使用的 URI 不一致。 使用 Docker 容器運行 n8n 時，localhost 和容器的網絡配置未正確處理。 確認 n8n 中的回調 URI 首先，確認 n8n 中使用的回調 URI。根據 n8n 文檔，默認的回調 URI 是：
+http://localhost:5678/rest/oauth2-credential/callback 如果你在本地運行 n8n，請確保這個 URI 在 n8n 配置中正確設置。如果你是在 Docker 中運行 n8n，則可能需要根據 Docker 的網絡配置來調整 URI。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-15 16:46:18 +0800 CST'>April 15, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 如何解決 `400: redirect_uri_mismatch` 錯誤並成功配置 Google OAuth 2.0 與 n8n" href="http://localhost:1313/posts/draft/n8n/n8n-fixing-400-redirect_uri_mismatch-error-in-google-oauth-2.0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Open DHCP Server 在 Windows 的設置與配置
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>基本設置與 IP 分配配置 安裝：從 SourceForge 下載 Open DHCP Server（例如 OpenDHCPServerInstaller64bitV1.84.exe），安裝至預設路徑（C:\OpenDHCPServer）。 服務啟動：執行 InstallService.exe 註冊服務，在 services.msc 中啟動「Open DHCP Server」。 配置文件（OpenDHCPServer.ini）： [LISTEN_ON]：指定網卡 IP，例如 192.168.1.2。 [RANGE_SET]：設置 IP 分配範圍，例如 DHCPRange=192.168.1.100-192.168.1.150。 重啟服務以生效。 測試：將設備設為「自動獲取 IP」，確認是否獲取範圍內的地址。 指定網卡分配 IP 確認網卡 IP：用 ipconfig 查看目標網卡的 IPv4 地址（例如 192.168.1.2）。 修改配置： [LISTEN_ON] 192.168.1.2 注意： 網卡需設為靜態 IP。 防火牆需允許 UDP 67 和 68 端口。 日誌分析與問題排查 日誌範例（OpenDHCPServer.log）： [08-Apr-25 13:43:49] Listening On: 192.168.1.2：服務正常監聽。 Warning: No IP Address for DHCP Static Host...：靜態主機未指定 IP。 Warning: Section [HTTP_INTERFACE], invalid entry...：HTTP 配置錯誤。 解決靜態主機警告： 在 [STATIC_HOSTS] 中添加： [STATIC_HOSTS] 00:ff:a4:0e:ef:99=192.168.1.10 修復 HTTP 問題： 確保 [HTTP_INTERFACE] 格式正確： [HTTP_INTERFACE] IP=127.0.0.1 Port=6789 檢查防火牆（TCP 6789）與端口衝突（netstat -an | find &#34;6789&#34;）。 HTTP 介面無法訪問 (127.0.0.1:6789/localhost:6789) 問題：IP 分配成功，但無法連上 HTTP 介面。 排查步驟： 確認端口監聽：netstat -an | find &#34;6789&#34;。 修正配置並重啟服務。 開放防火牆 TCP 6789。 測試：curl http://127.0.0.1:6789。 未解決時：檢查日誌是否有 HTTP 相關錯誤。 CLI 查看 IP 分配狀態 方法 1：監控日誌： PowerShell：Get-Content &#34;C:\OpenDHCPServer\OpenDHCPServer.log&#34; -Tail 10 -Wait。 cmd：迴圈 type 與 timeout。 方法 2：提取 HTTP 資訊（需修復 127.0.0.1:6789）： curl http://127.0.0.1:6789。 PowerShell 迴圈：while ($true) { Invoke-WebRequest -Uri &#34;http://127.0.0.1:6789&#34; | Select-Object -ExpandProperty Content; Start-Sleep -Seconds 5 }。 方法 3：檢查租約文件： 查看 DHCPLeases.ini：type &#34;C:\OpenDHCPServer\DHCPLeases.ini&#34;。 PowerShell 即時監控：Get-Content &#34;C:\OpenDHCPServer\DHCPLeases.ini&#34; -Tail 10 -Wait。 推薦配置範例 [LISTEN_ON] 192.168.1.2 [RANGE_SET] DHCPRange=192.168.1.100-192.168.1.150 [HTTP_INTERFACE] IP=127.0.0.1 Port=6789 [GENERAL] DefaultLeaseTime=36000 [LOGGING] LogLevel=Normal 注意事項 防火牆：確保 UDP 67/68（DHCP）和 TCP 6789（HTTP）端口開放。 衝突：關閉網路中其他 DHCP 服務（如路由器）。 靜態 IP：網卡 IP（192.168.1.2）需設為靜態，避免與範圍重疊。 </p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-10 14:01:08 +0800 CST'>April 10, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to Open DHCP Server 在 Windows 的設置與配置" href="http://localhost:1313/posts/open-dhcp-server-notes/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">CMake 輸出簡潔化
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>https://nirvana1997.github.io/CMake%E8%BE%93%E5%87%BA%E7%AE%80%E5%8C%96/
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-12-26 15:46:18 +0800 CST'>December 26, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to CMake 輸出簡潔化" href="http://localhost:1313/posts/draft/cmake-simplify-output/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="http://localhost:1313/posts/">
+      «&nbsp;Prev&nbsp;
+    </a>
+    <a class="next" href="http://localhost:1313/posts/page/3/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">YingChao Note</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

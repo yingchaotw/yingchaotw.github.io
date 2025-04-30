@@ -14,24 +14,60 @@
     <lastBuildDate>Thu, 01 May 2025 14:01:08 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/non-edid/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>在 Hugo 部落格中嵌入 n8n Demo 組件</title>
-      <link>http://localhost:1313/posts/n8n-demo/</link>
+      <title>Raspberry Pi 5 強制解析度顯示 TTY 畫面（適用無 EDID 顯示器）</title>
+      <link>http://localhost:1313/posts/raspberrypios_display_setup/</link>
       <pubDate>Thu, 01 May 2025 14:01:08 +0800</pubDate>
-      <guid>http://localhost:1313/posts/n8n-demo/</guid>
-      <description>&lt;p&gt;如果你在使用 &lt;strong&gt;Hugo&lt;/strong&gt; 部落格系統，並且希望在文章中展示 &lt;code&gt;n8n&lt;/code&gt; 的 &lt;strong&gt;workflow&lt;/strong&gt;，這篇文章將教你如何快速將 &lt;code&gt;n8n-demo&lt;/code&gt; 組件嵌入你的 Hugo 文章中，並且正確處理 &lt;strong&gt;workflow JSON&lt;/strong&gt; 的格式。&lt;/p&gt;
-&lt;h2 id=&#34;什麼是-n8n-demo-組件&#34;&gt;什麼是 n8n-demo 組件？&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;n8n&lt;/code&gt; 是一個開源自動化工具，讓你可以在圖形介面中設計工作流程（workflow），並且連接各種不同的 API 或服務。而 &lt;code&gt;n8n-demo&lt;/code&gt; 是一個可以將 n8n 工作流程嵌入到網頁中的 Web Component，讓你可以在文章或頁面中預覽這些流程。&lt;/p&gt;
-&lt;h2 id=&#34;步驟一安裝與設置-hugo&#34;&gt;步驟一：安裝與設置 Hugo&lt;/h2&gt;
-&lt;p&gt;如果你還沒有設置 Hugo 部落格，你可以參考 &lt;a href=&#34;https://gohugo.io/getting-started/&#34;&gt;Hugo 官方文檔&lt;/a&gt; 來進行安裝和初始化。一旦安裝完成，記得選擇一個適合的主題，這裡我們將使用 &lt;strong&gt;PaperMod&lt;/strong&gt; 主題來進行展示。&lt;/p&gt;
-&lt;h2 id=&#34;步驟二允許-hugo-解析-html-元素&#34;&gt;步驟二：允許 Hugo 解析 HTML 元素&lt;/h2&gt;
-&lt;p&gt;在 Hugo 中，默認情況下並不允許 Markdown 中使用 raw HTML 元素（像是 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 標籤）。為了能夠嵌入 &lt;code&gt;n8n-demo&lt;/code&gt; 組件，我們需要讓 Hugo 允許這些 HTML 標籤。&lt;/p&gt;
-&lt;h3 id=&#34;修改-configtoml&#34;&gt;修改 &lt;code&gt;config.toml&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;打開你的 Hugo 配置文件 &lt;code&gt;config.toml&lt;/code&gt;，加入以下設置：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;markup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;markup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;goldmark&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;markup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;goldmark&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;renderer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nx&#34;&gt;unsafe&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這樣，Hugo 就能夠正確解析 Markdown 中的 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 和 &lt;code&gt;&amp;lt;n8n-demo&amp;gt;&lt;/code&gt; 標籤。&lt;/p&gt;</description>
+      <guid>http://localhost:1313/posts/raspberrypios_display_setup/</guid>
+      <description>&lt;h1 id=&#34;raspberry-pi-5-強制解析度顯示-tty-畫面適用無-edid-顯示器&#34;&gt;Raspberry Pi 5 強制解析度顯示 TTY 畫面（適用無 EDID 顯示器）&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文筆記記錄如何讓 Raspberry Pi 5 在不支援 EDID 的顯示器上，透過 HDMI → DP → SerDes 的輸出方式，成功顯示純文字 TTY 畫面（無圖形介面），並強制指定解析度為 &lt;strong&gt;2560x1440@60Hz&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-系統環境與需求&#34;&gt;🧠 系統環境與需求&lt;/h2&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;項目&lt;/th&gt;
+          &lt;th&gt;說明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;硬體平台&lt;/td&gt;
+          &lt;td&gt;Raspberry Pi 5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;作業系統&lt;/td&gt;
+          &lt;td&gt;Raspberry Pi OS (Bookworm / Bullseye 以上)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;顯示輸出&lt;/td&gt;
+          &lt;td&gt;HDMI → DP 轉接 → SerDes → 顯示器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;顯示器解析度&lt;/td&gt;
+          &lt;td&gt;2560x1440 @ 60Hz&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;EDID 支援&lt;/td&gt;
+          &lt;td&gt;❌ 無（需手動指定解析度）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-設定方法&#34;&gt;⚙️ 設定方法&lt;/h2&gt;
+&lt;h3 id=&#34;1-編輯-bootfirmwareconfigtxt&#34;&gt;1. 編輯 &lt;code&gt;/boot/firmware/config.txt&lt;/code&gt;&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo nano /boot/firmware/config.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-加入以下內容&#34;&gt;2. 加入以下內容&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;hdmi_force_hotplug&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;hdmi_group&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;hdmi_mode&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;87&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;hdmi_cvt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;2560 1440 60 3 0 0 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;disable_overscan&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;config_hdmi_boost&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;9&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;boot_delay&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;hdmi_mode=87&lt;/code&gt; 搭配 &lt;code&gt;hdmi_cvt&lt;/code&gt; 代表自定解析度。
+&lt;code&gt;boot_delay=5&lt;/code&gt; 可讓 SerDes 等待初始化時間。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>N8n on YingChao Note</title>
-    <link>http://localhost:1313/categories/n8n/</link>
+    <link>https://yingchaotw.github.io/categories/n8n/</link>
     <description>Recent content in N8n on YingChao Note</description>
     <image>
       <title>YingChao Note</title>
-      <url>http://localhost:1313/papermod-cover.png</url>
-      <link>http://localhost:1313/papermod-cover.png</link>
+      <url>https://yingchaotw.github.io/papermod-cover.png</url>
+      <link>https://yingchaotw.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- 0.145.0</generator>
     <language>zh-tw</language>
     <lastBuildDate>Tue, 29 Apr 2025 20:14:08 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/n8n/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yingchaotw.github.io/categories/n8n/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在 Hugo 部落格中嵌入 n8n Demo 組件</title>
-      <link>http://localhost:1313/posts/embed-the-n8n-demo-component-in-the-hugoblog/</link>
+      <link>https://yingchaotw.github.io/posts/embed-the-n8n-demo-component-in-the-hugoblog/</link>
       <pubDate>Tue, 29 Apr 2025 20:14:08 +0800</pubDate>
-      <guid>http://localhost:1313/posts/embed-the-n8n-demo-component-in-the-hugoblog/</guid>
+      <guid>https://yingchaotw.github.io/posts/embed-the-n8n-demo-component-in-the-hugoblog/</guid>
       <description>&lt;style&gt;
 pre code {
   white-space: pre-wrap;

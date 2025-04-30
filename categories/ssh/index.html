@@ -140,7 +140,10 @@
 重新命名步驟：
 關閉 SSH 連線： 在你開始重新命名檔案之前，請確保沒有任何 SSH 連線正在使用這些金鑰。 找到金鑰檔案： 這些檔案通常位於你主目錄下的 .ssh 目錄中。 使用檔案管理工具或終端機： 直接將檔案名稱改為你想要的。 修改 .ssh/config 檔案 修改 .ssh/config 檔案，可以讓你自定義 SSH 連線的行為。當你重新命名金鑰檔案後，就需要對應地修改 config 檔案，讓 SSH 知道該使用哪個金鑰。
 config 檔案範例：
-Host github.com HostName github.com User git IdentityFile ~/.ssh/id_ed25519_pro ...</p>
+Host github.com HostName github.com User git IdentityFile ~/.ssh/id_ed25519_pro 解釋：
+Host: 指定一個別名，方便你快速連接。 HostName: 指定實際的伺服器地址。 User: 指定登入的使用者名稱。 IdentityFile: 指定要使用的私鑰檔案路徑。 修改步驟：
+開啟 .ssh/config 檔案： 使用你喜歡的文字編輯器。 新增或修改 Host 區塊： 如果已經有對應的 Host 區塊，直接修改 IdentityFile 的值。 如果沒有，新增一個 Host 區塊，並填寫相關資訊。 儲存檔案： 務必以純文字格式儲存，不要加入任何格式設定。 修改後的範例：
+...</p>
   </div>
   <footer class="entry-footer"><span title='2024-04-26 15:46:18 +0800 CST'>April 26, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
   <a class="entry-link" aria-label="post link to ssh 金鑰管理與設定" href="http://localhost:1313/posts/draft/ssh-key-management-and-settings/"></a>

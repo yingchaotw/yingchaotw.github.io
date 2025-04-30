@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Github Page on YingChao Note</title>
-    <link>http://localhost:1313/tags/github-page/</link>
+    <link>https://yingchaotw.github.io/tags/github-page/</link>
     <description>Recent content in Github Page on YingChao Note</description>
     <image>
       <title>YingChao Note</title>
-      <url>http://localhost:1313/papermod-cover.png</url>
-      <link>http://localhost:1313/papermod-cover.png</link>
+      <url>https://yingchaotw.github.io/papermod-cover.png</url>
+      <link>https://yingchaotw.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- 0.145.0</generator>
     <language>zh-tw</language>
     <lastBuildDate>Thu, 15 Feb 2024 16:46:18 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/github-page/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yingchaotw.github.io/tags/github-page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在 Docker Container 上撰寫 Hugo Blog</title>
-      <link>http://localhost:1313/posts/make-hugo-blog-docker/</link>
+      <link>https://yingchaotw.github.io/posts/make-hugo-blog-docker/</link>
       <pubDate>Thu, 15 Feb 2024 16:46:18 +0800</pubDate>
-      <guid>http://localhost:1313/posts/make-hugo-blog-docker/</guid>
+      <guid>https://yingchaotw.github.io/posts/make-hugo-blog-docker/</guid>
       <description>&lt;!-- Create Hugo Blog at Docker Container --&gt;
 &lt;h1 id=&#34;tldr&#34;&gt;TL;DR&lt;/h1&gt;
 &lt;ul&gt;

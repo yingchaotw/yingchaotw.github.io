@@ -126,7 +126,7 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">在 Docker Container 上撰寫 Hugo Blog
+    <h2 class="entry-hint-parent">建立 STM32 開發環境
       <span class="entry-hint" title="Draft">
         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
           <path
@@ -136,12 +136,19 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>https://editor.leonh.space/2022/zola/
-https://www.getzola.org
-</p>
+    <p>前言 自我高職踏入電子科系以來，關於韌體開發始終都是使用廠商提供的開發環境，但也被綁住在 Microsoft(微軟軟) Windows 系統下，有一段時間一直在 Windows、Linux Debain/Ubuntu 系統切來切去的，於是踏上了折騰自己的這條路，立志要跳脫微軟，能夠在不同系統互換且開發韌體程式。
+以下紀錄如何在開源的環境中編譯韌體，不透過現成的 IDE (如：Keil MDK、eclipse、STM32CubeIDE) 建立編譯環境，可挑選自己習慣的作業系統，不侷限作業系統或韌體晶片。
+使用軟體 以下為我在開發 STM32 韌體時，所使用的軟體，若有自己較上手的軟體也能夠自行替換。
+文字編輯器
+VIM - 1991年11月2日由 Bram Moolenaar 發布。在程式設計師中被廣泛使用。和Emacs並列成為類Unix系統使用者最喜歡的編輯器。 [1] Visual Studio CODE - 2015年4月29日由微軟開發且跨平台的免費原始碼編輯器 [2] 程式編譯器
+gcc-arm-none-eabi - ARM 生產的 ARM Architecture版本的GNU工具鏈（稱為“ARM GNU工具鏈”）使合作伙伴、開發人員和社群能夠使用近期Arm Architecture和開源專案GCC、Binutils、glibc、Newlib和GDB的新功能。[3] 韌體除錯
+OpenOCD - 由 Dominic Rath建立，是2005年奧格斯堡應用科學大學文憑論文的一部分。 從那時起，該專案已發展成為一個活躍的開源專案，由來自世界各地的軟體和硬體開發人員組成的多元化社群提供支援。[4] 程式專案
+STM32CubeMX - 是一個圖形工具，允許非常輕鬆地配置STM32微控制器和微處理器，並透過分步過程為Arm® Cortex®-M核心或Arm® Cortex®-A核心的部分Linux®裝置樹生成相應初始化C程式。[5] 程式燒錄
+STM32CubeProgrammer - 透過除錯介面（JTAG和SWD）和引導載入器介面（UART、USB DFU、I2C、SPI和CAN）為讀取、寫入和驗證裝置記憶體提供了一個易於使用和高效的環境。 [6] OpenOCD - Open On-Chip Debugger 旨在為嵌入式目標裝置提供除錯、系統內寫程式和邊界掃描測試。 [7] 建置環境 編輯器使用自己所習慣的，也可以使用 VIM 作為程式碼的編輯工作。 ![](https://imgur.com/vuVJovz.png =300x) [9]
+...</p>
   </div>
-  <footer class="entry-footer">1 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 在 Docker Container 上撰寫 Hugo Blog" href="http://localhost:1313/posts/draft/make-zola-blog-at-docker/"></a>
+  <footer class="entry-footer"><span title='2022-04-26 15:46:18 +0800 CST'>April 26, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 建立 STM32 開發環境" href="http://localhost:1313/posts/draft/build-stm32-development-environment/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

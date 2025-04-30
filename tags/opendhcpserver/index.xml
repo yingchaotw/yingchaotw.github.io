@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>OpenDHCPServer on YingChao Note</title>
-    <link>http://localhost:1313/tags/opendhcpserver/</link>
+    <link>https://yingchaotw.github.io/tags/opendhcpserver/</link>
     <description>Recent content in OpenDHCPServer on YingChao Note</description>
     <image>
       <title>YingChao Note</title>
-      <url>http://localhost:1313/papermod-cover.png</url>
-      <link>http://localhost:1313/papermod-cover.png</link>
+      <url>https://yingchaotw.github.io/papermod-cover.png</url>
+      <link>https://yingchaotw.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- 0.145.0</generator>
     <language>zh-tw</language>
     <lastBuildDate>Thu, 10 Apr 2025 14:01:08 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/opendhcpserver/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yingchaotw.github.io/tags/opendhcpserver/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Open DHCP Server 在 Windows 的設置與配置</title>
-      <link>http://localhost:1313/posts/open-dhcp-server-notes/</link>
+      <link>https://yingchaotw.github.io/posts/open-dhcp-server-notes/</link>
       <pubDate>Thu, 10 Apr 2025 14:01:08 +0800</pubDate>
-      <guid>http://localhost:1313/posts/open-dhcp-server-notes/</guid>
+      <guid>https://yingchaotw.github.io/posts/open-dhcp-server-notes/</guid>
       <description>&lt;h2 id=&#34;基本設置與-ip-分配配置&#34;&gt;基本設置與 IP 分配配置&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;安裝&lt;/strong&gt;：從 SourceForge 下載 &lt;a href=&#34;https://sourceforge.net/projects/dhcpserver/&#34;&gt;Open DHCP Server&lt;/a&gt;（例如 &lt;code&gt;OpenDHCPServerInstaller64bitV1.84.exe&lt;/code&gt;），安裝至預設路徑（&lt;code&gt;C:\OpenDHCPServer&lt;/code&gt;）。&lt;/li&gt;

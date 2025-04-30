@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>YingChao Note</title>
-    <link>http://localhost:1313/</link>
+    <link>https://yingchaotw.github.io/</link>
     <description>Recent content on YingChao Note</description>
     <image>
       <title>YingChao Note</title>
-      <url>http://localhost:1313/papermod-cover.png</url>
-      <link>http://localhost:1313/papermod-cover.png</link>
+      <url>https://yingchaotw.github.io/papermod-cover.png</url>
+      <link>https://yingchaotw.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- 0.145.0</generator>
     <language>zh-tw</language>
     <lastBuildDate>Tue, 29 Apr 2025 20:14:08 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yingchaotw.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>在 Hugo 部落格中嵌入 n8n Demo 組件</title>
-      <link>http://localhost:1313/posts/embed-the-n8n-demo-component-in-the-hugoblog/</link>
+      <link>https://yingchaotw.github.io/posts/embed-the-n8n-demo-component-in-the-hugoblog/</link>
       <pubDate>Tue, 29 Apr 2025 20:14:08 +0800</pubDate>
-      <guid>http://localhost:1313/posts/embed-the-n8n-demo-component-in-the-hugoblog/</guid>
+      <guid>https://yingchaotw.github.io/posts/embed-the-n8n-demo-component-in-the-hugoblog/</guid>
       <description>&lt;style&gt;
 pre code {
   white-space: pre-wrap;
@@ -46,9 +46,9 @@ pre code {
     </item>
     <item>
       <title>Open DHCP Server 在 Windows 的設置與配置</title>
-      <link>http://localhost:1313/posts/open-dhcp-server-notes/</link>
+      <link>https://yingchaotw.github.io/posts/open-dhcp-server-notes/</link>
       <pubDate>Thu, 10 Apr 2025 14:01:08 +0800</pubDate>
-      <guid>http://localhost:1313/posts/open-dhcp-server-notes/</guid>
+      <guid>https://yingchaotw.github.io/posts/open-dhcp-server-notes/</guid>
       <description>&lt;h2 id=&#34;基本設置與-ip-分配配置&#34;&gt;基本設置與 IP 分配配置&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;安裝&lt;/strong&gt;：從 SourceForge 下載 &lt;a href=&#34;https://sourceforge.net/projects/dhcpserver/&#34;&gt;Open DHCP Server&lt;/a&gt;（例如 &lt;code&gt;OpenDHCPServerInstaller64bitV1.84.exe&lt;/code&gt;），安裝至預設路徑（&lt;code&gt;C:\OpenDHCPServer&lt;/code&gt;）。&lt;/li&gt;
@@ -166,9 +166,9 @@ LogLevel=Normal
     </item>
     <item>
       <title>自訂 shield badge logo 的方式</title>
-      <link>http://localhost:1313/posts/shield-badge-icon/</link>
+      <link>https://yingchaotw.github.io/posts/shield-badge-icon/</link>
       <pubDate>Wed, 21 Feb 2024 16:46:18 +0800</pubDate>
-      <guid>http://localhost:1313/posts/shield-badge-icon/</guid>
+      <guid>https://yingchaotw.github.io/posts/shield-badge-icon/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://shields.io&#34;&gt;shields.io&lt;/a&gt; 是一個生成靜態和動態徽章的線上服務，適用於類似 &lt;a href=&#34;https://github.com&#34;&gt;GitHub&lt;/a&gt;, &lt;a href=&#34;https://gitlab.com&#34;&gt;GitLab&lt;/a&gt; 等專案頁面。透過調整 URL 參數，可以輕鬆地創建顯示專案狀態和顏色匹配的徽章。對於簡單的動態徽章，例如 last-commit，可以直接構造 URL，而對於複雜的動態徽章，如網頁訪問量等，則可能需要額外的工具，如 substats，來獲取數據。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;其實，如果是靜態的徽章，使用起來非常簡單。只需按照以下格式撰寫圖片的 URL，即可直接插入到 Markdown 中：&lt;/p&gt;
@@ -200,9 +200,9 @@ LogLevel=Normal
     </item>
     <item>
       <title>在 Docker Container 上撰寫 Hugo Blog</title>
-      <link>http://localhost:1313/posts/make-hugo-blog-docker/</link>
+      <link>https://yingchaotw.github.io/posts/make-hugo-blog-docker/</link>
       <pubDate>Thu, 15 Feb 2024 16:46:18 +0800</pubDate>
-      <guid>http://localhost:1313/posts/make-hugo-blog-docker/</guid>
+      <guid>https://yingchaotw.github.io/posts/make-hugo-blog-docker/</guid>
       <description>&lt;!-- Create Hugo Blog at Docker Container --&gt;
 &lt;h1 id=&#34;tldr&#34;&gt;TL;DR&lt;/h1&gt;
 &lt;ul&gt;
@@ -304,9 +304,9 @@ LogLevel=Normal
     </item>
     <item>
       <title></title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://yingchaotw.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://yingchaotw.github.io/about/</guid>
       <description>&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://avatars.githubusercontent.com/u/25223663?v=4&#34; alt=&#34;&#34;  /&gt;
 &lt;/p&gt;
 &lt;p&gt;Hi, I&amp;rsquo;m Yingchao. I&amp;rsquo;m a firmware engineer from Taiwan with a passion for microcontrollers and embedded systems. I&amp;rsquo;ve applied my skills to building micromouse and some hardware/firmware. I&amp;rsquo;m proficient in C, Python, and various build tools like &lt;code&gt;Make&lt;/code&gt;, &lt;code&gt;CMake&lt;/code&gt;, and &lt;code&gt;Docker&lt;/code&gt;.&lt;/p&gt;</description>

@@ -9,7 +9,7 @@
       <url>http://localhost:1313/papermod-cover.png</url>
       <link>http://localhost:1313/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- 0.134.1</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>zh-tw</language>
     <lastBuildDate>Fri, 26 Jan 2024 15:46:18 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/git/index.xml" rel="self" type="application/rss+xml" />
@@ -35,7 +35,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;sudo&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; password &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; logo:                                                       
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;logo@gaga:/home$ &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; repo
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;logo@gaga:/home/repo$ 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pr</description>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面是 linux 的指令，已經操作 git bash 一陣子的我們應該不陌生，只差在 linux 需要執行權限時的 sudo 並輸入密碼而已。&lt;/p&gt;
+&lt;p&gt;我們已經在 /home 下建立了 repo 的資料夾，但目前他還是一個很單純的空目錄，跟 git 完全扯不上關係。&lt;/p&gt;
+&lt;p&gt;因為需要在 repo 寫入資料，所以 repo 的資料夾的權限和擁有者都需要設定好，至少自己要能存取，如果有其他伙伴合作群組的話也要考慮一下。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

@@ -126,20 +126,102 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">在 Hugo 部落格中嵌入 n8n Demo 組件
+    <h2 class="entry-hint-parent">Raspberry Pi 5 強制解析度顯示 TTY 畫面（適用無 EDID 顯示器）
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
   <div class="entry-content">
-    <p>如果你在使用 Hugo 部落格系統，並且希望在文章中展示 n8n 的 workflow，這篇文章將教你如何快速將 n8n-demo 組件嵌入你的 Hugo 文章中，並且正確處理 workflow JSON 的格式。
-什麼是 n8n-demo 組件？ n8n 是一個開源自動化工具，讓你可以在圖形介面中設計工作流程（workflow），並且連接各種不同的 API 或服務。而 n8n-demo 是一個可以將 n8n 工作流程嵌入到網頁中的 Web Component，讓你可以在文章或頁面中預覽這些流程。
-步驟一：安裝與設置 Hugo 如果你還沒有設置 Hugo 部落格，你可以參考 Hugo 官方文檔 來進行安裝和初始化。一旦安裝完成，記得選擇一個適合的主題，這裡我們將使用 PaperMod 主題來進行展示。
-步驟二：允許 Hugo 解析 HTML 元素 在 Hugo 中，默認情況下並不允許 Markdown 中使用 raw HTML 元素（像是 &lt;script&gt; 標籤）。為了能夠嵌入 n8n-demo 組件，我們需要讓 Hugo 允許這些 HTML 標籤。
-修改 config.toml 打開你的 Hugo 配置文件 config.toml，加入以下設置：
-[markup] [markup.goldmark] [markup.goldmark.renderer] unsafe = true 這樣，Hugo 就能夠正確解析 Markdown 中的 &lt;script&gt; 和 &lt;n8n-demo&gt; 標籤。
+    <p>Raspberry Pi 5 強制解析度顯示 TTY 畫面（適用無 EDID 顯示器） 本文筆記記錄如何讓 Raspberry Pi 5 在不支援 EDID 的顯示器上，透過 HDMI → DP → SerDes 的輸出方式，成功顯示純文字 TTY 畫面（無圖形介面），並強制指定解析度為 2560x1440@60Hz。
+🧠 系統環境與需求 項目 說明 硬體平台 Raspberry Pi 5 作業系統 Raspberry Pi OS (Bookworm / Bullseye 以上) 顯示輸出 HDMI → DP 轉接 → SerDes → 顯示器 顯示器解析度 2560x1440 @ 60Hz EDID 支援 ❌ 無（需手動指定解析度） ⚙️ 設定方法 1. 編輯 /boot/firmware/config.txt sudo nano /boot/firmware/config.txt 2. 加入以下內容 hdmi_force_hotplug=1 hdmi_group=2 hdmi_mode=87 hdmi_cvt=2560 1440 60 3 0 0 0 disable_overscan=1 config_hdmi_boost=9 boot_delay=5 hdmi_mode=87 搭配 hdmi_cvt 代表自定解析度。 boot_delay=5 可讓 SerDes 等待初始化時間。
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-05-01 14:01:08 +0800 CST'>May 1, 2025</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 在 Hugo 部落格中嵌入 n8n Demo 組件" href="http://localhost:1313/posts/n8n-demo/"></a>
+  <footer class="entry-footer"><span title='2025-05-01 14:01:08 +0800 CST'>May 1, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to Raspberry Pi 5 強制解析度顯示 TTY 畫面（適用無 EDID 顯示器）" href="http://localhost:1313/posts/raspberrypios_display_setup/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>🎯 目標 📱 從手機（4G/外部網路）觸發家中內網的 n8n webhook，自動執行流程。
+🧭 實作流程概覽 ✅ 在家中電腦安裝並登入 Tailscale（運行 n8n）。 ✅ 在手機安裝 Tailscale 並登入相同帳號。 ✅ 取得 n8n 的 webhook URL（使用 Tailscale DNS 名稱）。 ✅ 使用手機的捷徑（Shortcuts / Tasker）或瀏覽器觸發 webhook。 🛠️ 詳細步驟 📌 步驟 1：在家中電腦安裝 Tailscale 下載並安裝 Tailscale：
+Tailscale 下載頁面
+安裝後，執行 tailscale up，或在 GUI 中登入（Windows/Mac）。
+使用 Google / GitHub 帳號登入。
+成功後，設備會取得 Tailscale 網域（例如：n8n-pc.tailscale.net）。
+📌 步驟 2：手機安裝 Tailscale 安裝 Tailscale App（iOS / Android）。 登入與家中設備相同帳號。 完成後，手機可直接與家中設備通訊。 📌 步驟 3：設定 n8n Webhook 在 n8n 中建立 Workflow，設定第一個節點為 Webhook：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-05-01 14:01:08 +0800 CST'>May 1, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）" href="http://localhost:1313/posts/draft/n8n/vpn_tailscale/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>🛠️ 利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP） 在某些特殊場景下，我們可能希望 讓一台 Raspberry Pi 的 WiFi 網路，共享給另一台僅透過乙太網路連線的電腦上網。這篇文章將介紹如何設定：
+PC 作為 DHCP Server Raspberry Pi 用 eth0 接收 IP Pi 透過 WiFi 上網 PC 最終透過 Pi 上網 這是一種「反向網路共用」，常見於開發板、測試環境或無線橋接需求。
+🖼️ 架構說明 graph LR PC([PC&lt;br&gt;OpenDHCPServer]) -- eth0 --&gt; RPi([Raspberry Pi&lt;br&gt;eth0: DHCP client]) RPi -- wlan0: WiFi --&gt; Router([WiFi 路由器&lt;br&gt;Internet Access]) PC 開啟 OpenDHCPServer，發配 IP 給 Raspberry Pi 的 eth0。 Raspberry Pi 已連上 WiFi，可正常上網。 我們希望 PC 能透過 Pi 的 WiFi 上網，因此 Raspberry Pi 必須設定成 NAT 路由器。 📦 環境條件 Raspberry Pi：已安裝 Raspberry Pi OS，WiFi 已能上網 PC：Windows、安裝 OpenDHCPServer (跳線)網路線一條，Pi eth0 ↔ PC ✅ 步驟一：設定 OpenDHCPServer（PC 端） 安裝與啟用 OpenDHCPServer 後，編輯設定檔（例如 OpenDHCPServer.ini）如下：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-05-01 14:01:08 +0800 CST'>May 1, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）" href="http://localhost:1313/posts/raspberrypios_network_forward/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>📋 步驟 1：開啟 Wi-Fi 檢查無線網卡狀態
+首先，確認你的無線網卡（wlan0）是否有啟動：
+ip link show wlan0 如果你看到 wlan0 被標記為 DOWN，那麼需要啟動它。
+啟動無線網卡
+如果 wlan0 是關閉的，使用以下指令啟動它：
+sudo ip link set wlan0 up 如果遇到 RF-kill 錯誤（即飛航模式），這表示 Wi-Fi 被軟體或硬體封鎖，會進入下一步解決。
+📋 步驟 2：解除飛航模式（RF-kill） 查看 RF-kill 狀態
+使用 rfkill 來檢查無線網卡是否被封鎖：
+rfkill list 這會列出所有被封鎖的設備。如果你看到無線網卡（wifi）被 “Soft blocked: yes” 或 “Hard blocked: yes”，則需要解封它。
+解除 RF-kill 封鎖
+如果是軟體封鎖（Soft blocked），可以用以下指令解除封鎖：
+sudo rfkill unblock wifi 如果是硬體封鎖（Hard blocked），可能需要按下物理的開關（例如某些筆電有 Wi-Fi 開關或按鍵）。
+若要解除所有封鎖，也可以使用：
+sudo rfkill unblock all 再次檢查無線網卡狀態
+解封後，重新啟動無線網卡：
+sudo ip link set wlan0 up 📋 步驟 3：連接到 Wi-Fi 網路 使用 wpa_supplicant 配置 Wi-Fi
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-05-01 14:01:08 +0800 CST'>May 1, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 利用 Raspberry Pi 分享 WiFi 網路給 PC（透過乙太網路 DHCP 分配 IP）" href="http://localhost:1313/posts/raspberrypios_network_setup/"></a>
 </article>
     </main>
     

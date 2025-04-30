@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.134.1"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.145.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
@@ -124,6 +124,20 @@
 <article class="post-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">在 Docker Container 上撰寫 Hugo Blog
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> TL;DR Hugo 介紹: Hugo 是一個開源的靜態網站產生器，擁有極快的網站架設速度，適合用於建立網站的框架。 Docker 設定與建置: 提供了詳細的 Dockerfile 以及如何使用它來建構 Hugo 的 Docker image，並且說明如何啟動、停止和刪除容器。 Hugo 的基本用法: 包括 Hugo 的安裝測試、命令查看、建立網站、處理草稿和過期內容、以及開發和測試網站的方法。 部署網站: 提到如何在準備部署網站時，透過 Hugo 建立網站，並且說明了在簡單的託管環境中如何上傳文件，以及使用 CI/CD 工作流程進行網站部署的常見做法。 附加功能: 也介紹如何使用 LiveReload 進行即時重新載入和自動重定向，以提升開發體驗。 Docker Setup 首先建立 dockerfile, 能夠建立 image, 使用這個 image 建立 container.
+FROM golang:alpine as builder ENV GOGC=50 # gcc/g&#43;&#43; are required to build SASS libraries for extended version RUN apk update &amp;&amp; \ # [自選] 編譯 Image 時間較短 apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community hugo &amp;&amp; \ # [自選] 編譯 Image 時間太長 # apk add --no-cache gcc g&#43;&#43; musl-dev git &amp;&amp; \ # go install -tags extended github.com/gohugoio/hugo@latest &amp;&amp; \ # [自選] 確認 hugo 安裝路徑及版本 $(which hugo) &amp;&amp; hugo version ######################################################## FROM alpine:latest as base LABEL maintainer=&#34;yingchao &lt;yingchao.tw@google.com&gt;&#34; # 更新 apt 及安裝套件. RUN apk update &amp;&amp; apk add --no-cache \ ca-certificates \ libc6-compat \ libstdc&#43;&#43; \ procps \ shadow \ curl \ sudo \ git \ # [自選] vim 套件安裝，會增加 image. vim ######################################################## FROM base as user_config ARG USER ARG USERID ARG GROUPID ARG PASSWORD # 在 OSX 環境上，一般用戶 UID 為 501，小於預設 UID_MIN 1000 RUN echo -e &#34;UID_MIN 500\nUID_MAX 60000&#34; &gt; /etc/login.defs; # 確認群組是否存在，如不存在則建立群組，在 docker 編譯失敗時，暫存中會有上一次編譯的群組名稱。 RUN if ! getent group $GROUPID &gt; /dev/null 2&gt;&amp;1; then \ groupadd -g $GROUPID $USER; \ else \ groupmod -n $USER $(getent group $GROUPID | cut -d: -f1); \ fi # 新增用戶並設定 UID 及 GID RUN useradd -m -u $USERID -g $GROUPID -s /bin/bash $USER # 設定用戶密碼 RUN echo &#34;$USER:$PASSWORD&#34; | chpasswd RUN echo &#34;%$USER ALL=(ALL) NOPASSWD:ALL&#34; &gt;&gt; /etc/sudoers RUN addgroup $USER wheel ######################################################## FROM base as final # 設定環境變數 ARG USER ENV PROJECT=/home/$USER/usbridge COPY --from=user_config /etc/sudoers /etc/passwd /etc/group /etc/ COPY --from=user_config /home/$USER /home/$USER COPY --from=builder /usr/bin/hugo /usr/bin/hugo COPY .profile /home/$USER/ # [自選] 編譯 Image 時間太長 # COPY --from=builder /go/bin/hugo /usr/bin/hugo # 登入非 root 用戶 USER $USER CMD [&#34;/bin/sh&#34;, &#34;-l&#34;] # 設定工作目錄 WORKDIR $PROJECT # 轉 HUGO 預設 PORT 1313 EXPOSE 1313 Build docker build 命令用於從 Dockerfile 構建 Docker image。 docker build 命令通過讀取 Dockerfile 中定義的指令，逐步構建 image，並將最終結果保存到 local 端的 image 中。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-02-15 16:46:18 +0800 CST'>February 15, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 在 Docker Container 上撰寫 Hugo Blog" href="http://localhost:1313/posts/make-hugo-blog-docker/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Docker 命令環境設置
       <span class="entry-hint" title="Draft">
         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
           <path
@@ -133,17 +147,102 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>https://editor.leonh.space/2022/zola/
-https://www.getzola.org
-</p>
+    <p>docker buildx docker/buildx github/docker/buildx 參考這個解法 無法從二進位版本安裝 buildx 插件
+這是 Mac 上此問題的正確解決方案： （Apple Silicon：M1、M2 等..）
+brew install docker-buildx ln -sfn /opt/homebrew/opt/docker-buildx/bin/docker-buildx ~/.docker/cli-plugins/docker-buildx chmod &#43;x ~/.docker/cli-plugins/docker-buildx Subcommands Command Description docker buildx bake Build from a file docker buildx build Start a build docker buildx create Create a new builder instance docker buildx debug Start debugger docker buildx du Disk usage docker buildx imagetools Commands to work on images in registry docker buildx inspect Inspect current builder instance docker buildx ls List builder instances docker buildx prune Remove build cache docker buildx rm Remove one or more builder instances docker buildx stop Stop builder instance docker buildx use Set the current builder instance docker buildx version Show buildx version information docker compose docker: ‘compose’ is not a docker command
+...</p>
   </div>
-  <footer class="entry-footer">1 min&nbsp;·&nbsp;yingchao</footer>
-  <a class="entry-link" aria-label="post link to 在 Docker Container 上撰寫 Hugo Blog" href="http://localhost:1313/posts/draft/make-zola-blog-at-docker/"></a>
+  <footer class="entry-footer"><span title='2024-01-26 15:46:18 +0800 CST'>January 26, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to Docker 命令環境設置" href="http://localhost:1313/posts/draft/docker-env-setup/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">git 建立遠端倉庫
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>準備 首先，我們要先建立好遠端倉庫，讓我們可以從電腦把資料推上去或拉回來。
+遠端倉庫只要建立一次，以後就可以一直使用。
+使用 git 推或拉的機制其實是透過 ssh 的連線，所以主機本身的 ssh 伺服器需要先架設好。
+我們這邊以 git 教學為主，ssh 的部分就不多說了。
+當然，主機也要裝好 git 套件，就像我們當時安裝了 windows 版的 git 那樣，現在只是改成 linux 版而已。
+所以我們要準備的就兩件事：
+主機架設好 ssh server 主機安裝好 git 建立遠端倉庫資料夾 我們使用 ssh 登入檔案下載平臺的主機，打算將遠端倉庫的資料夾叫做 repo
+並且放在 /home 資料夾下面。
+logo@gaga:~$ cd /home logo@gaga:/home$ sudo mkdir repo [sudo] password for logo: logo@gaga:/home$ cd repo logo@gaga:/home/repo$ 上面是 linux 的指令，已經操作 git bash 一陣子的我們應該不陌生，只差在 linux 需要執行權限時的 sudo 並輸入密碼而已。
+我們已經在 /home 下建立了 repo 的資料夾，但目前他還是一個很單純的空目錄，跟 git 完全扯不上關係。
+因為需要在 repo 寫入資料，所以 repo 的資料夾的權限和擁有者都需要設定好，至少自己要能存取，如果有其他伙伴合作群組的話也要考慮一下。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-01-26 15:46:18 +0800 CST'>January 26, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to git 建立遠端倉庫" href="http://localhost:1313/posts/draft/git-%E5%BB%BA%E7%AB%8B%E9%81%A0%E7%AB%AF%E5%80%89%E5%BA%AB/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">建立 Doorstop 需求管理工具
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>安裝 doorstop pip install doorstop doorstop --help 快速入門 建立根父需求文件：
+doorstop create REQ ./reqs/req 將專案添加到文件中，將自動編號：
+doorstop add REQ 建立子文件（低級要求）以連結到父文檔：
+doorstop create LLR ./reqs/llr --parent REQ doorstop add LLR 將低級項目連結到需求（像 ‘-’ 這樣的分隔符是可選的，可以忽略）：
+doorstop link LLR001 REQ001 檢查文件樹的完整性並驗證連結：
+doorstop 將未審閱的項目、文件或所有文件標記為已審閱：
+doorstop review REQ-001 # Marks item REQ-001 as reviewed doorstop review REQ # Marks all items in document REQ as reviewed doorstop review all # Marks all documents as reviewed 將項目、文件或所有文件中的可疑連結標記為已清除：
+doorstop clear LLR-001 # Marks all links originating in item LLR-001 as cleared doorstop clear LLR-001 REQ # Marks links in item LLR-001 to document REQ as cleared doorstop clear LLR REQ # Marks all links from LLR that target REQ as cleared doorstop clear LLR all # Marks all links originating in document LLR as cleared doorstop clear all # Marks all links in all documents as cleared 建立 HTML 文件 ：publish
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-10-14 14:01:08 +0800 CST'>October 14, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 建立 Doorstop 需求管理工具" href="http://localhost:1313/posts/draft/doorstop_setup/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">建立 STM32 開發環境
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>前言 自我高職踏入電子科系以來，關於韌體開發始終都是使用廠商提供的開發環境，但也被綁住在 Microsoft(微軟軟) Windows 系統下，有一段時間一直在 Windows、Linux Debain/Ubuntu 系統切來切去的，於是踏上了折騰自己的這條路，立志要跳脫微軟，能夠在不同系統互換且開發韌體程式。
+以下紀錄如何在開源的環境中編譯韌體，不透過現成的 IDE (如：Keil MDK、eclipse、STM32CubeIDE) 建立編譯環境，可挑選自己習慣的作業系統，不侷限作業系統或韌體晶片。
+使用軟體 以下為我在開發 STM32 韌體時，所使用的軟體，若有自己較上手的軟體也能夠自行替換。
+文字編輯器
+VIM - 1991年11月2日由 Bram Moolenaar 發布。在程式設計師中被廣泛使用。和Emacs並列成為類Unix系統使用者最喜歡的編輯器。 [1] Visual Studio CODE - 2015年4月29日由微軟開發且跨平台的免費原始碼編輯器 [2] 程式編譯器
+gcc-arm-none-eabi - ARM 生產的 ARM Architecture版本的GNU工具鏈（稱為“ARM GNU工具鏈”）使合作伙伴、開發人員和社群能夠使用近期Arm Architecture和開源專案GCC、Binutils、glibc、Newlib和GDB的新功能。[3] 韌體除錯
+OpenOCD - 由 Dominic Rath建立，是2005年奧格斯堡應用科學大學文憑論文的一部分。 從那時起，該專案已發展成為一個活躍的開源專案，由來自世界各地的軟體和硬體開發人員組成的多元化社群提供支援。[4] 程式專案
+STM32CubeMX - 是一個圖形工具，允許非常輕鬆地配置STM32微控制器和微處理器，並透過分步過程為Arm® Cortex®-M核心或Arm® Cortex®-A核心的部分Linux®裝置樹生成相應初始化C程式。[5] 程式燒錄
+STM32CubeProgrammer - 透過除錯介面（JTAG和SWD）和引導載入器介面（UART、USB DFU、I2C、SPI和CAN）為讀取、寫入和驗證裝置記憶體提供了一個易於使用和高效的環境。 [6] OpenOCD - Open On-Chip Debugger 旨在為嵌入式目標裝置提供除錯、系統內寫程式和邊界掃描測試。 [7] 建置環境 編輯器使用自己所習慣的，也可以使用 VIM 作為程式碼的編輯工作。 ![](https://imgur.com/vuVJovz.png =300x) [9]
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-04-26 15:46:18 +0800 CST'>April 26, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;yingchao</footer>
+  <a class="entry-link" aria-label="post link to 建立 STM32 開發環境" href="http://localhost:1313/posts/draft/build-stm32-development-environment/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="http://localhost:1313/page/3/">
       «&nbsp;Prev&nbsp;
+    </a>
+    <a class="next" href="http://localhost:1313/page/5/">Next&nbsp;&nbsp;»
     </a>
   </nav>
 </footer>

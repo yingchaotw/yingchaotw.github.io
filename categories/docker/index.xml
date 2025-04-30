@@ -9,7 +9,7 @@
       <url>http://localhost:1313/papermod-cover.png</url>
       <link>http://localhost:1313/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- 0.134.1</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>zh-tw</language>
     <lastBuildDate>Mon, 26 Feb 2024 22:46:18 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/docker/index.xml" rel="self" type="application/rss+xml" />
@@ -24,7 +24,23 @@
 &lt;p&gt;&lt;a href=&#34;https://viml.nchc.org.tw/archive_blog_824/&#34;&gt;不安裝 Docker Desktop 使用 Windows Docker 容器&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://chocolatey.org/install&#34;&gt;Install Chocolatey&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Set-ExecutionPolicy&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Bypass&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Scope&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;Process&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Force&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;System.Net.ServicePointManager&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SecurityProtocol&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;System.Net.ServicePointManager&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SecurityProtocol&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-bor&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;3072&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;iex &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;New-Object&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Net&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WebClient&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;DownloadString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;https://community.chocolatey.org/install.ps1&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pr</description>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最簡單的方法是只使用 &lt;code&gt;-o&lt;/code&gt; 選項，並確保下載鏈接是最終的下載地址：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl.exe -o docker.zip https://download.docker.com/win/static/stable/x86_64/docker-27.2.0.zip
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;這種方法直接將下載內容保存到指定的 &lt;code&gt;docker.zip&lt;/code&gt; 檔案中。&lt;/p&gt;
+&lt;p&gt;解壓縮之後放到 &lt;code&gt;C:\Program Files&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;將環境變數 Path 加入 &lt;code&gt;C:\Program Files\docker-27.2.0\docker&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Expand-Archive docker.zip -DestinationPath C:
+[Environment]::SetEnvironmentVariable(&amp;#34;Path&amp;#34;, &amp;#34;$($env:path);C:docker&amp;#34;, [System.EnvironmentVariableTarget]::Machine)
+$env:Path = [System.Environment]::GetEnvironmentVariable(&amp;#34;Path&amp;#34;,&amp;#34;Machine&amp;#34;)
+dockerd --register-service
+Start-Service docker
+docker run hello-world
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;C:\Users\yingchaochen&amp;gt;dockerd --register-service
+
+C:\Users\yingchaochen&amp;gt;docker run hello-world
+docker: error during connect: this error may indicate that the docker daemon is not running: Head &amp;#34;http://%2F%2F.%2Fpipe%2Fdocker_engine/_ping&amp;#34;: open //./pipe/docker_engine: The system cannot find the file specified.
+See &amp;#39;docker run --help&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
   </channel>
 </rss>

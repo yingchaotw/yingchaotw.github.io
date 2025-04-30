@@ -144,7 +144,10 @@
 所以我們要準備的就兩件事：
 主機架設好 ssh server 主機安裝好 git 建立遠端倉庫資料夾 我們使用 ssh 登入檔案下載平臺的主機，打算將遠端倉庫的資料夾叫做 repo
 並且放在 /home 資料夾下面。
-logo@gaga:~$ cd /home logo@gaga:/home$ sudo mkdir repo [sudo] password for logo: logo@gaga:/home$ cd repo logo@gaga:/home/repo$ ...</p>
+logo@gaga:~$ cd /home logo@gaga:/home$ sudo mkdir repo [sudo] password for logo: logo@gaga:/home$ cd repo logo@gaga:/home/repo$ 上面是 linux 的指令，已經操作 git bash 一陣子的我們應該不陌生，只差在 linux 需要執行權限時的 sudo 並輸入密碼而已。
+我們已經在 /home 下建立了 repo 的資料夾，但目前他還是一個很單純的空目錄，跟 git 完全扯不上關係。
+因為需要在 repo 寫入資料，所以 repo 的資料夾的權限和擁有者都需要設定好，至少自己要能存取，如果有其他伙伴合作群組的話也要考慮一下。
+...</p>
   </div>
   <footer class="entry-footer"><span title='2024-01-26 15:46:18 +0800 CST'>January 26, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;yingchao</footer>
   <a class="entry-link" aria-label="post link to git 建立遠端倉庫" href="http://localhost:1313/posts/draft/git-%E5%BB%BA%E7%AB%8B%E9%81%A0%E7%AB%AF%E5%80%89%E5%BA%AB/"></a>

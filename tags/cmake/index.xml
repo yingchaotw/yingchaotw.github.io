@@ -9,7 +9,7 @@
       <url>http://localhost:1313/papermod-cover.png</url>
       <link>http://localhost:1313/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- 0.134.1</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>zh-tw</language>
     <lastBuildDate>Thu, 26 Dec 2024 15:46:18 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/cmake/index.xml" rel="self" type="application/rss+xml" />
