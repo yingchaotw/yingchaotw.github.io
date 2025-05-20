@@ -14,118 +14,44 @@
     <lastBuildDate>Tue, 15 Apr 2025 16:46:18 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/self-hosted/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>n8n 重建使用者帳號（保留 workflow、credentials）</title>
-      <link>http://localhost:1313/posts/draft/n8n/n8n-reset-admin-credentials-without-deleting-your-data/</link>
+      <title>使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤</title>
+      <link>http://localhost:1313/posts/google-oauth2-setup-in-n8n/</link>
       <pubDate>Tue, 15 Apr 2025 16:46:18 +0800</pubDate>
-      <guid>http://localhost:1313/posts/draft/n8n/n8n-reset-admin-credentials-without-deleting-your-data/</guid>
-      <description>&lt;h1 id=&#34;-n8n-重建使用者帳號保留-workflowcredentials&#34;&gt;🔄 n8n 重建使用者帳號（保留 workflow、credentials）&lt;/h1&gt;
-&lt;h2 id=&#34;-背景&#34;&gt;📌 背景&lt;/h2&gt;
-&lt;p&gt;當使用 n8n（版本 1.x）開啟 &lt;strong&gt;User Management&lt;/strong&gt; 功能後，第一次啟動會要求建立一個 &lt;strong&gt;admin 使用者帳號&lt;/strong&gt;。&lt;br&gt;
-如果之後忘記密碼或想重新建立帳號，卻又不想刪除原本的 workflow/credentials 資料，這篇筆記提供一個簡單的方法。&lt;/p&gt;
+      <guid>http://localhost:1313/posts/google-oauth2-setup-in-n8n/</guid>
+      <description>&lt;p&gt;在這篇教學中，將完整介紹如何在 &lt;strong&gt;n8n&lt;/strong&gt; 中設定 &lt;strong&gt;Google OAuth2 認證&lt;/strong&gt;，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
+最後也會補充在設定過程中可能會遇到的常見錯誤，尤其是在使用 &lt;strong&gt;Docker 自架環境&lt;/strong&gt;時非常容易發生的 &lt;code&gt;redirect_uri_mismatch&lt;/code&gt; 問題，並提供解法。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;-目標&#34;&gt;✅ 目標&lt;/h2&gt;
+&lt;h2 id=&#34;-你需要準備的環境&#34;&gt;📦 你需要準備的環境&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;重置 n8n 使用者帳號（User）&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;保留所有 workflows、credentials、設定&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;適用於：SQLite（預設儲存方式）&lt;/li&gt;
-&lt;li&gt;n8n 是透過 Docker container 執行&lt;/li&gt;
-&lt;li&gt;資料掛載預設目錄為：&lt;code&gt;~/.n8n&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;已運行中的 n8n（本機或雲端部署均可）&lt;/li&gt;
+&lt;li&gt;Google 帳號&lt;/li&gt;
+&lt;li&gt;Google Cloud Console 存取權限&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;-環境條件&#34;&gt;🧰 環境條件&lt;/h2&gt;
+&lt;h2 id=&#34;在-google-cloud-console-建立-oauth2-憑證&#34;&gt;在 Google Cloud Console 建立 OAuth2 憑證&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;前往 &lt;a href=&#34;https://console.cloud.google.com/&#34;&gt;Google Cloud Console&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;建立一個專案（或使用現有專案）&lt;/li&gt;
+&lt;li&gt;到 &lt;code&gt;API 和服務 &amp;gt; 憑證&lt;/code&gt;
+&lt;br/&gt;&lt;img src=&#34;./images/Google%20總覽_建立品牌1.jpg&#34; alt=&#34;&#34; width=&#34;450&#34;/&gt;&lt;/li&gt;
+&lt;li&gt;點「&lt;strong&gt;建立憑證 &amp;gt; OAuth 用戶端 ID&lt;/strong&gt;」
+&lt;br/&gt;&lt;img src=&#34;./images/Google%20Auth%20Platform_用戶端.jpg&#34; alt=&#34;&#34; width=&#34;450&#34;/&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;-若首次設定會要求填寫oauth-同意畫面&#34;&gt;👉 若首次設定會要求填寫「OAuth 同意畫面」：&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Docker 已安裝&lt;/li&gt;
-&lt;li&gt;n8n 資料有掛載 volume 到 &lt;code&gt;~/.n8n&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Host 系統為 ARM 架構（例如 Apple M1/M2），所以需額外指定 &lt;code&gt;--platform linux/amd64&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;使用 &lt;code&gt;nouchka/sqlite3&lt;/code&gt; Docker image 來存取資料庫&lt;/li&gt;
+&lt;li&gt;使用者類型：選「外部」
+&lt;br/&gt;&lt;img src=&#34;./images/Google%20總覽_建立品牌2.jpg&#34; alt=&#34;&#34; width=&#34;450&#34;/&gt;&lt;/li&gt;
+&lt;li&gt;填寫應用名稱、支援信箱
+&lt;br/&gt;&lt;img src=&#34;./images/Google%20總覽_建立品牌3.jpg&#34; alt=&#34;&#34; width=&#34;450&#34;/&gt;&lt;/li&gt;
+&lt;li&gt;可略過 Scopes 設定（或先加入基本 openid/email/profile）&lt;/li&gt;
+&lt;li&gt;加入測試用戶（輸入你自己的 Gmail）
+&lt;br/&gt;&lt;img src=&#34;./images/Google%20Auth%20Platform_設定目標對象_新增測試使用者.jpg&#34; alt=&#34;&#34; width=&#34;450&#34;/&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;-重建使用者步驟&#34;&gt;🧼 重建使用者步驟&lt;/h2&gt;
-&lt;h3 id=&#34;1-使用-docker-打開-sqlite-資料庫&#34;&gt;1. 使用 Docker 打開 SQLite 資料庫&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker run --rm -it &lt;span class=&#34;se&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  --platform linux/amd64 &lt;span class=&#34;se&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  -v ~/.n8n:/data &lt;span class=&#34;se&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  nouchka/sqlite3 &lt;span class=&#34;se&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;  /data/database.sqlite
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;!-- ```bash
-docker run --rm -it \
-  --platform linux/amd64 \
-  -v $(pwd)/../n8n_data:/data \
-  nouchka/sqlite3 \
-  /data/database.sqlite
-``` --&gt;
-&lt;h3 id=&#34;2-在-sqlite3-cli-中執行&#34;&gt;2. 在 sqlite3 CLI 中執行：&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;email&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;DELETE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exit&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;說明：&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>使用 Docker 和 Docker Compose 部署 dnsmasq 和 Nginx</title>
-      <link>http://localhost:1313/posts/draft/dnsmasq--nginx-with-docker-compose/</link>
-      <pubDate>Tue, 15 Apr 2025 16:46:18 +0800</pubDate>
-      <guid>http://localhost:1313/posts/draft/dnsmasq--nginx-with-docker-compose/</guid>
-      <description>&lt;p&gt;這篇筆記將指導您如何使用 Docker 和 Docker Compose，將 &lt;code&gt;dnsmasq&lt;/code&gt; 作為 DNS 服務器和 &lt;code&gt;nginx&lt;/code&gt; 作為 Web 伺服器進行部署。&lt;/p&gt;
-&lt;h2 id=&#34;1-項目目錄結構&#34;&gt;1. 項目目錄結構&lt;/h2&gt;
-&lt;p&gt;首先，我們需要設置一個專案目錄結構，便於管理所有配置文件和 Docker 配置。&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;docker-dns-proxy/
-├── docker-compose.yml      # Docker Compose 配置文件
-├── nginx/                  # Nginx 配置目錄
-│   └── default.conf        # Nginx 設定檔
-└── dnsmasq/                # dnsmasq 配置目錄
-    └── dnsmasq.conf        # dnsmasq 設定檔
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;2-docker-composeyml-配置&#34;&gt;2. &lt;code&gt;docker-compose.yml&lt;/code&gt; 配置&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;docker-compose.yml&lt;/code&gt; 是用來定義和管理多個 Docker 容器的配置文件。在這個例子中，我們將設置兩個服務：&lt;code&gt;dnsmasq&lt;/code&gt; 和 &lt;code&gt;nginx&lt;/code&gt;。&lt;/p&gt;
-&lt;h3 id=&#34;範例配置&#34;&gt;範例配置&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;version&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;3.8&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;services&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;dnsmasq&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;andyshinn/dnsmasq:2.78&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;container_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;dnsmasq&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;ports&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;s2&#34;&gt;&amp;#34;53:53/udp&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;   &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# DNS 端口&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;s2&#34;&gt;&amp;#34;53:53/tcp&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;   &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# DNS 端口&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;volumes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;./dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf  &lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 映射配置文件&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;restart&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;always  &lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 容器異常退出後自動重啟&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;nginx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;image&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;nginx:latest&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;container_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;nginx&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;ports&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;s2&#34;&gt;&amp;#34;80:80&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;       &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# HTTP 端口&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;s2&#34;&gt;&amp;#34;443:443&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# HTTPS 端口&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;volumes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;./nginx/default.conf:/etc/nginx/conf.d/default.conf &lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 映射 Nginx 配置文件&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;depends_on&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;dnsmasq  &lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 確保 dnsmasq 容器先啟動&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;restart&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;always  &lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 容器異常退出後自動重啟&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;說明&#34;&gt;說明：&lt;/h3&gt;
+&lt;h3 id=&#34;然後建立-oauth-用戶端-id&#34;&gt;然後建立 OAuth 用戶端 ID：&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;dnsmasq&lt;/code&gt; 服務使用了 &lt;code&gt;andyshinn/dnsmasq&lt;/code&gt; Docker 映像，並將端口 &lt;code&gt;53&lt;/code&gt; 映射到主機，處理 DNS 請求。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;nginx&lt;/code&gt; 服務使用官方的 &lt;code&gt;nginx&lt;/code&gt; Docker 映像，並映射了 &lt;code&gt;80&lt;/code&gt; 和 &lt;code&gt;443&lt;/code&gt; 端口來處理 HTTP 和 HTTPS 請求。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;3-配置-dnsmasq&#34;&gt;3. 配置 dnsmasq&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;dnsmasq&lt;/code&gt; 用來提供 DNS 解析服務。在此，我們設置了基本的 DNS 配置。以下是 &lt;code&gt;dnsmasq.conf&lt;/code&gt; 的範本：&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>如何解決 `400: redirect_uri_mismatch` 錯誤並成功配置 Google OAuth 2.0 與 n8n</title>
-      <link>http://localhost:1313/posts/draft/n8n/n8n-fixing-400-redirect_uri_mismatch-error-in-google-oauth-2.0/</link>
-      <pubDate>Tue, 15 Apr 2025 16:46:18 +0800</pubDate>
-      <guid>http://localhost:1313/posts/draft/n8n/n8n-fixing-400-redirect_uri_mismatch-error-in-google-oauth-2.0/</guid>
-      <description>&lt;p&gt;在使用 n8n 自架 Docker 環境並配置 Google OAuth 2.0 認證時，你可能會遇到 &lt;strong&gt;&lt;code&gt;400: redirect_uri_mismatch&lt;/code&gt;&lt;/strong&gt; 錯誤。這個錯誤通常是由於 Google OAuth 配置中的回調 URI 與實際使用的 URI 不匹配所導致的。&lt;/p&gt;
-&lt;p&gt;本文將逐步引導你解決這個問題，並讓你能夠順利將 Google 服務與 n8n 進行集成。&lt;/p&gt;
-&lt;h2 id=&#34;什麼是-redirect_uri_mismatch-錯誤&#34;&gt;什麼是 &lt;code&gt;redirect_uri_mismatch&lt;/code&gt; 錯誤？&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;redirect_uri_mismatch&lt;/code&gt; 是 OAuth 2.0 流程中的一種常見錯誤。當 Google 在認證過程中發現傳入的回調 URI 與註冊的回調 URI 不匹配時，就會顯示這個錯誤。這樣的情況通常出現於以下幾種情況：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;回調 URI 在 Google Cloud Console 中的設置與 n8n 中使用的 URI 不一致。&lt;/li&gt;
-&lt;li&gt;使用 Docker 容器運行 n8n 時，&lt;code&gt;localhost&lt;/code&gt; 和容器的網絡配置未正確處理。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;確認-n8n-中的回調-uri&#34;&gt;確認 n8n 中的回調 URI&lt;/h2&gt;
-&lt;p&gt;首先，確認 n8n 中使用的回調 URI。根據 n8n 文檔，默認的回調 URI 是：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://localhost:5678/rest/oauth2-credential/callback
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果你在本地運行 n8n，請確保這個 URI 在 n8n 配置中正確設置。如果你是在 Docker 中運行 n8n，則可能需要根據 Docker 的網絡配置來調整 URI。&lt;/p&gt;</description>
+&lt;li&gt;
+&lt;p&gt;應用類型：&lt;strong&gt;網頁應用程式&lt;/strong&gt;
+&lt;br/&gt;&lt;img src=&#34;./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID.jpg&#34; alt=&#34;&#34; width=&#34;450&#34;/&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

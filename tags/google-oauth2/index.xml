@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Google OAuth2 on YingChao Note</title>
+    <link>https://yingchaotw.github.io/tags/google-oauth2/</link>
+    <description>Recent content in Google OAuth2 on YingChao Note</description>
+    <image>
+      <title>YingChao Note</title>
+      <url>https://yingchaotw.github.io/papermod-cover.png</url>
+      <link>https://yingchaotw.github.io/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Tue, 20 May 2025 21:13:58 +0800</lastBuildDate>
+    <atom:link href="https://yingchaotw.github.io/tags/google-oauth2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤</title>
+      <link>https://yingchaotw.github.io/posts/google-oauth2-setup-in-n8n/</link>
+      <pubDate>Tue, 20 May 2025 21:13:58 +0800</pubDate>
+      <guid>https://yingchaotw.github.io/posts/google-oauth2-setup-in-n8n/</guid>
+      <description>&lt;p&gt;在這篇筆記中，將紀錄如何在 &lt;strong&gt;n8n&lt;/strong&gt; 中設定 &lt;strong&gt;Google OAuth2 認證&lt;/strong&gt;，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
+最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 &lt;strong&gt;自架環境&lt;/strong&gt; 中非常容易發生的 &lt;code&gt;redirect_uri_mismatch&lt;/code&gt; 問題，並提供解法。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-你需要準備的環境&#34;&gt;📦 你需要準備的環境&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;已運行中的 n8n（本機或雲端部署均可）&lt;/li&gt;
+&lt;li&gt;Google 帳號&lt;/li&gt;
+&lt;li&gt;Google Cloud Console 存取權限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;在-google-cloud-console-建立-oauth2-憑證&#34;&gt;在 Google Cloud Console 建立 OAuth2 憑證&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;前往 &lt;a href=&#34;https://console.cloud.google.com/&#34;&gt;Google Cloud Console&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;建立一個專案（或使用現有專案）&lt;/li&gt;
+&lt;li&gt;到 &lt;code&gt;API 和服務 &amp;gt; 憑證&lt;/code&gt;
+&lt;br/&gt;&lt;img src=&#34;./images/Google%20總覽_建立品牌1.jpg&#34; alt=&#34;&#34; width=&#34;450&#34;/&gt;&lt;/li&gt;
+&lt;li&gt;點「&lt;strong&gt;建立憑證 &amp;gt; OAuth 用戶端 ID&lt;/strong&gt;」
+&lt;br/&gt;&lt;img src=&#34;./images/Google%20Auth%20Platform_用戶端.jpg&#34; alt=&#34;&#34; width=&#34;450&#34;/&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;-若首次設定會要求填寫oauth-同意畫面&#34;&gt;👉 若首次設定會要求填寫「OAuth 同意畫面」：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;使用者類型：選「外部」
+&lt;br/&gt;&lt;img src=&#34;./images/Google%20總覽_建立品牌2.jpg&#34; alt=&#34;&#34; width=&#34;450&#34;/&gt;&lt;/li&gt;
+&lt;li&gt;填寫應用名稱、支援信箱
+&lt;br/&gt;&lt;img src=&#34;./images/Google%20總覽_建立品牌3.jpg&#34; alt=&#34;&#34; width=&#34;450&#34;/&gt;&lt;/li&gt;
+&lt;li&gt;可略過 Scopes 設定（或先加入基本 openid/email/profile）&lt;/li&gt;
+&lt;li&gt;加入測試用戶（輸入你自己的 Gmail）
+&lt;br/&gt;&lt;img src=&#34;./images/Google%20Auth%20Platform_設定目標對象_新增測試使用者.jpg&#34; alt=&#34;&#34; width=&#34;450&#34;/&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;然後建立-oauth-用戶端-id&#34;&gt;然後建立 OAuth 用戶端 ID：&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;應用類型：&lt;strong&gt;網頁應用程式&lt;/strong&gt;
+&lt;br/&gt;&lt;img src=&#34;./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID.jpg&#34; alt=&#34;&#34; width=&#34;450&#34;/&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

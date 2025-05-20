@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤 | YingChao Note</title>
+<meta name="keywords" content="n8n, google OAuth2, API">
+<meta name="description" content="在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
+最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。
+
+📦 你需要準備的環境
+
+已運行中的 n8n（本機或雲端部署均可）
+Google 帳號
+Google Cloud Console 存取權限
+
+
+在 Google Cloud Console 建立 OAuth2 憑證
+
+前往 Google Cloud Console
+建立一個專案（或使用現有專案）
+到 API 和服務 &gt; 憑證
+
+點「建立憑證 &gt; OAuth 用戶端 ID」
+
+
+👉 若首次設定會要求填寫「OAuth 同意畫面」：
+
+使用者類型：選「外部」
+
+填寫應用名稱、支援信箱
+
+可略過 Scopes 設定（或先加入基本 openid/email/profile）
+加入測試用戶（輸入你自己的 Gmail）
+
+
+然後建立 OAuth 用戶端 ID：
+
+
+應用類型：網頁應用程式
+">
+<meta name="author" content="yingchao">
+<link rel="canonical" href="https://yingchaotw.github.io/posts/google-oauth2-setup-in-n8n/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yingchaotw.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yingchaotw.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yingchaotw.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yingchaotw.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yingchaotw.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://yingchaotw.github.io/posts/google-oauth2-setup-in-n8n/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤" />
+<meta property="og:description" content="在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
+最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。
+
+📦 你需要準備的環境
+
+已運行中的 n8n（本機或雲端部署均可）
+Google 帳號
+Google Cloud Console 存取權限
+
+
+在 Google Cloud Console 建立 OAuth2 憑證
+
+前往 Google Cloud Console
+建立一個專案（或使用現有專案）
+到 API 和服務 &gt; 憑證
+
+點「建立憑證 &gt; OAuth 用戶端 ID」
+
+
+👉 若首次設定會要求填寫「OAuth 同意畫面」：
+
+使用者類型：選「外部」
+
+填寫應用名稱、支援信箱
+
+可略過 Scopes 設定（或先加入基本 openid/email/profile）
+加入測試用戶（輸入你自己的 Gmail）
+
+
+然後建立 OAuth 用戶端 ID：
+
+
+應用類型：網頁應用程式
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yingchaotw.github.io/posts/google-oauth2-setup-in-n8n/" />
+<meta property="og:image" content="https://yingchaotw.github.io/papermod-cover.png" />
+<meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-05-20T21:13:58+08:00" />
+<meta property="article:modified_time" content="2025-05-20T21:13:58+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://yingchaotw.github.io/papermod-cover.png" />
+<meta name="twitter:title" content="使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤"/>
+<meta name="twitter:description" content="在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
+最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。
+
+📦 你需要準備的環境
+
+已運行中的 n8n（本機或雲端部署均可）
+Google 帳號
+Google Cloud Console 存取權限
+
+
+在 Google Cloud Console 建立 OAuth2 憑證
+
+前往 Google Cloud Console
+建立一個專案（或使用現有專案）
+到 API 和服務 &gt; 憑證
+
+點「建立憑證 &gt; OAuth 用戶端 ID」
+
+
+👉 若首次設定會要求填寫「OAuth 同意畫面」：
+
+使用者類型：選「外部」
+
+填寫應用名稱、支援信箱
+
+可略過 Scopes 設定（或先加入基本 openid/email/profile）
+加入測試用戶（輸入你自己的 Gmail）
+
+
+然後建立 OAuth 用戶端 ID：
+
+
+應用類型：網頁應用程式
+"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yingchaotw.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤",
+      "item": "https://yingchaotw.github.io/posts/google-oauth2-setup-in-n8n/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤",
+  "name": "使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤",
+  "description": "在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。 最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。\n📦 你需要準備的環境 已運行中的 n8n（本機或雲端部署均可） Google 帳號 Google Cloud Console 存取權限 在 Google Cloud Console 建立 OAuth2 憑證 前往 Google Cloud Console 建立一個專案（或使用現有專案） 到 API 和服務 \u0026gt; 憑證 點「建立憑證 \u0026gt; OAuth 用戶端 ID」 👉 若首次設定會要求填寫「OAuth 同意畫面」： 使用者類型：選「外部」 填寫應用名稱、支援信箱 可略過 Scopes 設定（或先加入基本 openid/email/profile） 加入測試用戶（輸入你自己的 Gmail） 然後建立 OAuth 用戶端 ID： 應用類型：網頁應用程式 ",
+  "keywords": [
+    "n8n", "google OAuth2", "API"
+  ],
+  "articleBody": "在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。 最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。\n📦 你需要準備的環境 已運行中的 n8n（本機或雲端部署均可） Google 帳號 Google Cloud Console 存取權限 在 Google Cloud Console 建立 OAuth2 憑證 前往 Google Cloud Console 建立一個專案（或使用現有專案） 到 API 和服務 \u003e 憑證 點「建立憑證 \u003e OAuth 用戶端 ID」 👉 若首次設定會要求填寫「OAuth 同意畫面」： 使用者類型：選「外部」 填寫應用名稱、支援信箱 可略過 Scopes 設定（或先加入基本 openid/email/profile） 加入測試用戶（輸入你自己的 Gmail） 然後建立 OAuth 用戶端 ID： 應用類型：網頁應用程式 名稱隨便填 在「授權的重定向 URI」中新增：\nhttp://localhost:5678/rest/oauth2-credential/callback 完成後會得到：\nClient ID Client Secret 🔧 在 n8n 中新增 Google OAuth2 憑證 登入 n8n 到左側選單 → Credentials 點「New credential」，搜尋並選擇： Google Sheets OAuth2、Gmail OAuth2、Google Drive OAuth2…等 點「Create New」，填入以下欄位： 欄位名稱 說明 Client ID 從 Google 複製 Client Secret 同上 Scopes 依服務填寫，例如 Google Sheets 是 https://www.googleapis.com/auth/spreadsheets n8n 會自動產生 Redirect URL，請複製並貼回 Google Cloud Console 設定中。 填完 Client ID 與 Client Secret 後點「 Sign in with Google」, 輸入帳號 登入 Google 授權會顯示應用程式未經驗證，因為是綁定我們自己架設的 n8n 服務，所以選擇繼續 Google 顯示 n8n 要求存取帳戶，需要勾選「全選」再按下繼續 授權完成後，你的憑證就建立好了！ ✨ 常用 OAuth2 Scopes 快查 Google 服務 Scope Google Sheets https://www.googleapis.com/auth/spreadsheets Google Drive https://www.googleapis.com/auth/drive Gmail 發信 https://www.googleapis.com/auth/gmail.send 🧠 延伸說明：解決 redirect_uri_mismatch 錯誤 什麼是 redirect_uri_mismatch 錯誤？ redirect_uri_mismatch 是 OAuth 2.0 流程中的一種常見錯誤。當 Google 在認證過程中發現傳入的回調 URI 與註冊的回調 URI 不匹配時，就會顯示這個錯誤。這樣的情況通常出現於以下幾種情況：\n回調 URI 在 Google Cloud Console 中的設置與 n8n 中使用的 URI 不一致。 使用 Docker 容器運行 n8n 時，localhost 和容器的網絡配置未正確處理。 在 Docker 中部署 n8n 時，很容易遇到以下錯誤：\nError 400: redirect_uri_mismatch 這是由於 Google 認證流程中的 回調 URI 與你在 Google Console 設定的不一致所導致。\n🔍 原因一：Docker 網路路徑問題 n8n 在容器中使用 localhost 時，實際上指的是容器內部，而非主機的 localhost，因此會導致 URI 不匹配。\n✅ 解法 在 Google Cloud Console 設定以下 URI：\nhttp://host.docker.internal:5678/rest/oauth2-credential/callback 在本機 n8n 介面上登入並驗證，Google 就能正確回傳 Token。\n⏳ Google 設定可能有延遲 修改回調 URI 或應用設定後，Google 的設定可能需要 5 分鐘到數小時 才會完全生效。建議修改設定後耐心等待幾分鐘再進行認證測試。\n🧹 清除瀏覽器緩存 有時候 OAuth 的快取也可能影響流程，建議進行以下操作：\n清除 cookies 與快取 改用無痕模式 改用另一個瀏覽器 🔐 確保 Client ID / Secret 是最新的 若你重新產生過憑證，記得到 n8n 中更新對應欄位，否則也會出現驗證錯誤。\n✅ Google OAuth 認證 Checklist 項目 狀態 Google OAuth2 憑證已建立 ✅ Redirect URI 正確設定 ✅ Docker 使用 host.docker.internal ✅ 等待設定生效 ⏳ 清除快取與 Cookie ✅ Client ID / Secret 正確 ✅ ✨ 常用 OAuth2 Scopes 快查 Google 服務 Scope Google Sheets https://www.googleapis.com/auth/spreadsheets Gmail 發信 https://www.googleapis.com/auth/gmail.send Google Drive https://www.googleapis.com/auth/drive 🔍 進階測試（可選） 可以使用 Postman 或其他 REST 工具測試 Google OAuth 流程，以排除是否為 n8n 端的問題。\n🧩 小結 整合 Google OAuth2 到 n8n 是非常強大且實用的功能，無論你要串接 Google Sheets 做資料收集，或是使用 Gmail 寄送自動通知郵件，都可以用這個流程完成。如果你遇到 redirect_uri_mismatch 錯誤，只要依照本文的步驟修改 URI 設定，大多數情況下都能順利解決。\n參考資料 Google OAuth2 Scopes 說明 ",
+  "wordCount" : "346",
+  "inLanguage": "en",
+  "image": "https://yingchaotw.github.io/papermod-cover.png","datePublished": "2025-05-20T21:13:58+08:00",
+  "dateModified": "2025-05-20T21:13:58+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "yingchao"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yingchaotw.github.io/posts/google-oauth2-setup-in-n8n/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "YingChao Note",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yingchaotw.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://yingchaotw.github.io/" accesskey="h" title="YingChao Note (Alt + H)">YingChao Note</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://yingchaotw.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yingchaotw.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yingchaotw.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://yingchaotw.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://yingchaotw.github.io/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤
+    </h1>
+    <div class="post-meta"><span title='2025-05-20 21:13:58 +0800 CST'>May 20, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao&nbsp;|&nbsp;<a href="https://github.com/yingchaotw/blog/tree/main/content/posts/Google-OAuth2-Setup-in-n8n/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#-%e4%bd%a0%e9%9c%80%e8%a6%81%e6%ba%96%e5%82%99%e7%9a%84%e7%92%b0%e5%a2%83" aria-label="📦 你需要準備的環境">📦 你需要準備的環境</a></li>
+                <li>
+                    <a href="#%e5%9c%a8-google-cloud-console-%e5%bb%ba%e7%ab%8b-oauth2-%e6%86%91%e8%ad%89" aria-label="在 Google Cloud Console 建立 OAuth2 憑證">在 Google Cloud Console 建立 OAuth2 憑證</a><ul>
+                        
+                <li>
+                    <a href="#-%e8%8b%a5%e9%a6%96%e6%ac%a1%e8%a8%ad%e5%ae%9a%e6%9c%83%e8%a6%81%e6%b1%82%e5%a1%ab%e5%af%aboauth-%e5%90%8c%e6%84%8f%e7%95%ab%e9%9d%a2" aria-label="👉 若首次設定會要求填寫「OAuth 同意畫面」：">👉 若首次設定會要求填寫「OAuth 同意畫面」：</a></li>
+                <li>
+                    <a href="#%e7%84%b6%e5%be%8c%e5%bb%ba%e7%ab%8b-oauth-%e7%94%a8%e6%88%b6%e7%ab%af-id" aria-label="然後建立 OAuth 用戶端 ID：">然後建立 OAuth 用戶端 ID：</a></li></ul>
+                </li>
+                <li>
+                    <a href="#-%e5%9c%a8-n8n-%e4%b8%ad%e6%96%b0%e5%a2%9e-google-oauth2-%e6%86%91%e8%ad%89" aria-label="🔧 在 n8n 中新增 Google OAuth2 憑證">🔧 在 n8n 中新增 Google OAuth2 憑證</a></li>
+                <li>
+                    <a href="#-%e5%b8%b8%e7%94%a8-oauth2-scopes-%e5%bf%ab%e6%9f%a5" aria-label="✨ 常用 OAuth2 Scopes 快查">✨ 常用 OAuth2 Scopes 快查</a></li>
+                <li>
+                    <a href="#-%e5%bb%b6%e4%bc%b8%e8%aa%aa%e6%98%8e%e8%a7%a3%e6%b1%ba-redirect_uri_mismatch-%e9%8c%af%e8%aa%a4" aria-label="🧠 延伸說明：解決 redirect_uri_mismatch 錯誤">🧠 延伸說明：解決 redirect_uri_mismatch 錯誤</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bb%80%e9%ba%bc%e6%98%af-redirect_uri_mismatch-%e9%8c%af%e8%aa%a4" aria-label="什麼是 redirect_uri_mismatch 錯誤？">什麼是 redirect_uri_mismatch 錯誤？</a></li>
+                <li>
+                    <a href="#-%e5%8e%9f%e5%9b%a0%e4%b8%80docker-%e7%b6%b2%e8%b7%af%e8%b7%af%e5%be%91%e5%95%8f%e9%a1%8c" aria-label="🔍 原因一：Docker 網路路徑問題">🔍 原因一：Docker 網路路徑問題</a></li>
+                <li>
+                    <a href="#-%e8%a7%a3%e6%b3%95" aria-label="✅ 解法">✅ 解法</a></li></ul>
+                </li>
+                <li>
+                    <a href="#-google-%e8%a8%ad%e5%ae%9a%e5%8f%af%e8%83%bd%e6%9c%89%e5%bb%b6%e9%81%b2" aria-label="⏳ Google 設定可能有延遲">⏳ Google 設定可能有延遲</a></li>
+                <li>
+                    <a href="#-%e6%b8%85%e9%99%a4%e7%80%8f%e8%a6%bd%e5%99%a8%e7%b7%a9%e5%ad%98" aria-label="🧹 清除瀏覽器緩存">🧹 清除瀏覽器緩存</a></li>
+                <li>
+                    <a href="#-%e7%a2%ba%e4%bf%9d-client-id--secret-%e6%98%af%e6%9c%80%e6%96%b0%e7%9a%84" aria-label="🔐 確保 Client ID / Secret 是最新的">🔐 確保 Client ID / Secret 是最新的</a></li>
+                <li>
+                    <a href="#-google-oauth-%e8%aa%8d%e8%ad%89-checklist" aria-label="✅ Google OAuth 認證 Checklist">✅ Google OAuth 認證 Checklist</a></li>
+                <li>
+                    <a href="#-%e5%b8%b8%e7%94%a8-oauth2-scopes-%e5%bf%ab%e6%9f%a5-1" aria-label="✨ 常用 OAuth2 Scopes 快查">✨ 常用 OAuth2 Scopes 快查</a></li>
+                <li>
+                    <a href="#-%e9%80%b2%e9%9a%8e%e6%b8%ac%e8%a9%a6%e5%8f%af%e9%81%b8" aria-label="🔍 進階測試（可選）">🔍 進階測試（可選）</a></li>
+                <li>
+                    <a href="#-%e5%b0%8f%e7%b5%90" aria-label="🧩 小結">🧩 小結</a></li>
+                <li>
+                    <a href="#%e5%8f%83%e8%80%83%e8%b3%87%e6%96%99" aria-label="參考資料">參考資料</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>在這篇筆記中，將紀錄如何在 <strong>n8n</strong> 中設定 <strong>Google OAuth2 認證</strong>，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
+最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 <strong>自架環境</strong> 中非常容易發生的 <code>redirect_uri_mismatch</code> 問題，並提供解法。</p>
+<hr>
+<h2 id="-你需要準備的環境">📦 你需要準備的環境<a hidden class="anchor" aria-hidden="true" href="#-你需要準備的環境">#</a></h2>
+<ul>
+<li>已運行中的 n8n（本機或雲端部署均可）</li>
+<li>Google 帳號</li>
+<li>Google Cloud Console 存取權限</li>
+</ul>
+<hr>
+<h2 id="在-google-cloud-console-建立-oauth2-憑證">在 Google Cloud Console 建立 OAuth2 憑證<a hidden class="anchor" aria-hidden="true" href="#在-google-cloud-console-建立-oauth2-憑證">#</a></h2>
+<ol>
+<li>前往 <a href="https://console.cloud.google.com/">Google Cloud Console</a></li>
+<li>建立一個專案（或使用現有專案）</li>
+<li>到 <code>API 和服務 &gt; 憑證</code>
+<br/><img src="./images/Google%20總覽_建立品牌1.jpg" alt="" width="450"/></li>
+<li>點「<strong>建立憑證 &gt; OAuth 用戶端 ID</strong>」
+<br/><img src="./images/Google%20Auth%20Platform_用戶端.jpg" alt="" width="450"/></li>
+</ol>
+<h3 id="-若首次設定會要求填寫oauth-同意畫面">👉 若首次設定會要求填寫「OAuth 同意畫面」：<a hidden class="anchor" aria-hidden="true" href="#-若首次設定會要求填寫oauth-同意畫面">#</a></h3>
+<ul>
+<li>使用者類型：選「外部」
+<br/><img src="./images/Google%20總覽_建立品牌2.jpg" alt="" width="450"/></li>
+<li>填寫應用名稱、支援信箱
+<br/><img src="./images/Google%20總覽_建立品牌3.jpg" alt="" width="450"/></li>
+<li>可略過 Scopes 設定（或先加入基本 openid/email/profile）</li>
+<li>加入測試用戶（輸入你自己的 Gmail）
+<br/><img src="./images/Google%20Auth%20Platform_設定目標對象_新增測試使用者.jpg" alt="" width="450"/></li>
+</ul>
+<h3 id="然後建立-oauth-用戶端-id">然後建立 OAuth 用戶端 ID：<a hidden class="anchor" aria-hidden="true" href="#然後建立-oauth-用戶端-id">#</a></h3>
+<ul>
+<li>
+<p>應用類型：<strong>網頁應用程式</strong>
+<br/><img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID.jpg" alt="" width="450"/></p>
+</li>
+<li>
+<p>名稱隨便填
+<br/><img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_設定名稱.jpg" alt="" width="450"/></p>
+</li>
+<li>
+<p>在「<strong>授權的重定向 URI</strong>」中新增：</p>
+<pre tabindex="0"><code>http://localhost:5678/rest/oauth2-credential/callback
+</code></pre> <img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_設定callback_URI.jpg" alt="" width="450"/>
+</li>
+</ul>
+<p>完成後會得到：</p>
+<ul>
+<li><strong>Client ID</strong></li>
+<li><strong>Client Secret</strong>
+<br/><img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_OAuth%20用戶端已建立.jpg" alt="" width="450"/></li>
+</ul>
+<hr>
+<h2 id="-在-n8n-中新增-google-oauth2-憑證">🔧 在 n8n 中新增 Google OAuth2 憑證<a hidden class="anchor" aria-hidden="true" href="#-在-n8n-中新增-google-oauth2-憑證">#</a></h2>
+<ol>
+<li>登入 n8n
+<br/><img src="./images/n8n%20登入%20overview%20畫面.png" alt="" width="450"/></li>
+<li>到左側選單 → Credentials</li>
+<li>點「<strong>New credential</strong>」，搜尋並選擇：
+<ul>
+<li>Google Sheets OAuth2、Gmail OAuth2、Google Drive OAuth2…等
+<br/><img src="./images/n8n-Add-new-credential.png" alt="" width="450"/></li>
+</ul>
+</li>
+<li>點「Create New」，填入以下欄位：</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>欄位名稱</th>
+          <th>說明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Client ID</td>
+          <td>從 Google 複製</td>
+      </tr>
+      <tr>
+          <td>Client Secret</td>
+          <td>同上</td>
+      </tr>
+      <tr>
+          <td>Scopes</td>
+          <td>依服務填寫，例如 Google Sheets 是 <code>https://www.googleapis.com/auth/spreadsheets</code></td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>n8n 會自動產生 <strong>Redirect URL</strong>，請複製並貼回 Google Cloud Console 設定中。
+<br/><img src="./images/n8n-填入-ClientID-and-ClientSecret.png" alt="" width="450"/>
+<br/><img src="./images/n8n-完成填入-ClientID-and-ClientSecret.png" alt="" width="450"/></p></blockquote>
+<ol start="5">
+<li>填完 Client ID 與 Client Secret 後點「 Sign in with Google」, 輸入帳號
+<br/><img src="./images/n8n-綁定-Google_API-登入畫面.png" alt="" width="450"/></li>
+<li>登入 Google 授權會顯示應用程式未經驗證，因為是綁定我們自己架設的 n8n 服務，所以選擇繼續
+<br/><img src="./images/Google警告應用程式未經驗證.png" alt="" width="450"/></li>
+<li>Google 顯示 n8n 要求存取帳戶，需要勾選「全選」再按下繼續
+<br/><img src="./images/Google-同意n8n存取帳戶頁面.png" alt="" width="450"/></li>
+<li>授權完成後，你的憑證就建立好了！
+<br/><img src="./images/n8n完成加入google_API.png" alt="" width="450"/></li>
+</ol>
+<h2 id="-常用-oauth2-scopes-快查">✨ 常用 OAuth2 Scopes 快查<a hidden class="anchor" aria-hidden="true" href="#-常用-oauth2-scopes-快查">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>Google 服務</th>
+          <th>Scope</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Google Sheets</td>
+          <td><code>https://www.googleapis.com/auth/spreadsheets</code></td>
+      </tr>
+      <tr>
+          <td>Google Drive</td>
+          <td><code>https://www.googleapis.com/auth/drive</code></td>
+      </tr>
+      <tr>
+          <td>Gmail 發信</td>
+          <td><code>https://www.googleapis.com/auth/gmail.send</code></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-延伸說明解決-redirect_uri_mismatch-錯誤">🧠 延伸說明：解決 <code>redirect_uri_mismatch</code> 錯誤<a hidden class="anchor" aria-hidden="true" href="#-延伸說明解決-redirect_uri_mismatch-錯誤">#</a></h2>
+<blockquote>
+<h3 id="什麼是-redirect_uri_mismatch-錯誤">什麼是 <code>redirect_uri_mismatch</code> 錯誤？<a hidden class="anchor" aria-hidden="true" href="#什麼是-redirect_uri_mismatch-錯誤">#</a></h3>
+<p><code>redirect_uri_mismatch</code> 是 OAuth 2.0 流程中的一種常見錯誤。當 Google 在認證過程中發現傳入的回調 URI 與註冊的回調 URI 不匹配時，就會顯示這個錯誤。這樣的情況通常出現於以下幾種情況：</p>
+<ul>
+<li>回調 URI 在 Google Cloud Console 中的設置與 n8n 中使用的 URI 不一致。</li>
+<li>使用 Docker 容器運行 n8n 時，<code>localhost</code> 和容器的網絡配置未正確處理。</li>
+</ul></blockquote>
+<p>在 Docker 中部署 n8n 時，很容易遇到以下錯誤：</p>
+<pre tabindex="0"><code>Error 400: redirect_uri_mismatch
+</code></pre><p>這是由於 Google 認證流程中的 <strong>回調 URI</strong> 與你在 Google Console 設定的不一致所導致。</p>
+<h3 id="-原因一docker-網路路徑問題">🔍 原因一：Docker 網路路徑問題<a hidden class="anchor" aria-hidden="true" href="#-原因一docker-網路路徑問題">#</a></h3>
+<p>n8n 在容器中使用 <code>localhost</code> 時，實際上指的是容器內部，而非主機的 localhost，因此會導致 URI 不匹配。</p>
+<h3 id="-解法">✅ 解法<a hidden class="anchor" aria-hidden="true" href="#-解法">#</a></h3>
+<ol>
+<li>
+<p>在 Google Cloud Console 設定以下 URI：</p>
+<pre tabindex="0"><code>http://host.docker.internal:5678/rest/oauth2-credential/callback
+</code></pre></li>
+<li>
+<p>在本機 n8n 介面上登入並驗證，Google 就能正確回傳 Token。</p>
+</li>
+</ol>
+<hr>
+<h2 id="-google-設定可能有延遲">⏳ Google 設定可能有延遲<a hidden class="anchor" aria-hidden="true" href="#-google-設定可能有延遲">#</a></h2>
+<p>修改回調 URI 或應用設定後，Google 的設定可能需要 <strong>5 分鐘到數小時</strong> 才會完全生效。建議修改設定後耐心等待幾分鐘再進行認證測試。</p>
+<hr>
+<h2 id="-清除瀏覽器緩存">🧹 清除瀏覽器緩存<a hidden class="anchor" aria-hidden="true" href="#-清除瀏覽器緩存">#</a></h2>
+<p>有時候 OAuth 的快取也可能影響流程，建議進行以下操作：</p>
+<ul>
+<li>清除 cookies 與快取</li>
+<li>改用無痕模式</li>
+<li>改用另一個瀏覽器</li>
+</ul>
+<hr>
+<h2 id="-確保-client-id--secret-是最新的">🔐 確保 Client ID / Secret 是最新的<a hidden class="anchor" aria-hidden="true" href="#-確保-client-id--secret-是最新的">#</a></h2>
+<p>若你重新產生過憑證，記得到 n8n 中更新對應欄位，否則也會出現驗證錯誤。</p>
+<hr>
+<h2 id="-google-oauth-認證-checklist">✅ Google OAuth 認證 Checklist<a hidden class="anchor" aria-hidden="true" href="#-google-oauth-認證-checklist">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>項目</th>
+          <th>狀態</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Google OAuth2 憑證已建立</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td>Redirect URI 正確設定</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td>Docker 使用 host.docker.internal</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td>等待設定生效</td>
+          <td>⏳</td>
+      </tr>
+      <tr>
+          <td>清除快取與 Cookie</td>
+          <td>✅</td>
+      </tr>
+      <tr>
+          <td>Client ID / Secret 正確</td>
+          <td>✅</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-常用-oauth2-scopes-快查-1">✨ 常用 OAuth2 Scopes 快查<a hidden class="anchor" aria-hidden="true" href="#-常用-oauth2-scopes-快查-1">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>Google 服務</th>
+          <th>Scope</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Google Sheets</td>
+          <td><code>https://www.googleapis.com/auth/spreadsheets</code></td>
+      </tr>
+      <tr>
+          <td>Gmail 發信</td>
+          <td><code>https://www.googleapis.com/auth/gmail.send</code></td>
+      </tr>
+      <tr>
+          <td>Google Drive</td>
+          <td><code>https://www.googleapis.com/auth/drive</code></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-進階測試可選">🔍 進階測試（可選）<a hidden class="anchor" aria-hidden="true" href="#-進階測試可選">#</a></h2>
+<p>可以使用 <strong>Postman</strong> 或其他 REST 工具測試 Google OAuth 流程，以排除是否為 n8n 端的問題。</p>
+<hr>
+<h2 id="-小結">🧩 小結<a hidden class="anchor" aria-hidden="true" href="#-小結">#</a></h2>
+<p>整合 Google OAuth2 到 n8n 是非常強大且實用的功能，無論你要串接 Google Sheets 做資料收集，或是使用 Gmail 寄送自動通知郵件，都可以用這個流程完成。如果你遇到 <code>redirect_uri_mismatch</code> 錯誤，只要依照本文的步驟修改 URI 設定，大多數情況下都能順利解決。</p>
+<h2 id="參考資料">參考資料<a hidden class="anchor" aria-hidden="true" href="#參考資料">#</a></h2>
+<ol>
+<li><a href="https://developers.google.com/identity/protocols/oauth2/scopes?hl=zh-tw">Google OAuth2 Scopes 說明</a></li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yingchaotw.github.io/tags/n8n/">N8n</a></li>
+      <li><a href="https://yingchaotw.github.io/tags/google-oauth2/">Google OAuth2</a></li>
+      <li><a href="https://yingchaotw.github.io/tags/api/">API</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://yingchaotw.github.io/posts/embed-the-n8n-demo-component-in-the-hugoblog/">
+    <span class="title">Next »</span>
+    <br>
+    <span>在 Hugo 部落格中嵌入 n8n Demo 組件</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤 on x"
+            href="https://x.com/intent/tweet/?text=%e4%bd%bf%e7%94%a8%20n8n%20%e6%95%b4%e5%90%88%20Google%20OAuth2%20%e4%b8%a6%e8%a7%a3%e6%b1%ba%20redirect_uri_mismatch%20%e9%8c%af%e8%aa%a4&amp;url=https%3a%2f%2fyingchaotw.github.io%2fposts%2fgoogle-oauth2-setup-in-n8n%2f&amp;hashtags=n8n%2cgoogleOAuth2%2cAPI">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤 on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fyingchaotw.github.io%2fposts%2fgoogle-oauth2-setup-in-n8n%2f&amp;title=%e4%bd%bf%e7%94%a8%20n8n%20%e6%95%b4%e5%90%88%20Google%20OAuth2%20%e4%b8%a6%e8%a7%a3%e6%b1%ba%20redirect_uri_mismatch%20%e9%8c%af%e8%aa%a4&amp;summary=%e4%bd%bf%e7%94%a8%20n8n%20%e6%95%b4%e5%90%88%20Google%20OAuth2%20%e4%b8%a6%e8%a7%a3%e6%b1%ba%20redirect_uri_mismatch%20%e9%8c%af%e8%aa%a4&amp;source=https%3a%2f%2fyingchaotw.github.io%2fposts%2fgoogle-oauth2-setup-in-n8n%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤 on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fyingchaotw.github.io%2fposts%2fgoogle-oauth2-setup-in-n8n%2f&title=%e4%bd%bf%e7%94%a8%20n8n%20%e6%95%b4%e5%90%88%20Google%20OAuth2%20%e4%b8%a6%e8%a7%a3%e6%b1%ba%20redirect_uri_mismatch%20%e9%8c%af%e8%aa%a4">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤 on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fyingchaotw.github.io%2fposts%2fgoogle-oauth2-setup-in-n8n%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤 on whatsapp"
+            href="https://api.whatsapp.com/send?text=%e4%bd%bf%e7%94%a8%20n8n%20%e6%95%b4%e5%90%88%20Google%20OAuth2%20%e4%b8%a6%e8%a7%a3%e6%b1%ba%20redirect_uri_mismatch%20%e9%8c%af%e8%aa%a4%20-%20https%3a%2f%2fyingchaotw.github.io%2fposts%2fgoogle-oauth2-setup-in-n8n%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤 on telegram"
+            href="https://telegram.me/share/url?text=%e4%bd%bf%e7%94%a8%20n8n%20%e6%95%b4%e5%90%88%20Google%20OAuth2%20%e4%b8%a6%e8%a7%a3%e6%b1%ba%20redirect_uri_mismatch%20%e9%8c%af%e8%aa%a4&amp;url=https%3a%2f%2fyingchaotw.github.io%2fposts%2fgoogle-oauth2-setup-in-n8n%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share 使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤 on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=%e4%bd%bf%e7%94%a8%20n8n%20%e6%95%b4%e5%90%88%20Google%20OAuth2%20%e4%b8%a6%e8%a7%a3%e6%b1%ba%20redirect_uri_mismatch%20%e9%8c%af%e8%aa%a4&u=https%3a%2f%2fyingchaotw.github.io%2fposts%2fgoogle-oauth2-setup-in-n8n%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://yingchaotw.github.io/">YingChao Note</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
