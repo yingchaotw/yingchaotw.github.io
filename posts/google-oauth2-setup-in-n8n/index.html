@@ -7,7 +7,9 @@
 <meta name="robots" content="index, follow">
 <title>使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤 | YingChao Note</title>
 <meta name="keywords" content="n8n, google OAuth2, API">
-<meta name="description" content="在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
+<meta name="description" content="
+
+在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
 最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。
 
 📦 你需要準備的環境
@@ -19,28 +21,53 @@ Google Cloud Console 存取權限
 
 在 Google Cloud Console 建立 OAuth2 憑證
 
+
 前往 Google Cloud Console
+
+
 建立一個專案（或使用現有專案）
+
+
 到 API 和服務 &gt; 憑證
 
+
+
+
+
+
 點「建立憑證 &gt; OAuth 用戶端 ID」
+
+
+
+
 
 
 👉 若首次設定會要求填寫「OAuth 同意畫面」：
 
 使用者類型：選「外部」
+ 
+ 
+ 
+ 
 
 填寫應用名稱、支援信箱
+ 
+ 
+ 
+ 
 
 可略過 Scopes 設定（或先加入基本 openid/email/profile）
 加入測試用戶（輸入你自己的 Gmail）
+ 
+ 
+ 
+ 
 
 
 然後建立 OAuth 用戶端 ID：
 
 
-應用類型：網頁應用程式
-">
+應用類型：網頁應用程式">
 <meta name="author" content="yingchao">
 <link rel="canonical" href="https://yingchaotw.github.io/posts/google-oauth2-setup-in-n8n/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
@@ -89,7 +116,9 @@ Google Cloud Console 存取權限
 
     </style>
 </noscript><meta property="og:title" content="使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤" />
-<meta property="og:description" content="在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
+<meta property="og:description" content="
+
+在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
 最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。
 
 📦 你需要準備的環境
@@ -101,28 +130,53 @@ Google Cloud Console 存取權限
 
 在 Google Cloud Console 建立 OAuth2 憑證
 
+
 前往 Google Cloud Console
+
+
 建立一個專案（或使用現有專案）
+
+
 到 API 和服務 &gt; 憑證
 
+
+
+
+
+
 點「建立憑證 &gt; OAuth 用戶端 ID」
+
+
+
+
 
 
 👉 若首次設定會要求填寫「OAuth 同意畫面」：
 
 使用者類型：選「外部」
+ 
+ 
+ 
+ 
 
 填寫應用名稱、支援信箱
+ 
+ 
+ 
+ 
 
 可略過 Scopes 設定（或先加入基本 openid/email/profile）
 加入測試用戶（輸入你自己的 Gmail）
+ 
+ 
+ 
+ 
 
 
 然後建立 OAuth 用戶端 ID：
 
 
-應用類型：網頁應用程式
-" />
+應用類型：網頁應用程式" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yingchaotw.github.io/posts/google-oauth2-setup-in-n8n/" />
 <meta property="og:image" content="https://yingchaotw.github.io/papermod-cover.png" />
@@ -133,7 +187,9 @@ Google Cloud Console 存取權限
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://yingchaotw.github.io/papermod-cover.png" />
 <meta name="twitter:title" content="使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤"/>
-<meta name="twitter:description" content="在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
+<meta name="twitter:description" content="
+
+在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
 最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。
 
 📦 你需要準備的環境
@@ -145,28 +201,53 @@ Google Cloud Console 存取權限
 
 在 Google Cloud Console 建立 OAuth2 憑證
 
+
 前往 Google Cloud Console
+
+
 建立一個專案（或使用現有專案）
+
+
 到 API 和服務 &gt; 憑證
 
+
+
+
+
+
 點「建立憑證 &gt; OAuth 用戶端 ID」
+
+
+
+
 
 
 👉 若首次設定會要求填寫「OAuth 同意畫面」：
 
 使用者類型：選「外部」
+ 
+ 
+ 
+ 
 
 填寫應用名稱、支援信箱
+ 
+ 
+ 
+ 
 
 可略過 Scopes 設定（或先加入基本 openid/email/profile）
 加入測試用戶（輸入你自己的 Gmail）
+ 
+ 
+ 
+ 
 
 
 然後建立 OAuth 用戶端 ID：
 
 
-應用類型：網頁應用程式
-"/>
+應用類型：網頁應用程式"/>
 
 
 <script type="application/ld+json">
@@ -195,11 +276,11 @@ Google Cloud Console 存取權限
   "@type": "BlogPosting",
   "headline": "使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤",
   "name": "使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤",
-  "description": "在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。 最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。\n📦 你需要準備的環境 已運行中的 n8n（本機或雲端部署均可） Google 帳號 Google Cloud Console 存取權限 在 Google Cloud Console 建立 OAuth2 憑證 前往 Google Cloud Console 建立一個專案（或使用現有專案） 到 API 和服務 \u0026gt; 憑證 點「建立憑證 \u0026gt; OAuth 用戶端 ID」 👉 若首次設定會要求填寫「OAuth 同意畫面」： 使用者類型：選「外部」 填寫應用名稱、支援信箱 可略過 Scopes 設定（或先加入基本 openid/email/profile） 加入測試用戶（輸入你自己的 Gmail） 然後建立 OAuth 用戶端 ID： 應用類型：網頁應用程式 ",
+  "description": " 在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。 最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。\n📦 你需要準備的環境 已運行中的 n8n（本機或雲端部署均可） Google 帳號 Google Cloud Console 存取權限 在 Google Cloud Console 建立 OAuth2 憑證 前往 Google Cloud Console\n建立一個專案（或使用現有專案）\n到 API 和服務 \u0026gt; 憑證 點「建立憑證 \u0026gt; OAuth 用戶端 ID」\n👉 若首次設定會要求填寫「OAuth 同意畫面」： 使用者類型：選「外部」 填寫應用名稱、支援信箱 可略過 Scopes 設定（或先加入基本 openid/email/profile） 加入測試用戶（輸入你自己的 Gmail） 然後建立 OAuth 用戶端 ID： 應用類型：網頁應用程式\n",
   "keywords": [
     "n8n", "google OAuth2", "API"
   ],
-  "articleBody": "在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。 最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。\n📦 你需要準備的環境 已運行中的 n8n（本機或雲端部署均可） Google 帳號 Google Cloud Console 存取權限 在 Google Cloud Console 建立 OAuth2 憑證 前往 Google Cloud Console 建立一個專案（或使用現有專案） 到 API 和服務 \u003e 憑證 點「建立憑證 \u003e OAuth 用戶端 ID」 👉 若首次設定會要求填寫「OAuth 同意畫面」： 使用者類型：選「外部」 填寫應用名稱、支援信箱 可略過 Scopes 設定（或先加入基本 openid/email/profile） 加入測試用戶（輸入你自己的 Gmail） 然後建立 OAuth 用戶端 ID： 應用類型：網頁應用程式 名稱隨便填 在「授權的重定向 URI」中新增：\nhttp://localhost:5678/rest/oauth2-credential/callback 完成後會得到：\nClient ID Client Secret 🔧 在 n8n 中新增 Google OAuth2 憑證 登入 n8n 到左側選單 → Credentials 點「New credential」，搜尋並選擇： Google Sheets OAuth2、Gmail OAuth2、Google Drive OAuth2…等 點「Create New」，填入以下欄位： 欄位名稱 說明 Client ID 從 Google 複製 Client Secret 同上 Scopes 依服務填寫，例如 Google Sheets 是 https://www.googleapis.com/auth/spreadsheets n8n 會自動產生 Redirect URL，請複製並貼回 Google Cloud Console 設定中。 填完 Client ID 與 Client Secret 後點「 Sign in with Google」, 輸入帳號 登入 Google 授權會顯示應用程式未經驗證，因為是綁定我們自己架設的 n8n 服務，所以選擇繼續 Google 顯示 n8n 要求存取帳戶，需要勾選「全選」再按下繼續 授權完成後，你的憑證就建立好了！ ✨ 常用 OAuth2 Scopes 快查 Google 服務 Scope Google Sheets https://www.googleapis.com/auth/spreadsheets Google Drive https://www.googleapis.com/auth/drive Gmail 發信 https://www.googleapis.com/auth/gmail.send 🧠 延伸說明：解決 redirect_uri_mismatch 錯誤 什麼是 redirect_uri_mismatch 錯誤？ redirect_uri_mismatch 是 OAuth 2.0 流程中的一種常見錯誤。當 Google 在認證過程中發現傳入的回調 URI 與註冊的回調 URI 不匹配時，就會顯示這個錯誤。這樣的情況通常出現於以下幾種情況：\n回調 URI 在 Google Cloud Console 中的設置與 n8n 中使用的 URI 不一致。 使用 Docker 容器運行 n8n 時，localhost 和容器的網絡配置未正確處理。 在 Docker 中部署 n8n 時，很容易遇到以下錯誤：\nError 400: redirect_uri_mismatch 這是由於 Google 認證流程中的 回調 URI 與你在 Google Console 設定的不一致所導致。\n🔍 原因一：Docker 網路路徑問題 n8n 在容器中使用 localhost 時，實際上指的是容器內部，而非主機的 localhost，因此會導致 URI 不匹配。\n✅ 解法 在 Google Cloud Console 設定以下 URI：\nhttp://host.docker.internal:5678/rest/oauth2-credential/callback 在本機 n8n 介面上登入並驗證，Google 就能正確回傳 Token。\n⏳ Google 設定可能有延遲 修改回調 URI 或應用設定後，Google 的設定可能需要 5 分鐘到數小時 才會完全生效。建議修改設定後耐心等待幾分鐘再進行認證測試。\n🧹 清除瀏覽器緩存 有時候 OAuth 的快取也可能影響流程，建議進行以下操作：\n清除 cookies 與快取 改用無痕模式 改用另一個瀏覽器 🔐 確保 Client ID / Secret 是最新的 若你重新產生過憑證，記得到 n8n 中更新對應欄位，否則也會出現驗證錯誤。\n✅ Google OAuth 認證 Checklist 項目 狀態 Google OAuth2 憑證已建立 ✅ Redirect URI 正確設定 ✅ Docker 使用 host.docker.internal ✅ 等待設定生效 ⏳ 清除快取與 Cookie ✅ Client ID / Secret 正確 ✅ ✨ 常用 OAuth2 Scopes 快查 Google 服務 Scope Google Sheets https://www.googleapis.com/auth/spreadsheets Gmail 發信 https://www.googleapis.com/auth/gmail.send Google Drive https://www.googleapis.com/auth/drive 🔍 進階測試（可選） 可以使用 Postman 或其他 REST 工具測試 Google OAuth 流程，以排除是否為 n8n 端的問題。\n🧩 小結 整合 Google OAuth2 到 n8n 是非常強大且實用的功能，無論你要串接 Google Sheets 做資料收集，或是使用 Gmail 寄送自動通知郵件，都可以用這個流程完成。如果你遇到 redirect_uri_mismatch 錯誤，只要依照本文的步驟修改 URI 設定，大多數情況下都能順利解決。\n參考資料 Google OAuth2 Scopes 說明 ",
+  "articleBody": " 在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。 最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。\n📦 你需要準備的環境 已運行中的 n8n（本機或雲端部署均可） Google 帳號 Google Cloud Console 存取權限 在 Google Cloud Console 建立 OAuth2 憑證 前往 Google Cloud Console\n建立一個專案（或使用現有專案）\n到 API 和服務 \u003e 憑證 點「建立憑證 \u003e OAuth 用戶端 ID」\n👉 若首次設定會要求填寫「OAuth 同意畫面」： 使用者類型：選「外部」 填寫應用名稱、支援信箱 可略過 Scopes 設定（或先加入基本 openid/email/profile） 加入測試用戶（輸入你自己的 Gmail） 然後建立 OAuth 用戶端 ID： 應用類型：網頁應用程式\n名稱隨便填\n在「授權的重定向 URI」中新增：\nhttp://localhost:5678/rest/oauth2-credential/callback 完成後會得到：\nClient ID Client Secret 🔧 在 n8n 中新增 Google OAuth2 憑證 登入 n8n 到左側選單 → Credentials 點「New credential」，搜尋並選擇： Google Sheets OAuth2、Gmail OAuth2、Google Drive OAuth2…等 點「Create New」，填入以下欄位： 欄位名稱 說明 Client ID 從 Google 複製 Client Secret 同上 Scopes 依服務填寫，例如 Google Sheets 是 https://www.googleapis.com/auth/spreadsheets n8n 會自動產生 Redirect URL，請複製並貼回 Google Cloud Console 設定中。\n填完 Client ID 與 Client Secret 後點「 Sign in with Google」, 輸入帳號 登入 Google 授權會顯示應用程式未經驗證，因為是綁定我們自己架設的 n8n 服務，所以選擇繼續 Google 顯示 n8n 要求存取帳戶，需要勾選「全選」再按下繼續 授權完成後，你的憑證就建立好了！ ✨ 常用 OAuth2 Scopes 快查 Google 服務 Scope Google Sheets https://www.googleapis.com/auth/spreadsheets Google Drive https://www.googleapis.com/auth/drive Gmail 發信 https://www.googleapis.com/auth/gmail.send 🧠 延伸說明：解決 redirect_uri_mismatch 錯誤 什麼是 redirect_uri_mismatch 錯誤？ redirect_uri_mismatch 是 OAuth 2.0 流程中的一種常見錯誤。當 Google 在認證過程中發現傳入的回調 URI 與註冊的回調 URI 不匹配時，就會顯示這個錯誤。這樣的情況通常出現於以下幾種情況：\n回調 URI 在 Google Cloud Console 中的設置與 n8n 中使用的 URI 不一致。 使用 Docker 容器運行 n8n 時，localhost 和容器的網絡配置未正確處理。 在 Docker 中部署 n8n 時，很容易遇到以下錯誤：\nError 400: redirect_uri_mismatch 這是由於 Google 認證流程中的 回調 URI 與你在 Google Console 設定的不一致所導致。\n🔍 原因一：Docker 網路路徑問題 n8n 在容器中使用 localhost 時，實際上指的是容器內部，而非主機的 localhost，因此會導致 URI 不匹配。\n✅ 解法 在 Google Cloud Console 設定以下 URI：\nhttp://host.docker.internal:5678/rest/oauth2-credential/callback 在本機 n8n 介面上登入並驗證，Google 就能正確回傳 Token。\n⏳ Google 設定可能有延遲 修改回調 URI 或應用設定後，Google 的設定可能需要 5 分鐘到數小時 才會完全生效。建議修改設定後耐心等待幾分鐘再進行認證測試。\n🧹 清除瀏覽器緩存 有時候 OAuth 的快取也可能影響流程，建議進行以下操作：\n清除 cookies 與快取 改用無痕模式 改用另一個瀏覽器 🔐 確保 Client ID / Secret 是最新的 若你重新產生過憑證，記得到 n8n 中更新對應欄位，否則也會出現驗證錯誤。\n✅ Google OAuth 認證 Checklist 項目 狀態 Google OAuth2 憑證已建立 ✅ Redirect URI 正確設定 ✅ Docker 使用 host.docker.internal ✅ 等待設定生效 ⏳ 清除快取與 Cookie ✅ Client ID / Secret 正確 ✅ ✨ 常用 OAuth2 Scopes 快查 Google 服務 Scope Google Sheets https://www.googleapis.com/auth/spreadsheets Gmail 發信 https://www.googleapis.com/auth/gmail.send Google Drive https://www.googleapis.com/auth/drive 🔍 進階測試（可選） 可以使用 Postman 或其他 REST 工具測試 Google OAuth 流程，以排除是否為 n8n 端的問題。\n🧩 小結 整合 Google OAuth2 到 n8n 是非常強大且實用的功能，無論你要串接 Google Sheets 做資料收集，或是使用 Gmail 寄送自動通知郵件，都可以用這個流程完成。如果你遇到 redirect_uri_mismatch 錯誤，只要依照本文的步驟修改 URI 設定，大多數情況下都能順利解決。\n參考資料 Google OAuth2 Scopes 說明 ",
   "wordCount" : "346",
   "inLanguage": "en",
   "image": "https://yingchaotw.github.io/papermod-cover.png","datePublished": "2025-05-20T21:13:58+08:00",
@@ -346,7 +427,9 @@ Google Cloud Console 存取權限
     </details>
 </div>
 
-  <div class="post-content"><p>在這篇筆記中，將紀錄如何在 <strong>n8n</strong> 中設定 <strong>Google OAuth2 認證</strong>，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
+  <div class="post-content"><link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+<p>在這篇筆記中，將紀錄如何在 <strong>n8n</strong> 中設定 <strong>Google OAuth2 認證</strong>，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。
 最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 <strong>自架環境</strong> 中非常容易發生的 <code>redirect_uri_mismatch</code> 問題，並提供解法。</p>
 <hr>
 <h2 id="-你需要準備的環境">📦 你需要準備的環境<a hidden class="anchor" aria-hidden="true" href="#-你需要準備的環境">#</a></h2>
@@ -358,56 +441,102 @@ Google Cloud Console 存取權限
 <hr>
 <h2 id="在-google-cloud-console-建立-oauth2-憑證">在 Google Cloud Console 建立 OAuth2 憑證<a hidden class="anchor" aria-hidden="true" href="#在-google-cloud-console-建立-oauth2-憑證">#</a></h2>
 <ol>
-<li>前往 <a href="https://console.cloud.google.com/">Google Cloud Console</a></li>
-<li>建立一個專案（或使用現有專案）</li>
-<li>到 <code>API 和服務 &gt; 憑證</code>
-<br/><img src="./images/Google%20總覽_建立品牌1.jpg" alt="" width="450"/></li>
-<li>點「<strong>建立憑證 &gt; OAuth 用戶端 ID</strong>」
-<br/><img src="./images/Google%20Auth%20Platform_用戶端.jpg" alt="" width="450"/></li>
+<li>
+<p>前往 <a href="https://console.cloud.google.com/">Google Cloud Console</a></p>
+</li>
+<li>
+<p>建立一個專案（或使用現有專案）</p>
+</li>
+<li>
+<p>到 <code>API 和服務 &gt; 憑證</code>
+<br/>
+<a href="./images/Google%20總覽_建立品牌1.jpg" data-lightbox="gallery" data-title="Google 總覽_建立品牌1">
+<img src="./images/Google%20總覽_建立品牌1.jpg" alt="Google 總覽_建立品牌1" style="max-width: 450px;" />
+</a></p>
+</li>
+<li>
+<p>點「<strong>建立憑證 &gt; OAuth 用戶端 ID</strong>」</p>
+<!-- <br/><img src="./images/Google%20Auth%20Platform_用戶端.jpg" alt="" width="450"/> -->
+<a href="./images/Google%20Auth%20Platform_用戶端.jpg" data-lightbox="gallery" data-title="Google Auth Platform_用戶端.">
+<img src="./images/Google%20Auth%20Platform_用戶端.jpg" alt="Google Auth Platform_用戶端." style="max-width: 450px;" />
+</a>
+</li>
 </ol>
 <h3 id="-若首次設定會要求填寫oauth-同意畫面">👉 若首次設定會要求填寫「OAuth 同意畫面」：<a hidden class="anchor" aria-hidden="true" href="#-若首次設定會要求填寫oauth-同意畫面">#</a></h3>
 <ul>
 <li>使用者類型：選「外部」
-<br/><img src="./images/Google%20總覽_建立品牌2.jpg" alt="" width="450"/></li>
+ <!-- <br/><img src="./images/Google%20總覽_建立品牌2.jpg" alt="" width="450"/> -->
+ <a href="./images/Google%20總覽_建立品牌2.jpg" data-lightbox="gallery" data-title="Google 總覽_建立品牌2">
+ <img src="./images/Google%20總覽_建立品牌2.jpg" alt="Google 總覽_建立品牌2" style="max-width: 450px;" />
+ </a>
+</li>
 <li>填寫應用名稱、支援信箱
-<br/><img src="./images/Google%20總覽_建立品牌3.jpg" alt="" width="450"/></li>
+ <!-- <br/><img src="./images/Google%20總覽_建立品牌3.jpg" alt="" width="450"/> -->
+ <a href="./images/Google%20總覽_建立品牌3.jpg" data-lightbox="gallery" data-title="Google 總覽_建立品牌3">
+ <img src="./images/Google%20總覽_建立品牌3.jpg" alt="Google 總覽_建立品牌3" style="max-width: 450px;" />
+ </a>
+</li>
 <li>可略過 Scopes 設定（或先加入基本 openid/email/profile）</li>
 <li>加入測試用戶（輸入你自己的 Gmail）
-<br/><img src="./images/Google%20Auth%20Platform_設定目標對象_新增測試使用者.jpg" alt="" width="450"/></li>
+ <!-- <br/><img src="./images/Google%20Auth%20Platform_設定目標對象_新增測試使用者.jpg" alt="" width="450"/> -->
+ <a href="./images/Google%20Auth%20Platform_設定目標對象_新增測試使用者.jpg" data-lightbox="gallery" data-title="Google Auth Platform 設定目標對象 新增測試使用者">
+ <img src="./images/Google%20Auth%20Platform_設定目標對象_新增測試使用者.jpg" alt="Google Auth Platform 設定目標對象 新增測試使用者" style="max-width: 450px;" />
+ </a>
+</li>
 </ul>
 <h3 id="然後建立-oauth-用戶端-id">然後建立 OAuth 用戶端 ID：<a hidden class="anchor" aria-hidden="true" href="#然後建立-oauth-用戶端-id">#</a></h3>
 <ul>
 <li>
-<p>應用類型：<strong>網頁應用程式</strong>
-<br/><img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID.jpg" alt="" width="450"/></p>
+<p>應用類型：<strong>網頁應用程式</strong></p>
+ <!-- <br/><img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID.jpg" alt="" width="450"/> -->
+ <a href="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID.jpg" data-lightbox="gallery" data-title="Google Auth Platform_建立 OAuth 用戶端 ID">
+ <img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID.jpg" alt="Google Auth Platform_建立 OAuth 用戶端 ID" style="max-width: 450px;" />
+ </a>
 </li>
 <li>
-<p>名稱隨便填
-<br/><img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_設定名稱.jpg" alt="" width="450"/></p>
+<p>名稱隨便填</p>
+ <!-- <br/><img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_設定名稱.jpg" alt="" width="450"/> -->
+ <a href="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_設定名稱.jpg" data-lightbox="gallery" data-title="Google Auth Platform 建立 OAuth 用戶端 ID 設定名稱">
+ <img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_設定名稱.jpg" alt="Google Auth Platform 建立 OAuth 用戶端 ID 設定名稱" style="max-width: 450px;" />
+ </a>
 </li>
 <li>
 <p>在「<strong>授權的重定向 URI</strong>」中新增：</p>
 <pre tabindex="0"><code>http://localhost:5678/rest/oauth2-credential/callback
-</code></pre> <img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_設定callback_URI.jpg" alt="" width="450"/>
+</code></pre> <!-- <img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_設定callback_URI.jpg" alt="" width="450"/> -->
+ <a href="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_設定callback_URI.jpg" data-lightbox="gallery" data-title="GoogleAuthPlatform建立OAuth用戶端ID設定callback_URI.jpg">
+ <img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_設定callback_URI.jpg" alt="GoogleAuthPlatform建立OAuth用戶端ID設定callback_URI.jpg" style="max-width: 450px;" />
+ </a>
 </li>
 </ul>
 <p>完成後會得到：</p>
 <ul>
 <li><strong>Client ID</strong></li>
 <li><strong>Client Secret</strong>
-<br/><img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_OAuth%20用戶端已建立.jpg" alt="" width="450"/></li>
+ <!-- <br/><img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_OAuth%20用戶端已建立.jpg" alt="" width="450"/> -->
+ <a href="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_OAuth%20用戶端已建立.jpg" data-lightbox="gallery" data-title="GoogleAuthPlatform建立OAuth用戶端ID OAuth用戶端已建立">
+ <img src="./images/Google%20Auth%20Platform_建立%20OAuth%20用戶端%20ID_OAuth%20用戶端已建立.jpg" alt="GoogleAuthPlatform建立OAuth用戶端ID OAuth用戶端已建立" style="max-width: 450px;" />
+ </a>
+</li>
 </ul>
 <hr>
 <h2 id="-在-n8n-中新增-google-oauth2-憑證">🔧 在 n8n 中新增 Google OAuth2 憑證<a hidden class="anchor" aria-hidden="true" href="#-在-n8n-中新增-google-oauth2-憑證">#</a></h2>
 <ol>
 <li>登入 n8n
-<br/><img src="./images/n8n%20登入%20overview%20畫面.png" alt="" width="450"/></li>
+<!-- <br/><img src="./images/n8n%20登入%20overview%20畫面.png" alt="" width="450"/> -->
+<a href="./images/n8n%20登入%20overview%20畫面.png" data-lightbox="gallery" data-title="n8n 登入 overview 畫面">
+<img src="./images/n8n%20登入%20overview%20畫面.png" alt="n8n 登入 overview 畫面" style="max-width: 450px;" />
+</a>
+</li>
 <li>到左側選單 → Credentials</li>
 <li>點「<strong>New credential</strong>」，搜尋並選擇：
 <ul>
-<li>Google Sheets OAuth2、Gmail OAuth2、Google Drive OAuth2…等
-<br/><img src="./images/n8n-Add-new-credential.png" alt="" width="450"/></li>
+<li>Google Sheets OAuth2、Gmail OAuth2、Google Drive OAuth2…等</li>
 </ul>
+<!-- <br/><img src="./images/n8n-Add-new-credential.png" alt="" width="450"/> -->
+<a href="./images/n8n-Add-new-credential.png" data-lightbox="gallery" data-title="n8n Add new credential">
+<img src="./images/n8n-Add-new-credential.png" alt="n8n Add new credential" style="max-width: 450px;" />
+</a>
 </li>
 <li>點「Create New」，填入以下欄位：</li>
 </ol>
@@ -434,18 +563,40 @@ Google Cloud Console 存取權限
   </tbody>
 </table>
 <blockquote>
-<p>n8n 會自動產生 <strong>Redirect URL</strong>，請複製並貼回 Google Cloud Console 設定中。
-<br/><img src="./images/n8n-填入-ClientID-and-ClientSecret.png" alt="" width="450"/>
-<br/><img src="./images/n8n-完成填入-ClientID-and-ClientSecret.png" alt="" width="450"/></p></blockquote>
+<p>n8n 會自動產生 <strong>Redirect URL</strong>，請複製並貼回 Google Cloud Console 設定中。</p></blockquote>
+   <!-- <br/><img src="./images/n8n-填入-ClientID-and-ClientSecret.png" alt="" width="450"/> -->
+   <!-- <br/><img src="./images/n8n-完成填入-ClientID-and-ClientSecret.png" alt="" width="450"/> -->
+   <a href="./images/n8n-填入-ClientID-and-ClientSecret.png" data-lightbox="gallery" data-title="n8n 填入 ClientID and Client Secret">
+   <img src="./images/n8n-填入-ClientID-and-ClientSecret.png" alt="n8n 填入 ClientID and Client Secret" style="max-width: 450px;" />
+   </a>
+   <a href="./images/n8n-完成填入-ClientID-and-ClientSecret.png" data-lightbox="gallery" data-title="n8n-完成填入-ClientID-and-ClientSecret">
+   <img src="./images/n8n-完成填入-ClientID-and-ClientSecret.png" alt="n8n-完成填入-ClientID-and-ClientSecret" style="max-width: 450px;" />
+   </a>
 <ol start="5">
 <li>填完 Client ID 與 Client Secret 後點「 Sign in with Google」, 輸入帳號
-<br/><img src="./images/n8n-綁定-Google_API-登入畫面.png" alt="" width="450"/></li>
+<!-- <br/><img src="./images/n8n-綁定-Google_API-登入畫面.png" alt="" width="450"/> -->
+<a href="./images/n8n-綁定-Google_API-登入畫面.png" data-lightbox="gallery" data-title="n8n-綁定-Google_API-登入畫面">
+<img src="./images/n8n-綁定-Google_API-登入畫面.png" alt="n8n-綁定-Google_API-登入畫面" style="max-width: 450px;" />
+</a>
+</li>
 <li>登入 Google 授權會顯示應用程式未經驗證，因為是綁定我們自己架設的 n8n 服務，所以選擇繼續
-<br/><img src="./images/Google警告應用程式未經驗證.png" alt="" width="450"/></li>
+<!-- <br/><img src="./images/Google警告應用程式未經驗證.png" alt="" width="450"/> -->
+<a href="./images/Google警告應用程式未經驗證.png" data-lightbox="gallery" data-title="Google警告應用程式未經驗證">
+<img src="./images/Google警告應用程式未經驗證.png" alt="Google警告應用程式未經驗證" style="max-width: 450px;" />
+</a>
+</li>
 <li>Google 顯示 n8n 要求存取帳戶，需要勾選「全選」再按下繼續
-<br/><img src="./images/Google-同意n8n存取帳戶頁面.png" alt="" width="450"/></li>
+<!-- <br/><img src="./images/Google-同意n8n存取帳戶頁面.png" alt="" width="450"/> -->
+<a href="./images/Google-同意n8n存取帳戶頁面.png" data-lightbox="gallery" data-title="Google-同意n8n存取帳戶頁面">
+<img src="./images/Google-同意n8n存取帳戶頁面.png" alt="Google-同意n8n存取帳戶頁面" style="max-width: 450px;" />
+</a>
+</li>
 <li>授權完成後，你的憑證就建立好了！
-<br/><img src="./images/n8n完成加入google_API.png" alt="" width="450"/></li>
+<!-- <br/><img src="./images/n8n完成加入google_API.png" alt="" width="450"/> -->
+<a href="./images/n8n完成加入google_API.png" data-lightbox="gallery" data-title="n8n完成加入google_API.png">
+<img src="./images/n8n完成加入google_API.png" alt="n8n完成加入google_API.png" style="max-width: 450px;" />
+</a>
+</li>
 </ol>
 <h2 id="-常用-oauth2-scopes-快查">✨ 常用 OAuth2 Scopes 快查<a hidden class="anchor" aria-hidden="true" href="#-常用-oauth2-scopes-快查">#</a></h2>
 <table>

@@ -141,8 +141,12 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。 最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。
-📦 你需要準備的環境 已運行中的 n8n（本機或雲端部署均可） Google 帳號 Google Cloud Console 存取權限 在 Google Cloud Console 建立 OAuth2 憑證 前往 Google Cloud Console 建立一個專案（或使用現有專案） 到 API 和服務 &gt; 憑證 點「建立憑證 &gt; OAuth 用戶端 ID」 👉 若首次設定會要求填寫「OAuth 同意畫面」： 使用者類型：選「外部」 填寫應用名稱、支援信箱 可略過 Scopes 設定（或先加入基本 openid/email/profile） 加入測試用戶（輸入你自己的 Gmail） 然後建立 OAuth 用戶端 ID： 應用類型：網頁應用程式 ...</p>
+    <p> 在這篇筆記中，將紀錄如何在 n8n 中設定 Google OAuth2 認證，以串接像是 Google Sheets、Gmail 或 Google Drive 等服務。 最後也加上在設定過程中可能會遇到的常見錯誤，尤其是在 自架環境 中非常容易發生的 redirect_uri_mismatch 問題，並提供解法。
+📦 你需要準備的環境 已運行中的 n8n（本機或雲端部署均可） Google 帳號 Google Cloud Console 存取權限 在 Google Cloud Console 建立 OAuth2 憑證 前往 Google Cloud Console
+建立一個專案（或使用現有專案）
+到 API 和服務 &gt; 憑證 點「建立憑證 &gt; OAuth 用戶端 ID」
+👉 若首次設定會要求填寫「OAuth 同意畫面」： 使用者類型：選「外部」 填寫應用名稱、支援信箱 可略過 Scopes 設定（或先加入基本 openid/email/profile） 加入測試用戶（輸入你自己的 Gmail） 然後建立 OAuth 用戶端 ID： 應用類型：網頁應用程式
+...</p>
   </div>
   <footer class="entry-footer"><span title='2025-05-20 21:13:58 +0800 CST'>May 20, 2025</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;yingchao</footer>
   <a class="entry-link" aria-label="post link to 使用 n8n 整合 Google OAuth2 並解決 redirect_uri_mismatch 錯誤" href="https://yingchaotw.github.io/posts/google-oauth2-setup-in-n8n/"></a>
